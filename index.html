@@ -284,7 +284,7 @@ tbody tr:hover{background:var(--b2)}
       <div class="lf"><label>Password</label><input type="password" id="lp" value="admin123" placeholder="••••••••"/></div>
       <button class="btn-lo" onclick="login()">Sign In →</button>
       <div class="lo-err" id="lerr">Invalid credentials. Please check and try again.</div>
-      <div class="lo-hint"><b>Demo access:</b> admin@afcco.com &nbsp;/&nbsp; admin123</div>
+      <div class="lo-hint"><b>Demo access:</b> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="147570797d7a54757277777b3a777b79">[email&#160;protected]</a> &nbsp;/&nbsp; admin123</div>
     </div>
   </div>
 </div>
@@ -301,7 +301,7 @@ tbody tr:hover{background:var(--b2)}
     <div class="si-item on" onclick="go('dash',this)"><i class="fas fa-th-large"></i>Dashboard</div>
     <div class="si-sec">Operations</div>
     <div class="si-item" onclick="go('proj',this)"><i class="fas fa-hard-hat"></i>Projects<span class="si-badge" id="sb-proj">8</span></div>
-    <div class="si-item" onclick="go('fin',this)"><i class="fas fa-wallet"></i>Finance</div>
+    <div class="si-item" id="nav-fin" onclick="go('fin',this)"><i class="fas fa-wallet"></i>Finance</div>
     <div class="si-item" onclick="go('proc',this)"><i class="fas fa-shopping-cart"></i>Procurement<span class="si-badge red" id="sb-proc">3</span></div>
     <div class="si-item" onclick="go('equip',this)"><i class="fas fa-truck"></i>Equipment</div>
     <div class="si-sec">People</div>
@@ -311,12 +311,12 @@ tbody tr:hover{background:var(--b2)}
     <div class="si-item" onclick="go('docs',this)"><i class="fas fa-folder-open"></i>Documents</div>
     <div class="si-item" onclick="go('crm',this)"><i class="fas fa-handshake"></i>CRM & Clients</div>
     <div class="si-item" onclick="go('rpt',this)"><i class="fas fa-chart-bar"></i>Reports & BI</div>
-    <div class="si-item" onclick="go('set',this)"><i class="fas fa-cog"></i>Settings</div>
+    <div class="si-item" id="nav-set" onclick="go('set',this)"><i class="fas fa-cog"></i>Settings</div>
   </nav>
   <div class="si-ft">
     <div class="si-user">
-      <div class="si-av">AM</div>
-      <div style="flex:1"><div class="si-un">Ahmed Malik</div><div class="si-ur">System Administrator</div></div>
+      <div class="si-av" id="sideAv">AM</div>
+      <div style="flex:1"><div class="si-un" id="sideUn">Ahmed Malik</div><div class="si-ur" id="sideUr">System Administrator</div></div>
       <div class="si-on"></div>
     </div>
   </div>
@@ -329,7 +329,7 @@ tbody tr:hover{background:var(--b2)}
   <div class="hd-acts">
     <button class="hd-btn" onclick="toggleNotif(event)"><i class="fas fa-bell"></i><div class="hd-dot" id="notDot"></div></button>
     <div class="hd-div"></div>
-    <div class="hd-av" title="Ahmed Malik — Admin">AM</div>
+    <div class="hd-av" id="hdAv" title="Ahmed Malik — Admin" style="cursor:pointer" onclick="go('set',document.querySelectorAll('.si-item')[13])">AM</div>
     <button class="hd-btn" onclick="logout()" title="Sign Out"><i class="fas fa-sign-out-alt"></i></button>
   </div>
 </header>
@@ -344,7 +344,7 @@ tbody tr:hover{background:var(--b2)}
 <!-- ████ DASHBOARD ████ -->
 <div class="pg on" id="pg-dash">
   <div class="ph">
-    <div><h2>Executive Dashboard</h2><p>Good morning, Ahmed — <span id="today"></span></p></div>
+    <div><h2>Executive Dashboard</h2><p id="dashGreet">Good morning, Ahmed — <span id="today"></span></p></div>
     <div class="ph-acts">
       <button class="bt bt-out bt-sm" onclick="genR('fin')"><i class="fas fa-download"></i> Export</button>
       <button class="bt bt-pri bt-sm" onclick="refreshDash()"><i class="fas fa-sync-alt"></i> Refresh</button>
@@ -370,7 +370,7 @@ tbody tr:hover{background:var(--b2)}
   </div>
   <div class="g2">
     <div class="cd">
-      <div class="cd-h"><div class="cd-hl"><i class="fas fa-tasks"></i><div><div class="cd-t">Project Progress</div><div class="cd-st">Active projects</div></div></div><button class="bt bt-gh bt-sm" onclick="go('proj',document.querySelector('.si-item:nth-child(3)'))">View all →</button></div>
+      <div class="cd-h"><div class="cd-hl"><i class="fas fa-tasks"></i><div><div class="cd-t">Project Progress</div><div class="cd-st">Active projects</div></div></div><button class="bt bt-pri bt-sm" onclick="go('proj',document.querySelectorAll('.si-item')[2])">View all →</button></div>
       <div class="cd-b" id="dProj"></div>
     </div>
     <div class="cd">
@@ -641,7 +641,7 @@ tbody tr:hover{background:var(--b2)}
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ===================== DATA STORE =====================
 const D = {
   projects:[
@@ -1004,12 +1004,12 @@ function rDash(){
   const pendPO=D.pos.filter(p=>p.s==='Pending').length;
   const el=document.getElementById('dashKPIs');
   if(el) el.innerHTML=`
-    <div class="kpi"><div class="ki teal"><i class="fas fa-hard-hat"></i></div><div><div class="kv">${D.projects.filter(p=>p.st==='Active').length}</div><div class="kl">Active Projects</div><div class="kc up"><i class="fas fa-arrow-up"></i> ${D.projects.length} total</div></div></div>
-    <div class="kpi"><div class="ki blue"><i class="fas fa-dollar-sign"></i></div><div><div class="kv">${fmtN(D.inv.reduce((s,i)=>s+i.am,0))}</div><div class="kl">Revenue (Invoiced)</div><div class="kc up"><i class="fas fa-arrow-up"></i> 18% vs last year</div></div></div>
-    <div class="kpi"><div class="ki green"><i class="fas fa-users"></i></div><div><div class="kv">${D.emps.length}</div><div class="kl">Total Employees</div><div class="kc up"><i class="fas fa-arrow-up"></i> ${D.emps.filter(e=>e.s==='Active').length} active</div></div></div>
-    <div class="kpi"><div class="ki amber"><i class="fas fa-truck"></i></div><div><div class="kv">${D.eqs.length}</div><div class="kl">Equipment Assets</div><div class="kc fl">${D.eqs.filter(e=>e.s==='Operational').length} operational</div></div></div>
-    <div class="kpi"><div class="ki red"><i class="fas fa-exclamation-triangle"></i></div><div><div class="kv">${openHSE}</div><div class="kl">Open HSE Incidents</div><div class="kc ${openHSE>2?'dn':'fl'}">Target: 0</div></div></div>
-    <div class="kpi"><div class="ki gray"><i class="fas fa-shopping-cart"></i></div><div><div class="kv">${pendPO}</div><div class="kl">Pending POs</div><div class="kc dn">${D.pos.length} total this month</div></div></div>`;
+    <div class="kpi" style="cursor:pointer" onclick="go('proj',document.querySelectorAll('.si-item')[2])"><div class="ki teal"><i class="fas fa-hard-hat"></i></div><div><div class="kv">${D.projects.filter(p=>p.st==='Active').length}</div><div class="kl">Active Projects</div><div class="kc up"><i class="fas fa-arrow-up"></i> ${D.projects.length} total</div></div></div>
+    <div class="kpi" style="cursor:pointer" onclick="go('fin',document.querySelectorAll('.si-item')[3])"><div class="ki blue"><i class="fas fa-dollar-sign"></i></div><div><div class="kv">${fmtN(D.inv.reduce((s,i)=>s+i.am,0))}</div><div class="kl">Revenue (Invoiced)</div><div class="kc up"><i class="fas fa-arrow-up"></i> 18% vs last year</div></div></div>
+    <div class="kpi" style="cursor:pointer" onclick="go('hr',document.querySelectorAll('.si-item')[7])"><div class="ki green"><i class="fas fa-users"></i></div><div><div class="kv">${D.emps.length}</div><div class="kl">Total Employees</div><div class="kc up"><i class="fas fa-arrow-up"></i> ${D.emps.filter(e=>e.s==='Active').length} active</div></div></div>
+    <div class="kpi" style="cursor:pointer" onclick="go('equip',document.querySelectorAll('.si-item')[5])"><div class="ki amber"><i class="fas fa-truck"></i></div><div><div class="kv">${D.eqs.length}</div><div class="kl">Equipment Assets</div><div class="kc fl">${D.eqs.filter(e=>e.s==='Operational').length} operational</div></div></div>
+    <div class="kpi" style="cursor:pointer" onclick="go('hse',document.querySelectorAll('.si-item')[8])"><div class="ki red"><i class="fas fa-exclamation-triangle"></i></div><div><div class="kv">${openHSE}</div><div class="kl">Open HSE Incidents</div><div class="kc ${openHSE>2?'dn':'fl'}">Target: 0</div></div></div>
+    <div class="kpi" style="cursor:pointer" onclick="go('proc',document.querySelectorAll('.si-item')[4])"><div class="ki gray"><i class="fas fa-shopping-cart"></i></div><div><div class="kv">${pendPO}</div><div class="kl">Pending POs</div><div class="kc dn">${D.pos.length} total this month</div></div></div>`;
 
   // Project progress
   const dp=document.getElementById('dProj');
@@ -1017,8 +1017,8 @@ function rDash(){
     <div style="padding:12px 0;border-bottom:1px solid var(--b3)">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
         <div>
-          <div style="font-size:13.5px;font-weight:600;color:var(--t1);cursor:pointer" onclick="viewRecord('proj',${D.projects.indexOf(p)})">${p.n}</div>
-          <div style="font-size:12px;color:var(--t4);margin-top:1px">${p.cl} · ${p.loc} · ${p.pm}</div>
+          <div style="font-size:13.5px;font-weight:600;color:var(--t1);cursor:pointer" onclick="viewRecord('proj',${D.projects.indexOf(p)})">${escapeHTML(p.n)}</div>
+          <div style="font-size:12px;color:var(--t4);margin-top:1px">${escapeHTML(p.cl)} · ${escapeHTML(p.loc)} · ${escapeHTML(p.pm)}</div>
         </div>${bd(p.st)}
       </div>${pgb(p.pr)}
     </div>`).join('');
@@ -1050,15 +1050,15 @@ function rDash(){
   if(da){
     const alerts=[];
     const bdEq=D.eqs.find(e=>e.s==='Breakdown');
-    if(bdEq) alerts.push(`<div class="al al-r"><i class="fas fa-exclamation-circle"></i><div><strong>Urgent:</strong> ${bdEq.n} is in BREAKDOWN status — immediate attention required</div></div>`);
+    if(bdEq) alerts.push(`<div class="al al-r" style="cursor:pointer" onclick="go('equip',document.querySelectorAll('.si-item')[5])"><i class="fas fa-exclamation-circle"></i><div><strong>Urgent:</strong> ${bdEq.n} is in BREAKDOWN status — click to view Equipment</div></div>`);
     const expTrn=D.trn.filter(t=>t.s==='Expiring Soon');
     if(expTrn.length) alerts.push(`<div class="al al-a"><i class="fas fa-clock"></i><div><strong>Reminder:</strong> ${expTrn.length} employee certification(s) expiring soon — ${expTrn.map(t=>t.n).join(', ')}</div></div>`);
     const ovInv=D.inv.filter(i=>i.s==='Overdue');
-    if(ovInv.length) alerts.push(`<div class="al al-r"><i class="fas fa-file-invoice"></i><div><strong>Finance Alert:</strong> ${ovInv.length} invoice(s) overdue — total ${fmtN(ovInv.reduce((s,i)=>s+i.am,0))}</div></div>`);
+    if(ovInv.length) alerts.push(`<div class="al al-r" style="cursor:pointer" onclick="go('fin',document.querySelectorAll('.si-item')[3])"><i class="fas fa-file-invoice"></i><div><strong>Finance Alert:</strong> ${ovInv.length} invoice(s) overdue — total ${fmtN(ovInv.reduce((s,i)=>s+i.am,0))} — click to view</div></div>`);
     const lowInvt=D.invt.filter(i=>i.s==='Low');
-    if(lowInvt.length) alerts.push(`<div class="al al-a"><i class="fas fa-boxes"></i><div><strong>Inventory:</strong> ${lowInvt.length} material(s) below minimum stock — ${lowInvt.map(i=>i.mt).join(', ')}</div></div>`);
+    if(lowInvt.length) alerts.push(`<div class="al al-a" style="cursor:pointer" onclick="go('proc',document.querySelectorAll('.si-item')[4])"><i class="fas fa-boxes"></i><div><strong>Inventory:</strong> ${lowInvt.length} material(s) below minimum stock — ${lowInvt.map(i=>i.mt).join(', ')} — click to view</div></div>`);
     const delP=D.projects.filter(p=>p.st==='Delayed');
-    if(delP.length) alerts.push(`<div class="al al-a"><i class="fas fa-hard-hat"></i><div><strong>Projects:</strong> ${delP.length} project(s) delayed — ${delP.map(p=>p.n).join(', ')}</div></div>`);
+    if(delP.length) alerts.push(`<div class="al al-a" style="cursor:pointer" onclick="go('proj',document.querySelectorAll('.si-item')[2])"><i class="fas fa-hard-hat"></i><div><strong>Projects:</strong> ${delP.length} project(s) delayed — ${delP.map(p=>p.n).join(', ')} — click to view</div></div>`);
     alerts.push(`<div class="al al-g"><i class="fas fa-check-circle"></i><div><strong>HSE:</strong> 180 consecutive days without a Lost Time Injury across all sites</div></div>`);
     da.innerHTML=alerts.join('');
   }
@@ -1073,8 +1073,8 @@ function rProj(){
   b.innerHTML=D.projects.map((p,i)=>`
     <tr>
       <td class="tm">${p.id}</td>
-      <td class="tp">${p.n}</td>
-      <td>${p.cl}</td>
+      <td class="tp">${escapeHTML(p.n)}</td>
+      <td>${escapeHTML(p.cl)}</td>
       <td><span class="bg bg-b">${p.tp}</span></td>
       <td>${p.loc}</td>
       <td>₨${fmtNP(p.bgt)}</td>
@@ -1085,7 +1085,7 @@ function rProj(){
         <div style="display:flex;gap:2px">
           <button class="bt bt-gh bt-ic" onclick="viewRecord('proj',${i})" title="View"><i class="fas fa-eye"></i></button>
           <button class="bt bt-gh bt-ic" onclick="editRecord('proj',${i})" title="Edit"><i class="fas fa-edit"></i></button>
-          <button class="bt bt-gh bt-ic" onclick="delRecord('projects',${i},'rProj')" title="Delete" style="color:var(--err)"><i class="fas fa-trash"></i></button>
+          <button class="bt bt-gh bt-ic admin-only" onclick="delRecord('projects',${i},'rProj')" title="Delete" style="color:var(--err)"><i class="fas fa-trash"></i></button>
         </div>
       </td>
     </tr>`).join('');
@@ -1135,8 +1135,8 @@ function rFin(){
       <td>${bd(inv.s)}</td>
       <td>
         <div style="display:flex;gap:2px">
-          <button class="bt bt-gh bt-ic" onclick="viewRecord('inv',${i})" title="View"><i class="fas fa-eye"></i></button>
-          <button class="bt bt-gh bt-ic" onclick="editRecord('inv',${i})" title="Edit"><i class="fas fa-edit"></i></button>
+          <button class="bt bt-gh bt-ic" onclick="viewRecord('invoice',${i})" title="View"><i class="fas fa-eye"></i></button>
+          <button class="bt bt-gh bt-ic" onclick="editRecord('invoice',${i})" title="Edit"><i class="fas fa-edit"></i></button>
           <button class="bt bt-gh bt-ic" onclick="delRecord('inv',${i},'rFin')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
         </div>
       </td>
@@ -1154,7 +1154,7 @@ function rFin(){
       <td>${bd(ex.s)}</td>
       <td>
         <div style="display:flex;gap:2px">
-          <button class="bt bt-gh bt-ic" onclick="editRecord('exp',${i})" title="Edit"><i class="fas fa-edit"></i></button>
+          <button class="bt bt-gh bt-ic" onclick="editRecord('expense',${i})" title="Edit"><i class="fas fa-edit"></i></button>
           <button class="bt bt-gh bt-ic" onclick="delRecord('exp',${i},'rFin')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
         </div>
       </td>
@@ -1484,32 +1484,67 @@ function rCRM(){
   }
 }
 
-// ====== USERS ======
+// ====== USERS MANAGEMENT ======
 function rUsers(){
-  const b=document.getElementById('bUsers');
-  if(!b)return;
-  b.innerHTML=D.users.map((u,i)=>`
+  const b = document.getElementById('bUsers');
+  if(!b) return;
+
+  b.innerHTML = D.users.map((u, i) => {
+    // Check if this display user has a corresponding login in USERS object
+    const authKey = Object.keys(USERS).find(email => USERS[email].name === u.n);
+    const hasLogin = !!authKey;
+    
+    return `
     <tr>
-      <td><div style="display:flex;align-items:center;gap:8px"><div class="av" style="background:${u.col}">${u.av}</div><span class="tp">${u.n}</span></div></td>
-      <td>${u.r}</td><td>${u.em}</td><td>${bd(u.s)}</td>
-      <td><div style="display:flex;gap:2px">
-        <button class="bt bt-gh bt-ic" onclick="editRecord('user',${i})" title="Edit"><i class="fas fa-edit"></i></button>
-        <button class="bt bt-gh bt-ic" onclick="toggleUserStatus(${i})" title="Toggle Status"><i class="fas fa-power-off"></i></button>
-      </div></td>
-    </tr>`).join('');
+      <td>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div class="av" style="background:${u.col}">${u.av}</div>
+          <div>
+            <span class="tp">${escapeHTML(u.n)}</span>
+            ${hasLogin ? `<br><small style="color:var(--pri)">Login Active: ${authKey}</small>` : ''}
+          </div>
+        </div>
+      </td>
+      <td>${escapeHTML(u.r)}</td>
+      <td>${escapeHTML(u.em)}</td>
+      <td>${bd(u.s)}</td>
+      <td>
+        <div style="display:flex;gap:2px">
+          <button class="bt bt-gh bt-ic" onclick="editRecord('user',${i})" title="Edit Permissions">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="bt bt-gh bt-ic" onclick="toggleUserStatus(${i})" title="Toggle Active">
+            <i class="fas fa-power-off"></i>
+          </button>
+          ${hasLogin ? `
+          <button class="bt bt-gh bt-ic" onclick="promptResetPassword('${authKey}')" title="Reset Login Password">
+            <i class="fas fa-key" style="color:var(--warn)"></i>
+          </button>` : ''}
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
 }
 
-function toggleUserStatus(i){
-  D.users[i].s=D.users[i].s==='Active'?'Inactive':'Active';
-  rUsers();toast(`User ${D.users[i].n} is now ${D.users[i].s}`);
+// Function to reset password from the UI
+function promptResetPassword(email) {
+    const newPass = prompt(`Enter new password for ${email}:`);
+    if (newPass && newPass.length >= 4) {
+        USERS[email].password = newPass;
+        toast(`Password for ${USERS[email].name} updated successfully!`);
+        addActivity(`Password updated for ${email}`, 'Security');
+    } else if (newPass) {
+        toast("Password too short!", "e");
+    }
 }
 
 // ====== NOTIFICATIONS ======
 function rNotifs(){
   const nl=document.getElementById('notList');
   if(!nl)return;
+  const notifLinks=['proj','hse','proc','hr','crm'];
   nl.innerHTML=D.notifs.map((n,i)=>`
-    <div class="np-i" style="${n.read?'opacity:.6':''}" onclick="markNotifRead(${i})">
+    <div class="np-i" style="${n.read?'opacity:.6':''}" onclick="markNotifRead(${i});document.getElementById('notP').classList.remove('op');go(notifLinks[${i}]||'dash',null)">
       <div class="np-ic" style="background:${n.icBg};color:${n.icC}"><i class="${n.ic}"></i></div>
       <div>
         <div class="np-tx" style="font-weight:${n.read?400:600}">${n.tx}</div>
@@ -1532,6 +1567,8 @@ function rKPIs(){rProjKPIs();rDash();}
 
 // Add activity log
 function addActivity(desc,title){
+  // sanitize inputs before storing
+  desc = escapeHTML(desc); title = escapeHTML(title);
   const now=new Date();
   const time='Today, '+now.toLocaleTimeString('en-PK',{hour:'2-digit',minute:'2-digit'});
   D.activity.unshift({col:'var(--pri)',time,title:title||'Record Updated',desc});
@@ -1895,12 +1932,34 @@ function saveRecord(type){
     // recalc computed
     if(type==='invt'){old.s=parseInt(old.sk)<=parseInt(old.mn)?'Low':'OK';}
     if(type==='pay'){old.ne=(parseFloat(old.b)||0)+(parseFloat(old.a)||0)+(parseFloat(old.o)||0)-(parseFloat(old.d)||0);}
+    // If editing a user, sync name/role in sidebar if it's the current user
+    if(type==='user'&&currentUser){
+      const authKey=Object.keys(USERS).find(k=>USERS[k].name===old.n||USERS[k].name===data.n);
+      if(authKey){USERS[authKey].name=data.n;USERS[authKey].initials=(data.n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2));applyPermissions(USERS[authKey]);}
+    }
     toast(cfg.title+' updated successfully');
   }else{
     // Add new
     const rec=cfg.newFn(data);
     D[cfg.arr].unshift(rec);
-    toast(cfg.title+' added successfully');
+    // If adding a user, also create a USERS auth entry
+    if(type==='user'&&data.em){
+      const initials=(data.n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2));
+      const defaultPw='afcco'+new Date().getFullYear();
+      const roleMap={'Administrator':true,'Finance Manager':true};
+      USERS[data.em]={
+        password:defaultPw,
+        name:data.n,
+        initials:initials,
+        role:data.r||'Viewer',
+        canAccessFinance:!!(roleMap[data.r]),
+        canAccessSettings:data.r==='Administrator',
+        canDeleteProjects:data.r==='Administrator'
+      };
+      toast(cfg.title+' added — login: '+data.em+' / '+defaultPw);
+    }else{
+      toast(cfg.title+' added successfully');
+    }
   }
 
   addActivity((editingIdx!==null?'Updated ':'Added ')+cfg.actTitle+': '+(data[cfg.fields[0].key]||''),cfg.title+' '+(editingIdx!==null?'Updated':'Added'));
@@ -1922,6 +1981,8 @@ function delRecord(arr,idx,rerenderFn,fromModal=false){
 function viewRecord(type,idx){
   const viewers={
     proj:(p)=>({title:'Project: '+p.n,fields:[['ID',p.id],['Client',p.cl],['Type',p.tp],['Location',p.loc],['Budget','₨'+fmtNP(p.bgt)],['Progress',p.pr+'%'],['Status',bd(p.st)],['Project Manager',p.pm],['Start Date',p.s],['End Date',p.e||'TBD'],['Description',p.desc||'—']]}),
+    invoice:(inv)=>({title:'Invoice: '+inv.no,fields:[['Invoice #',inv.no],['Client',inv.cl],['Project',inv.pr],['Amount','₨'+fmtNP(inv.am)],['Invoice Date',inv.dt],['Due Date',inv.du],['Status',bd(inv.s)]]}),
+    expense:(ex)=>({title:'Expense: '+ex.ds,fields:[['Date',ex.dt],['Category',ex.ct],['Description',ex.ds],['Project',ex.pr],['Amount','₨'+fmtNP(ex.am)],['Approved By',ex.by],['Status',bd(ex.s)]]}),
     emp:(e)=>({title:'Employee: '+e.n,fields:[['ID',e.id],['Designation',e.dg],['Department',e.dp],['Site',e.st],['Salary','₨'+fmtNP(e.sl)],['Join Date',e.jd],['Phone',e.ph||'—'],['Email',e.em||'—'],['Status',bd(e.s)]]}),
     inv:(i)=>({title:'Invoice: '+i.no,fields:[['Client',i.cl],['Project',i.pr],['Amount','₨'+fmtNP(i.am)],['Date',i.dt],['Due Date',i.du],['Status',bd(i.s)]]}),
     equip:(e)=>({title:'Equipment: '+e.n,fields:[['ID',e.id],['Category',e.ct],['Make/Model',e.md],['Year',e.yr],['Site',e.st],['Fuel/day',e.fu>0?e.fu+' L':'—'],['Utilization',e.util+'%'],['Status',bd(e.s)]]}),
@@ -2040,30 +2101,136 @@ function saveSettings(){
   addActivity('Company settings updated','Settings saved');
 }
 
-// Login / Logout
-function login(){
-  const u=document.getElementById('lu').value.trim();
-  const p=document.getElementById('lp').value;
-  if(u==='admin@afcco.com'&&p==='admin123'){
-    document.getElementById('loginPage').style.display='none';
-    document.getElementById('app').style.display='block';
-    document.getElementById('today').textContent=new Date().toLocaleDateString('en-PK',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-    rAll();
-    setTimeout(initCharts,200);
-    toast('Welcome back, Ahmed Malik!');
-  }else{
-    document.getElementById('lerr').style.display='block';
-    setTimeout(()=>document.getElementById('lerr').style.display='none',3000);
+// ===================== RBAC & AUTH =====================
+
+// User lookup table — extend this to add more users
+const USERS = {
+  'admin@afcco.com': {
+    password: 'admin123',
+    name: 'Ahmed Malik',
+    initials: 'AM',
+    role: 'Administrator',
+    canAccessFinance: true,
+    canAccessSettings: true,
+    canDeleteProjects: true
+  },
+  'suhaib@afcco.com': {
+    password: 'ops2024',
+    name: 'Suhaib Sheth',
+    initials: 'SS',
+    role: 'Operations Manager',
+    canAccessFinance: false,
+    canAccessSettings: false,
+    canDeleteProjects: false
+  }
+};
+
+// Currently logged-in user (in-memory + sessionStorage)
+let currentUser = null;
+
+// XSS protection helper
+function escapeHTML(str) {
+  if (str == null) return '';
+  return String(str)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&#x27;');
+}
+
+// Apply UI permissions based on role
+function applyPermissions(user) {
+  // Finance sidebar item
+  const navFin = document.getElementById('nav-fin');
+  if (navFin) navFin.style.display = user.canAccessFinance ? '' : 'none';
+
+  // Settings sidebar item
+  const navSet = document.getElementById('nav-set');
+  if (navSet) navSet.style.display = user.canAccessSettings ? '' : 'none';
+
+  // Admin-only elements (projects delete button etc.)
+  document.querySelectorAll('.admin-only').forEach(el => {
+    el.style.display = user.canDeleteProjects ? '' : 'none';
+  });
+
+  // Update sidebar user info
+  const sideAv = document.getElementById('sideAv');
+  const sideUn = document.getElementById('sideUn');
+  const sideUr = document.getElementById('sideUr');
+  const hdAv   = document.getElementById('hdAv');
+  if (sideAv) sideAv.textContent = user.initials;
+  if (sideUn) sideUn.textContent = user.name;
+  if (sideUr) sideUr.textContent = user.role;
+  if (hdAv)   { hdAv.textContent = user.initials; hdAv.title = user.name + ' — ' + user.role; }
+
+  // Update dashboard greeting
+  const greet = document.getElementById('dashGreet');
+  if (greet) {
+    const firstName = user.name.split(' ')[0];
+    greet.innerHTML = 'Good morning, ' + escapeHTML(firstName) + ' — <span id="today"></span>';
   }
 }
 
-function logout(){
-  if(confirm('Sign out of AFCCO MIS?')){
-    document.getElementById('app').style.display='none';
-    document.getElementById('loginPage').style.display='flex';
+// Restore session on page load
+function initializeSession() {
+  const saved = sessionStorage.getItem('afcco_user');
+  if (saved) {
+    try {
+      const user = JSON.parse(saved);
+      if (USERS[user.email]) {
+        currentUser = user;
+        document.getElementById('loginPage').style.display = 'none';
+        document.getElementById('app').style.display = 'block';
+        document.getElementById('today').textContent = new Date().toLocaleDateString('en-PK',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+        applyPermissions(USERS[user.email]);
+        rAll();
+        setTimeout(initCharts, 200);
+      }
+    } catch(e) {
+      sessionStorage.removeItem('afcco_user');
+    }
+  }
+}
+
+function login() {
+  const email = document.getElementById('lu').value.trim().toLowerCase();
+  const pass  = document.getElementById('lp').value;
+  const user  = USERS[email];
+
+  if (user && user.password === pass) {
+    currentUser = { email };
+    sessionStorage.setItem('afcco_user', JSON.stringify(currentUser));
+
+    document.getElementById('loginPage').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    document.getElementById('today').textContent = new Date().toLocaleDateString('en-PK',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+    applyPermissions(user);
+    rAll();
+    setTimeout(initCharts, 200);
+    toast('Welcome back, ' + escapeHTML(user.name) + '!');
+  } else {
+    document.getElementById('lerr').style.display = 'block';
+    setTimeout(() => document.getElementById('lerr').style.display = 'none', 3000);
+  }
+}
+
+function logout() {
+  if (confirm('Sign out of AFCCO MIS?')) {
+    sessionStorage.removeItem('afcco_user');
+    currentUser = null;
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('loginPage').style.display = 'flex';
+    // Reset login form
+    document.getElementById('lu').value = '';
+    document.getElementById('lp').value = '';
     toast('Signed out successfully');
   }
 }
+
+// Run session check on load
+initializeSession();
 
 // Click outside modals to close
 document.addEventListener('click',e=>{
