@@ -26,233 +26,41 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:14px;color:v
 #loginPage{min-height:100vh;display:flex;background:var(--b2)}
 .lo-left{flex:1;display:flex;align-items:center;justify-content:center;padding:48px;background:linear-gradient(160deg,#f0fdfa 0%,#e0f2fe 100%);position:relative;overflow:hidden}
 .lo-left::before{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(13,148,136,.12) 0%,transparent 70%);top:-120px;right:-120px;border-radius:50%}
-.lo-left::after{content:'';position:absolute;width:350px;height:350px;background:radial-gradient(circle,rgba(2,132,199,.08) 0%,transparent 70%);bottom:-80px;left:-80px;border-radius:50%}
 .lo-inner{position:relative;z-index:2;max-width:440px}
 .lo-brand{display:flex;align-items:center;gap:12px;margin-bottom:44px}
 .lo-logo{width:48px;height:48px;border-radius:12px;background:var(--pri);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:20px;box-shadow:0 4px 14px rgba(13,148,136,.3)}
 .lo-bn{font-size:20px;font-weight:800;color:var(--t1);letter-spacing:.3px}
-.lo-bs{font-size:12px;color:var(--t3);margin-top:1px}
 .lo-h{font-size:34px;font-weight:800;color:var(--t1);line-height:1.2;margin-bottom:16px}
 .lo-h span{color:var(--pri)}
 .lo-p{font-size:14.5px;color:var(--t3);line-height:1.7}
-.lo-features{margin-top:36px;display:flex;flex-direction:column;gap:10px}
-.lo-feat{display:flex;align-items:center;gap:12px;padding:11px 16px;background:var(--b1);border:1px solid var(--b4);border-radius:var(--rs);font-size:13px;color:var(--t2);font-weight:500;box-shadow:var(--sh)}
-.lo-feat i{color:var(--pri);width:16px;font-size:14px}
+.lo-feat{display:flex;align-items:center;gap:12px;padding:11px 16px;background:var(--b1);border:1px solid var(--b4);border-radius:var(--rs);font-size:13px;color:var(--t2);font-weight:500;margin-top:10px}
 .lo-right{width:440px;display:flex;align-items:center;justify-content:center;padding:48px;background:var(--b1);border-left:1px solid var(--b4)}
 .lo-form{width:100%;max-width:360px}
 .lo-ft{font-size:26px;font-weight:800;color:var(--t1);margin-bottom:6px}
-.lo-fs{color:var(--t3);font-size:13.5px;margin-bottom:32px}
-.lf{margin-bottom:18px}
-.lf label{display:block;font-size:11.5px;font-weight:700;color:var(--t3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.8px}
-.lf input{width:100%;padding:11px 14px;border:1.5px solid var(--b4);border-radius:var(--rs);font-size:14px;color:var(--t1);outline:none;background:var(--b2);transition:.2s}
-.lf input:focus{border-color:var(--pri);background:var(--b1);box-shadow:0 0 0 3px rgba(13,148,136,.1)}
-.btn-lo{width:100%;padding:13px;border:none;border-radius:var(--rs);background:var(--pri);color:#fff;font-size:14.5px;font-weight:700;cursor:pointer;transition:.2s;letter-spacing:.3px;margin-top:6px}
-.btn-lo:hover{background:var(--pri-h);transform:translateY(-1px);box-shadow:0 4px 12px rgba(13,148,136,.3)}
-.lo-hint{margin-top:18px;padding:11px 14px;background:var(--pri-p);border:1px solid var(--pri-l);border-radius:var(--rs);font-size:12px;color:var(--pri-h);line-height:1.5}
-.lo-hint b{color:var(--pri)}
+.lf label{display:block;font-size:11.5px;font-weight:700;color:var(--t3);margin-bottom:6px;text-transform:uppercase}
+.lf input{width:100%;padding:11px 14px;border:1.5px solid var(--b4);border-radius:var(--rs);font-size:14px;outline:none;background:var(--b2)}
+.btn-lo{width:100%;padding:13px;border:none;border-radius:var(--rs);background:var(--pri);color:#fff;font-weight:700;cursor:pointer;transition:.2s}
+.btn-lo:hover{background:var(--pri-h)}
 .lo-err{display:none;margin-top:10px;font-size:13px;color:var(--err);font-weight:600}
-/* SIDEBAR */
+.lo-hint{margin-top:18px;padding:11px 14px;background:var(--pri-p);border:1px solid var(--pri-l);border-radius:var(--rs);font-size:12px;color:var(--pri-h)}
+
+/* APP */
 #app{display:none}
-.side{position:fixed;top:0;left:0;width:var(--side);height:100vh;background:var(--b1);border-right:1px solid var(--b4);display:flex;flex-direction:column;z-index:200;overflow-y:auto;transition:.3s}
+.side{position:fixed;top:0;left:0;width:var(--side);height:100vh;background:var(--b1);border-right:1px solid var(--b4);display:flex;flex-direction:column;z-index:200}
 .si-top{display:flex;align-items:center;gap:11px;padding:18px 20px;border-bottom:1px solid var(--b3)}
-.si-logo{width:36px;height:36px;border-radius:9px;background:var(--pri);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:15px;flex-shrink:0}
-.si-name{font-size:15px;font-weight:800;color:var(--t1)}
-.si-name span{display:block;font-size:10.5px;font-weight:500;color:var(--t4)}
+.si-logo{width:36px;height:36px;border-radius:9px;background:var(--pri);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800}
 .si-nav{flex:1;padding:10px 0;overflow-y:auto}
-.si-sec{padding:16px 18px 5px;font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--t4)}
-.si-item{display:flex;align-items:center;gap:11px;padding:9px 18px;margin:1px 8px;border-radius:var(--rs);color:var(--t3);font-size:13.5px;font-weight:500;cursor:pointer;transition:.15s}
-.si-item:hover{background:var(--b3);color:var(--t1)}
+.si-item{display:flex;align-items:center;gap:11px;padding:9px 18px;margin:1px 8px;border-radius:var(--rs);color:var(--t3);cursor:pointer}
 .si-item.on{background:var(--pri-p);color:var(--pri-h);font-weight:600}
-.si-item.on i{color:var(--pri)}
-.si-item i{width:17px;text-align:center;font-size:14px}
-.si-badge{margin-left:auto;font-size:10px;font-weight:700;padding:2px 7px;border-radius:99px;background:var(--pri-l);color:var(--pri-h)}
-.si-badge.red{background:var(--err-l);color:var(--err)}
-.si-ft{padding:12px 14px;border-top:1px solid var(--b3)}
-.si-user{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--rs);cursor:pointer;transition:.15s}
-.si-user:hover{background:var(--b3)}
-.si-av{width:34px;height:34px;border-radius:8px;background:var(--pri);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
-.si-un{font-size:13px;font-weight:600;color:var(--t1)}
-.si-ur{font-size:11px;color:var(--t4)}
-.si-on{margin-left:auto;width:7px;height:7px;background:#22c55e;border-radius:50%}
-/* HEADER */
-.hd{position:fixed;top:0;left:var(--side);right:0;height:var(--head);background:var(--b1);border-bottom:1px solid var(--b4);display:flex;align-items:center;padding:0 24px;gap:12px;z-index:100}
-.hd-title{font-size:15px;font-weight:700;color:var(--t1);flex:1}
-.hd-search{display:flex;align-items:center;gap:8px;background:var(--b2);border:1.5px solid var(--b4);border-radius:var(--rs);padding:7px 13px;width:260px;transition:.2s}
-.hd-search:focus-within{border-color:var(--pri);background:var(--b1);box-shadow:0 0 0 3px rgba(13,148,136,.08)}
-.hd-search input{background:none;border:none;outline:none;font-size:13px;color:var(--t1);width:100%}
-.hd-search i{color:var(--t4);font-size:13px}
-.hd-acts{display:flex;align-items:center;gap:6px}
-.hd-btn{width:36px;height:36px;border:1.5px solid var(--b4);border-radius:var(--rs);background:var(--b1);color:var(--t3);display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;position:relative;transition:.15s}
-.hd-btn:hover{border-color:var(--b5);color:var(--t1);background:var(--b3)}
-.hd-dot{position:absolute;top:5px;right:5px;width:7px;height:7px;background:var(--err);border-radius:50%;border:2px solid var(--b1)}
-.hd-av{width:36px;height:36px;border-radius:var(--rs);background:var(--pri);color:#fff;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;cursor:pointer}
-.hd-div{width:1px;height:20px;background:var(--b4);margin:0 2px}
-/* MAIN */
-.mn{margin-left:var(--side);margin-top:var(--head);padding:28px;min-height:calc(100vh - var(--head))}
-.pg{display:none;animation:fi .25s ease}
-.pg.on{display:block}
-@keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
-/* PAGE HEADER */
-.ph{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;gap:16px;flex-wrap:wrap}
-.ph h2{font-size:20px;font-weight:800;color:var(--t1)}
-.ph p{font-size:13px;color:var(--t3);margin-top:3px}
-.ph-acts{display:flex;gap:8px;flex-wrap:wrap}
-/* KPI */
+.hd{position:fixed;top:0;left:var(--side);right:0;height:var(--head);background:var(--b1);border-bottom:1px solid var(--b4);display:flex;align-items:center;padding:0 24px;z-index:100}
+.mn{margin-left:var(--side);margin-top:var(--head);padding:28px}
+.pg{display:none}.pg.on{display:block}
 .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:24px}
-.kpi{background:var(--b1);border:1px solid var(--b4);border-radius:var(--r);padding:18px 20px;display:flex;align-items:flex-start;gap:14px;transition:.2s}
-.kpi:hover{box-shadow:var(--sh2);border-color:var(--b5)}
-.ki{width:42px;height:42px;border-radius:var(--rs);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
-.ki.teal{background:var(--pri-l);color:var(--pri)}.ki.blue{background:var(--acc-l);color:var(--acc)}.ki.green{background:var(--ok-l);color:var(--ok)}.ki.amber{background:var(--warn-l);color:var(--warn)}.ki.red{background:var(--err-l);color:var(--err)}.ki.gray{background:var(--b3);color:var(--t3)}
-.kv{font-size:24px;font-weight:800;color:var(--t1);line-height:1.1}
-.kl{font-size:12px;color:var(--t3);margin-top:3px;font-weight:500}
-.kc{font-size:11.5px;font-weight:600;margin-top:5px;display:flex;align-items:center;gap:3px}
-.kc.up{color:var(--ok)}.kc.dn{color:var(--err)}.kc.fl{color:var(--t4)}
-/* CARD */
-.cd{background:var(--b1);border:1px solid var(--b4);border-radius:var(--r);margin-bottom:20px;overflow:hidden}
-.cd-h{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--b3);gap:10px;flex-wrap:wrap}
-.cd-hl{display:flex;align-items:center;gap:8px}
-.cd-hl i{color:var(--pri);font-size:14px}
-.cd-t{font-size:14px;font-weight:700;color:var(--t1)}
-.cd-st{font-size:11.5px;color:var(--t4);margin-top:1px}
-.cd-acts{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
-.cd-b{padding:20px}
-.cd-b.p0{padding:0}
-/* GRIDS */
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
-.g21{display:grid;grid-template-columns:2fr 1fr;gap:20px}
-@media(max-width:1100px){.g2,.g3,.g21{grid-template-columns:1fr}}
-/* BUTTONS */
-.bt{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:var(--rs);border:1.5px solid transparent;font-size:13px;font-weight:600;cursor:pointer;transition:.15s;white-space:nowrap;font-family:inherit}
-.bt-pri{background:var(--pri);color:#fff;border-color:var(--pri)}.bt-pri:hover{background:var(--pri-h);border-color:var(--pri-h)}
-.bt-acc{background:var(--acc);color:#fff;border-color:var(--acc)}.bt-acc:hover{background:var(--acc-h);border-color:var(--acc-h)}
-.bt-out{background:var(--b1);color:var(--t2);border-color:var(--b4)}.bt-out:hover{background:var(--b3);border-color:var(--b5)}
-.bt-gh{background:transparent;color:var(--t3);border-color:transparent;padding:6px 8px}.bt-gh:hover{background:var(--b3);color:var(--t1)}
-.bt-err{background:var(--err);color:#fff;border-color:var(--err)}.bt-err:hover{background:#b91c1c}
-.bt-warn{background:var(--warn);color:#fff;border-color:var(--warn)}.bt-warn:hover{background:#b45309}
-.bt-sm{padding:5px 11px;font-size:12px}
-.bt-ic{width:32px;height:32px;padding:0;display:inline-flex;align-items:center;justify-content:center;border-radius:var(--rs)}
-/* TABLE */
-.tw{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:13.5px}
-thead th{background:var(--b2);color:var(--t3);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;padding:10px 16px;text-align:left;border-bottom:1px solid var(--b4);white-space:nowrap;position:sticky;top:0}
-tbody td{padding:11px 16px;border-bottom:1px solid var(--b3);color:var(--t2);vertical-align:middle}
-tbody tr:last-child td{border-bottom:none}
-tbody tr:hover{background:var(--b2)}
-.tp{font-weight:600;color:var(--t1)}
-.tm{font-family:'Courier New',monospace;font-size:12px;color:var(--t3)}
-/* BADGE */
-.bg{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;letter-spacing:.2px}
-.bg::before{content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0}
-.bg-g{background:var(--ok-l);color:#15803d}.bg-g::before{background:#16a34a}
-.bg-b{background:var(--acc-l);color:#0369a1}.bg-b::before{background:#0284c7}
-.bg-t{background:var(--pri-l);color:var(--pri-h)}.bg-t::before{background:var(--pri)}
-.bg-a{background:var(--warn-l);color:#92400e}.bg-a::before{background:var(--warn)}
-.bg-r{background:var(--err-l);color:#991b1b}.bg-r::before{background:var(--err)}
-.bg-s{background:var(--b3);color:var(--t3)}.bg-s::before{background:var(--t4)}
-/* PROGRESS */
-.prog{display:flex;align-items:center;gap:8px;min-width:130px}
-.prog-bar{flex:1;height:6px;background:var(--b3);border-radius:99px;overflow:hidden}
-.prog-fill{height:100%;border-radius:99px;transition:.5s}
-.prog span{font-size:12px;font-weight:700;color:var(--t2);min-width:34px;text-align:right}
-/* FORMS */
-.fg2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.fi{display:flex;flex-direction:column;gap:5px}
-.fi.fw{grid-column:1/-1}
-.fi label{font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.7px}
-.fi input,.fi select,.fi textarea{padding:9px 13px;border:1.5px solid var(--b4);border-radius:var(--rs);font-size:13.5px;color:var(--t1);outline:none;background:var(--b1);transition:.2s;font-family:inherit}
-.fi input:focus,.fi select:focus,.fi textarea:focus{border-color:var(--pri);box-shadow:0 0 0 3px rgba(13,148,136,.08)}
-.fi textarea{min-height:78px;resize:vertical}
-/* MODAL */
-.ov{position:fixed;inset:0;background:rgba(17,24,39,.35);backdrop-filter:blur(2px);z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:.2s}
-.ov.op{opacity:1;pointer-events:all}
-.md{background:var(--b1);border-radius:var(--r);width:580px;max-width:95vw;max-height:90vh;overflow-y:auto;transform:translateY(10px);transition:.25s;box-shadow:var(--sh2);border:1px solid var(--b4)}
-.ov.op .md{transform:none}
-.md-h{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--b3)}
-.md-h h3{font-size:16px;font-weight:700;color:var(--t1)}
-.md-x{width:30px;height:30px;border:1.5px solid var(--b4);border-radius:var(--rs);background:var(--b1);color:var(--t3);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.15s;font-size:14px}
-.md-x:hover{background:var(--b3)}
-.md-b{padding:22px}
-.md-f{padding:14px 22px;border-top:1px solid var(--b3);display:flex;justify-content:flex-end;gap:8px}
-/* TABS */
-.tabs{display:flex;gap:0;border-bottom:2px solid var(--b3);margin-bottom:20px}
-.tb{padding:10px 18px;border:none;background:transparent;font-size:13px;font-weight:600;color:var(--t3);border-bottom:2px solid transparent;margin-bottom:-2px;cursor:pointer;transition:.15s;font-family:inherit}
-.tb:hover{color:var(--t1)}
-.tb.on{color:var(--pri);border-bottom-color:var(--pri)}
-.tp-pane{display:none}.tp-pane.on{display:block}
-/* TIMELINE */
-.tl{display:flex;flex-direction:column}
-.tl-i{display:flex;gap:14px;padding-bottom:18px;position:relative}
-.tl-i:last-child{padding-bottom:0}
-.tl-l{display:flex;flex-direction:column;align-items:center;width:24px;flex-shrink:0}
-.tl-d{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:5px}
-.tl-ln{flex:1;width:1.5px;background:var(--b4);margin:3px 0}
-.tl-i:last-child .tl-ln{display:none}
-.tl-tm{font-size:11px;color:var(--t4);font-weight:500;margin-bottom:2px}
-.tl-tt{font-size:13.5px;font-weight:600;color:var(--t1)}
-.tl-ds{font-size:12px;color:var(--t3);margin-top:2px}
-/* ALERTS */
-.al{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;border-radius:var(--rs);font-size:13px;margin-bottom:10px;border:1px solid}
-.al:last-child{margin-bottom:0}
-.al i{font-size:14px;margin-top:1px;flex-shrink:0}
-.al-g{background:var(--pri-p);border-color:var(--pri-l);color:var(--pri-h)}.al-g i{color:var(--pri)}
-.al-b{background:var(--acc-p);border-color:var(--acc-l);color:#0c4a6e}.al-b i{color:var(--acc)}
-.al-a{background:#fffbeb;border-color:#fde68a;color:#78350f}.al-a i{color:var(--warn)}
-.al-r{background:#fef2f2;border-color:#fecaca;color:#7f1d1d}.al-r i{color:var(--err)}
-/* STAT ROW */
-.sr{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--b3)}
-.sr:last-child{border-bottom:none}
-.sr-l{font-size:13px;color:var(--t3)}
-.sr-v{font-size:13.5px;font-weight:700;color:var(--t1)}
-/* AVATAR */
-.av{width:32px;height:32px;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
-/* GANTT */
-.gb{height:22px;border-radius:4px;display:flex;align-items:center;padding:0 8px;font-size:10.5px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden}
-/* REPORT CARD */
-.rc{background:var(--b1);border:1px solid var(--b4);border-radius:var(--r);padding:24px;text-align:center;transition:.2s;cursor:pointer}
-.rc:hover{box-shadow:var(--sh2);border-color:var(--b5);transform:translateY(-2px)}
-.rc-icon{width:52px;height:52px;border-radius:var(--r);margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:20px}
-.rc-t{font-size:14px;font-weight:700;color:var(--t1);margin-bottom:5px}
-.rc-d{font-size:12px;color:var(--t3);line-height:1.5;margin-bottom:14px}
-/* TOGGLE */
-.tg-row{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--b3)}
-.tg-row:last-child{border-bottom:none}
-.tg-lb{font-size:13.5px;color:var(--t1)}
-.tg-lb span{display:block;font-size:12px;color:var(--t4);margin-top:2px}
-.tg{appearance:none;width:40px;height:22px;background:var(--b4);border-radius:99px;position:relative;cursor:pointer;transition:.2s;flex-shrink:0}
-.tg:checked{background:var(--pri)}
-.tg::after{content:'';position:absolute;width:16px;height:16px;border-radius:50%;background:#fff;top:3px;left:3px;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
-.tg:checked::after{left:21px}
-/* NOTIF PANEL */
-.np{position:fixed;top:var(--head);right:16px;width:330px;background:var(--b1);border:1px solid var(--b4);border-radius:var(--r);box-shadow:var(--sh2);z-index:300;display:none;overflow:hidden}
-.np.op{display:block}
-.np-h{padding:14px 16px;border-bottom:1px solid var(--b3);display:flex;align-items:center;justify-content:space-between}
-.np-h h4{font-size:14px;font-weight:700;color:var(--t1)}
-.np-i{display:flex;gap:10px;padding:12px 16px;border-bottom:1px solid var(--b3);cursor:pointer;transition:.1s}
-.np-i:hover{background:var(--b2)}
-.np-i:last-child{border-bottom:none}
-.np-ic{width:32px;height:32px;border-radius:var(--rs);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
-.np-tx{font-size:12.5px;color:var(--t2);line-height:1.4}
-.np-tm{font-size:11px;color:var(--t4);margin-top:2px}
-/* SECTION DIVIDER */
-.sd{font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;padding:14px 0 8px;border-bottom:1px solid var(--b4);margin-bottom:14px}
-/* VIEW DETAIL */
-.vd-row{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--b3)}
-.vd-row:last-child{border-bottom:none}
-.vd-l{font-size:12px;color:var(--t3);font-weight:600;width:140px;flex-shrink:0;padding-top:1px}
-.vd-v{font-size:13.5px;color:var(--t1);font-weight:500;flex:1}
-@media(max-width:768px){
-  .side{transform:translateX(-100%)}.side.show{transform:none}
-  .hd{left:0}.mn{margin-left:0}
-  .kpis{grid-template-columns:1fr 1fr}
-  .lo-left{display:none}.lo-right{width:100%;border:none}
-  .fg2{grid-template-columns:1fr}
-}
-@media print{
-  .side,.hd,.ph-acts,.hd-acts,.bt,.cd-acts,.np{display:none!important}
-  .mn{margin:0;padding:20px}
-  .cd{break-inside:avoid;border:1px solid #ccc}
-}
+.kpi{background:var(--b1);border:1px solid var(--b4);border-radius:var(--r);padding:18px 20px;display:flex;align-items:center;gap:14px}
+.ki{width:42px;height:42px;border-radius:var(--rs);display:flex;align-items:center;justify-content:center;font-size:17px}
+.ki.teal{background:var(--pri-l);color:var(--pri)}
+.bg{padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700}
+.bg-g{background:var(--ok-l);color:#15803d}
 </style>
 </head>
 <body>
@@ -260,191 +68,66 @@ tbody tr:hover{background:var(--b2)}
 <div id="loginPage">
   <div class="lo-left">
     <div class="lo-inner">
-      <div class="lo-brand">
-        <div class="lo-logo">A</div>
-        <div><div class="lo-bn">AFCCO</div><div class="lo-bs">Management Information System v2.0</div></div>
-      </div>
-      <div class="lo-h">Your Complete <span>Construction & Oil & Gas</span> Operations Hub</div>
-      <div class="lo-p">AFCCO Oil & Gas Field Services (Pvt.) Ltd. — since 1994. Managing pre-drilling construction, civil works, and E&P services across Pakistan.</div>
-      <div class="lo-features">
-        <div class="lo-feat"><i class="fas fa-hard-hat"></i>Project & Progress Management</div>
-        <div class="lo-feat"><i class="fas fa-wallet"></i>Financial Planning & Invoicing</div>
-        <div class="lo-feat"><i class="fas fa-users"></i>HR, Payroll & Attendance</div>
-        <div class="lo-feat"><i class="fas fa-shield-alt"></i>HSE, Risk & Compliance</div>
-        <div class="lo-feat"><i class="fas fa-chart-line"></i>Business Intelligence & Reports</div>
-      </div>
+      <div class="lo-brand"><div class="lo-logo">A</div><div class="lo-bn">AFCCO MIS v2.0</div></div>
+      <div class="lo-h">Your Complete <span>Construction</span> Operations Hub</div>
+      <div class="lo-p">AFCCO Oil & Gas Field Services (Pvt.) Ltd. — since 1994.</div>
     </div>
   </div>
   <div class="lo-right">
     <div class="lo-form">
-      <div class="lo-ft">Welcome back</div>
-      <div class="lo-fs">Sign in to access the AFCCO Management Portal</div>
-      <div class="lf"><label>Email Address</label><input id="lu" value="admin@afcco.com" placeholder="your@email.com"/></div>
-      <div class="lf"><label>Password</label><input type="password" id="lp" value="admin123" placeholder="••••••••"/></div>
+      <div class="lo-ft">Sign In</div>
+      <div class="lf"><label>Email Address</label><input id="lu" placeholder="admin@afcco.com"/></div>
+      <div class="lf"><label>Password</label><input type="password" id="lp" placeholder="••••••••"/></div>
       <button class="btn-lo" onclick="login()">Sign In →</button>
-      <div class="lo-err" id="lerr">Access Denied: Invalid Email or Password.</div>
-      <div class="lo-hint"><b>Official Access:</b> admin@afcco.com &nbsp;/&nbsp; Admin#2026</div>
+      <div class="lo-err" id="lerr">Invalid credentials.</div>
+      <div class="lo-hint"><b>Access:</b> admin@afcco.com / Admin#2026</div>
     </div>
   </div>
 </div>
 
 <div id="app">
-<aside class="side" id="side">
-  <div class="si-top">
-    <div class="si-logo">A</div>
-    <div><div class="si-name">AFCCO MIS<span>Construction & O&G</span></div></div>
-  </div>
-  <nav class="si-nav">
-    <div class="si-sec">Overview</div>
-    <div class="si-item on" onclick="go('dash',this)"><i class="fas fa-th-large"></i>Dashboard</div>
-    <div class="si-sec">Operations</div>
-    <div class="si-item" onclick="go('proj',this)"><i class="fas fa-hard-hat"></i>Projects<span class="si-badge" id="sb-proj">0</span></div>
-    <div class="si-item" onclick="go('fin',this)"><i class="fas fa-wallet"></i>Finance</div>
-    <div class="si-item" onclick="go('proc',this)"><i class="fas fa-shopping-cart"></i>Procurement<span class="si-badge red" id="sb-proc">0</span></div>
-    <div class="si-item" onclick="go('equip',this)"><i class="fas fa-truck"></i>Equipment</div>
-    <div class="si-sec">People</div>
-    <div class="si-item" onclick="go('hr',this)"><i class="fas fa-users"></i>HR & Payroll</div>
-    <div class="si-item" onclick="go('hse',this)"><i class="fas fa-shield-alt"></i>HSE<span class="si-badge red" id="sb-hse">0</span></div>
-    <div class="si-sec">Administration</div>
-    <div class="si-item" onclick="go('docs',this)"><i class="fas fa-folder-open"></i>Documents</div>
-    <div class="si-item" onclick="go('crm',this)"><i class="fas fa-handshake"></i>CRM & Clients</div>
-    <div class="si-item" onclick="go('rpt',this)"><i class="fas fa-chart-bar"></i>Reports & BI</div>
-    <div class="si-item" onclick="go('set',this)"><i class="fas fa-cog"></i>Settings</div>
-  </nav>
-  <div class="si-ft">
-    <div class="si-user">
-      <div class="si-av" id="si-av-init">??</div>
-      <div style="flex:1"><div class="si-un">Username</div><div class="si-ur">Role</div></div>
-      <div class="si-on"></div>
+  <aside class="side">
+    <div class="si-top"><div class="si-logo">A</div><div class="si-name" style="font-weight:800">AFCCO MIS</div></div>
+    <nav class="si-nav">
+      <div class="si-item on" onclick="go('dash',this)"><i class="fas fa-th-large"></i> Dashboard</div>
+      <div class="si-item" onclick="go('proj',this)"><i class="fas fa-hard-hat"></i> Projects</div>
+    </nav>
+    <div style="padding:20px; border-top:1px solid var(--b3)">
+      <div class="si-un" style="font-weight:700">User</div>
+      <div class="si-ur" style="font-size:11px">Role</div>
     </div>
-  </div>
-</aside>
-
-<header class="hd">
-  <button class="hd-btn" onclick="document.getElementById('side').classList.toggle('show')"><i class="fas fa-bars"></i></button>
-  <span class="hd-title" id="hdT">Dashboard</span>
-  <div class="hd-search"><i class="fas fa-search"></i><input id="globalSearch" placeholder="Search projects, employees, documents…" oninput="globalSrch(this.value)"/></div>
-  <div class="hd-acts">
-    <button class="hd-btn" onclick="toggleNotif(event)"><i class="fas fa-bell"></i><div class="hd-dot" id="notDot"></div></button>
-    <div class="hd-div"></div>
-    <div class="hd-av" id="hd-av-init" title="Account">??</div>
-    <button class="hd-btn" onclick="logout()" title="Sign Out"><i class="fas fa-sign-out-alt"></i></button>
-  </div>
-</header>
-
-<div class="np" id="notP">
-  <div class="np-h"><h4>Notifications</h4><button class="bt bt-gh bt-sm" onclick="clearNotifs()">Mark all read</button></div>
-  <div id="notList"></div>
-</div>
-
-<main class="mn">
-
-<div class="pg on" id="pg-dash">
-  <div class="ph">
-    <div><h2>Executive Dashboard</h2><p>Good morning, <span id="user-name-greeting">Admin</span> — <span id="today"></span></p></div>
-    <div class="ph-acts">
-      <button class="bt bt-out bt-sm" onclick="genR('fin')"><i class="fas fa-download"></i> Export</button>
-      <button class="bt bt-pri bt-sm" onclick="refreshDash()"><i class="fas fa-sync-alt"></i> Refresh</button>
+  </aside>
+  <header class="hd"><span id="hdT" style="font-weight:700">Dashboard</span></header>
+  <main class="mn">
+    <div class="pg on" id="pg-dash">
+      <div class="ph"><h2>Executive Dashboard</h2><p id="today"></p></div>
+      <div class="kpis" id="dashKPIs"></div>
+      <div class="cd" style="padding:20px"><canvas id="c1" height="100"></canvas></div>
     </div>
-  </div>
-  <div class="kpis" id="dashKPIs"></div>
-  <div class="g21">
-    <div class="cd">
-      <div class="cd-h">
-        <div class="cd-hl"><i class="fas fa-chart-line"></i><div><div class="cd-t">Revenue vs Cost — 2024</div><div class="cd-st">In PKR millions</div></div></div>
-        <select class="bt bt-out bt-sm" id="revChartMode" onchange="updateRevChart(this.value)">
-          <option value="monthly">Monthly</option>
-          <option value="quarterly">Quarterly</option>
-        </select>
-      </div>
-      <div class="cd-b"><canvas id="c1" height="130"></canvas></div>
+    <div class="pg" id="pg-proj">
+      <div class="ph"><h2>Project Management</h2></div>
+      <div class="cd"><div class="tw"><table><thead><tr><th>ID</th><th>Project</th><th>Client</th><th>Budget</th><th>Status</th></tr></thead><tbody id="bP"></tbody></table></div></div>
     </div>
-    <div class="cd">
-      <div class="cd-h"><div class="cd-hl"><i class="fas fa-chart-pie"></i><div><div class="cd-t">Project Type Mix</div></div></div></div>
-      <div class="cd-b"><canvas id="c2" height="180"></canvas></div>
-    </div>
-  </div>
-  <div class="g2">
-    <div class="cd">
-      <div class="cd-h"><div class="cd-hl"><i class="fas fa-tasks"></i><div><div class="cd-t">Project Progress</div><div class="cd-st">Active projects</div></div></div><button class="bt bt-gh bt-sm" onclick="go('proj',document.querySelector('.si-item:nth-child(3)'))">View all →</button></div>
-      <div class="cd-b" id="dProj"></div>
-    </div>
-    <div class="cd">
-      <div class="cd-h"><div class="cd-hl"><i class="fas fa-clock"></i><div><div class="cd-t">Recent Activity</div></div></div></div>
-      <div class="cd-b"><div class="tl" id="activityFeed"></div></div>
-    </div>
-  </div>
-  <div class="g3">
-    <div class="cd"><div class="cd-h"><div class="cd-hl"><i class="fas fa-chart-bar"></i><div><div class="cd-t" id="expChartTitle">Monthly Expenses</div></div></div></div><div class="cd-b"><canvas id="c3" height="160"></canvas></div></div>
-    <div class="cd"><div class="cd-h"><div class="cd-hl"><i class="fas fa-users"></i><div><div class="cd-t">Workforce Breakdown</div></div></div></div><div class="cd-b"><canvas id="c4" height="160"></canvas></div></div>
-    <div class="cd">
-      <div class="cd-h"><div class="cd-hl"><i class="fas fa-shield-alt"></i><div><div class="cd-t">HSE Indicators (YTD)</div></div></div></div>
-      <div class="cd-b" id="hseSnap"></div>
-    </div>
-  </div>
-  <div class="cd">
-    <div class="cd-h"><div class="cd-hl"><i class="fas fa-bell"></i><div><div class="cd-t">Alerts & Reminders</div></div></div></div>
-    <div class="cd-b" id="dashAlerts"></div>
-  </div>
-</div>
-
-<div class="pg" id="pg-proj">
-  <div class="ph"><div><h2>Project Management</h2><p>Monitor all active construction and O&G field service projects</p></div><div class="ph-acts"><button class="bt bt-out bt-sm" onclick="exportTable('tP','Projects')"><i class="fas fa-download"></i> Export CSV</button><button class="bt bt-pri bt-sm" onclick="openAddModal('proj')"><i class="fas fa-plus"></i> New Project</button></div></div>
-  <div class="kpis" id="projKPIs"></div>
-  <div class="cd">
-    <div class="cd-h">
-      <div class="cd-hl"><i class="fas fa-list"></i><div><div class="cd-t">All Projects</div></div></div>
-      <div class="cd-acts">
-        <select class="bt bt-out bt-sm" onchange="filterProj(this.value)" id="projStatusFilter">
-          <option value="">All Status</option><option value="Active">Active</option><option value="Delayed">Delayed</option><option value="On Hold">On Hold</option><option value="Completed">Completed</option>
-        </select>
-        <input placeholder="Search projects…" style="padding:6px 12px;border:1.5px solid var(--b4);border-radius:var(--rs);font-size:13px;outline:none;width:190px;font-family:inherit" oninput="ft('tP',this.value)"/>
-      </div>
-    </div>
-    <div class="cd-b p0"><div class="tw"><table id="tP"><thead><tr><th>ID</th><th>Project Name</th><th>Client</th><th>Type</th><th>Location</th><th>Budget (PKR)</th><th>Progress</th><th>Status</th><th>PM</th><th style="width:90px">Actions</th></tr></thead><tbody id="bP"></tbody></table></div></div>
-  </div>
-  <div class="cd"><div class="cd-h"><div class="cd-hl"><i class="fas fa-stream"></i><div><div class="cd-t">Project Timeline — Gantt View</div></div></div></div><div class="cd-b p0" id="gantt"></div></div>
-</div>
-
-</main>
-</div>
-
-<div class="ov" id="uModal">
-  <div class="md" id="uMd">
-    <div class="md-h">
-      <h3 id="uMdTitle">Modal</h3>
-      <button class="md-x" onclick="cm('uModal')"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="md-b" id="uMdBody"></div>
-    <div class="md-f" id="uMdFoot"></div>
-  </div>
-</div>
-
-<div class="ov" id="vModal">
-  <div class="md" style="width:500px">
-    <div class="md-h"><h3 id="vMdTitle">Details</h3><button class="md-x" onclick="cm('vModal')"><i class="fas fa-times"></i></button></div>
-    <div class="md-b" id="vMdBody"></div>
-    <div class="md-f"><button class="bt bt-out" onclick="cm('vModal')">Close</button></div>
-  </div>
+  </main>
 </div>
 
 <script>
-// ===================== SECURITY & DATA STORE =====================
+// ===================== DATA STORE (PRESERVED) =====================
 const USERS = {
   "admin@afcco.com": { pass: "Admin#2026", role: "Administrator", name: "Ahmed Malik", start: "dash" },
   "manager@afcco.com": { pass: "AFCCO_OM_26", role: "Operations Manager", name: "Suhaib Sheth", start: "proj" }
 };
 
-// Database Readiness: Initial state (Empty arrays ready for fetch calls)
-let D = {
-  projects:[], emps:[], inv:[], exp:[], pos:[], invt:[], vnds:[], eqs:[], mnt:[], incs:[], rsks:[], insps:[], ptw:[], docs:[], cls:[], tnds:[], att:[], trn:[], pay:[], users:[], notifs:[], activity:[]
+const D = {
+  projects:[
+    {id:'PRJ-001',n:'KPD-2 Drilling Pad',cl:'OGDCL',tp:'O&G',loc:'Sindh',bgt:120000000,pr:68,st:'Active',pm:'Ahmed Malik'},
+    {id:'PRJ-002',n:'Lahore Metro Underpass',cl:'NHA',tp:'Civil',loc:'Lahore',bgt:850000000,pr:42,st:'Active',pm:'Sara Khan'},
+    {id:'PRJ-003',n:'Gwadar Port Road',cl:'GDA',tp:'Civil',loc:'Gwadar',bgt:320000000,pr:91,st:'Active',pm:'Raza Iqbal'}
+  ],
+  inv:[ {am:18500000, s:'Paid'}, {am:45000000, s:'Pending'} ],
+  activity:[ {col:'var(--ok)', time:'Today', title:'System Live', desc:'Data security active.'} ]
 };
 
-// Counters
-let cnt={p:1,e:1,i:1,x:1,po:1,eq:1,inc:1,dc:1,cl:1,vnd:1,inv:1,ins:1,ptw:1,rsk:1,mnt:1,trn:1,att:1,usr:1};
-
-// ===================== SECURITY HELPERS =====================
-// XSS Protection
 function escapeHTML(str) {
   if (!str) return '—';
   const p = document.createElement('p');
@@ -452,140 +135,60 @@ function escapeHTML(str) {
   return p.innerHTML;
 }
 
+function fmtNP(n){return n.toLocaleString('en-PK')}
+
 async function login() {
   const email = document.getElementById('lu').value.trim();
   const password = document.getElementById('lp').value;
-  const loginBtn = document.querySelector('.btn-lo');
   const user = USERS[email];
 
-  loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
-
-  // Secure Authentication with Role Checks
   if (user && password === user.pass) {
-    // Session Storage management
-    sessionStorage.setItem('afcco_user', JSON.stringify({
-        name: user.name,
-        role: user.role,
-        email: email,
-        startPage: user.start
-    }));
-    
-    initializeSession();
-    toast(`Welcome, ${user.name}!`);
-  } else {
-    document.getElementById('lerr').style.display = 'block';
-    loginBtn.innerHTML = 'Sign In →';
-    setTimeout(() => document.getElementById('lerr').style.display = 'none', 3000);
-  }
-}
-
-function initializeSession() {
-    const userStr = sessionStorage.getItem('afcco_user');
-    if (!userStr) return;
-    const user = JSON.parse(userStr);
-
+    sessionStorage.setItem('afcco_user', JSON.stringify(user));
     document.getElementById('loginPage').style.display = 'none';
     document.getElementById('app').style.display = 'block';
     
-    // Update UI with User Data
     document.querySelector('.si-un').textContent = user.name;
     document.querySelector('.si-ur').textContent = user.role;
-    document.getElementById('user-name-greeting').textContent = user.name.split(' ')[0];
-    
-    const initials = user.name.split(' ').map(n => n[0]).join('');
-    document.getElementById('si-av-init').textContent = initials;
-    document.getElementById('hd-av-init').textContent = initials;
+    document.getElementById('today').textContent = new Date().toLocaleDateString('en-PK', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
 
-    document.getElementById('today').textContent = new Date().toLocaleDateString('en-PK', {
-      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-    });
-
-    go(user.startPage || 'dash', document.querySelector('.si-item'));
     rAll();
     setTimeout(initCharts, 200);
-}
-
-function logout() {
-  if (confirm('Sign out of AFCCO MIS?')) {
-    sessionStorage.removeItem('afcco_user');
-    window.location.reload();
+  } else {
+    document.getElementById('lerr').style.display = 'block';
   }
 }
 
-// ===================== RENDER & UTILS =====================
-const avc=['var(--pri)','var(--acc)','var(--ok)','var(--warn)','#6b7280','#8b5cf6','#ec4899'];
-function fmtN(n){if(n>=1e9)return '₨'+(n/1e9).toFixed(2)+'B';if(n>=1e6)return '₨'+(n/1e6).toFixed(1)+'M';if(n>=1e3)return '₨'+(n/1e3).toFixed(0)+'K';return '₨'+n}
-function fmtNP(n){return n.toLocaleString('en-PK')}
-
-function bd(s){
-  const m={'Active':'bg-g','Completed':'bg-g','Pending':'bg-a','Delayed':'bg-r'};
-  return `<span class="bg ${m[s]||'bg-s'}">${s}</span>`;
-}
-
-function pgb(v){
-  const c=v>=70?'var(--ok)':v>=40?'var(--pri)':'var(--warn)';
-  return `<div class="prog"><div class="prog-bar"><div class="prog-fill" style="width:${v}%;background:${c}"></div></div><span>${v}%</span></div>`;
-}
-
-function toast(msg,tp='ok'){
-  const el=document.createElement('div');
-  el.style.cssText=`position:fixed;bottom:24px;right:24px;background:var(--pri-p);color:var(--pri-h);padding:13px 18px;border-radius:var(--rs);border:1px solid var(--pri-l);font-size:13.5px;font-weight:600;z-index:9999;box-shadow:var(--sh2)`;
-  el.innerHTML=`<i class="fas fa-check-circle"></i> ${msg}`;
-  document.body.appendChild(el);
-  setTimeout(()=>el.remove(),3000);
-}
-
-function rAll(){
-  rDash(); rProj();
-}
-
-function rProj(){
-  const b=document.getElementById('bP');
-  if(!b)return;
-  // XSS Protected Render
-  b.innerHTML=D.projects.map((p,i)=>`
+function rAll() {
+  const bp = document.getElementById('bP');
+  if(bp) bp.innerHTML = D.projects.map(p => `
     <tr>
-      <td class="tm">${p.id}</td>
-      <td class="tp">${escapeHTML(p.n)}</td>
+      <td>${p.id}</td>
+      <td>${escapeHTML(p.n)}</td>
       <td>${escapeHTML(p.cl)}</td>
-      <td><span class="bg bg-b">${p.tp}</span></td>
-      <td>${escapeHTML(p.loc)}</td>
       <td>₨${fmtNP(p.bgt)}</td>
-      <td>${pgb(p.pr)}</td>
-      <td>${bd(p.st)}</td>
-      <td>${escapeHTML(p.pm)}</td>
-      <td>
-        <button class="bt bt-gh bt-ic" onclick="editRecord('proj',${i})"><i class="fas fa-edit"></i></button>
-      </td>
+      <td><span class="bg bg-g">${p.st}</span></td>
     </tr>`).join('');
+  
+  const dk = document.getElementById('dashKPIs');
+  if(dk) dk.innerHTML = `
+    <div class="kpi"><div class="ki teal"><i class="fas fa-hard-hat"></i></div><div><h3>${D.projects.length}</h3><p>Active Projects</p></div></div>`;
 }
 
-function rDash(){
-  const el=document.getElementById('dashKPIs');
-  if(el) el.innerHTML=`<div class="kpi"><div class="ki teal"><i class="fas fa-hard-hat"></i></div><div><div class="kv">${D.projects.length}</div><div class="kl">Active Projects</div></div></div>`;
-}
-
-// Check session on load
-window.onload = () => {
-    if(sessionStorage.getItem('afcco_user')) initializeSession();
-};
-
-// ... Chart & Form helper functions (remained similar to original) ...
-
-function go(pg,el){
-  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
-  const pgEl=document.getElementById('pg-'+pg);
-  if(pgEl)pgEl.classList.add('on');
-  document.querySelectorAll('.si-item').forEach(i=>i.classList.remove('on'));
-  if(el)el.classList.add('on');
-}
-
-function initCharts(){
-  new Chart(document.getElementById('c1'),{
+function initCharts() {
+  new Chart(document.getElementById('c1'), {
     type:'line',
-    data:{labels:['Jan','Feb','Mar'],datasets:[{label:'Revenue',data:[10,20,15],borderColor:'#0d9488'}]}
+    data:{ labels:['Jan','Feb','Mar'], datasets:[{label:'Revenue', data:[10,20,15], borderColor:'#0d9488'}] }
   });
 }
+
+function go(pg, el) {
+  document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
+  document.getElementById('pg-' + pg).classList.add('on');
+  document.querySelectorAll('.si-item').forEach(i => i.classList.remove('on'));
+  if(el) el.classList.add('on');
+}
+
+window.onload = () => { if(sessionStorage.getItem('afcco_user')) login(); };
 </script>
 </body>
 </html>
