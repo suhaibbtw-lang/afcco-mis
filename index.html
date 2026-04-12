@@ -1489,14 +1489,10 @@ function rUsers(){
   const b = document.getElementById('bUsers');
   if(!b) return;
 
-  // Get the email of the person currently logged in
-  const session = JSON.parse(sessionStorage.getItem('afcco_user') || '{}');
-  const currentEmail = session.email;
-
   b.innerHTML = D.users.map((u, i) => {
-    // Find if this user has credentials in the USERS object
+    // Check if this display user has a corresponding login in USERS object
     const authKey = Object.keys(USERS).find(email => USERS[email].name === u.n);
-    const isMe = (authKey === currentEmail);
+    const hasLogin = !!authKey;
     
     return `
     <tr>
@@ -1504,8 +1500,8 @@ function rUsers(){
         <div style="display:flex;align-items:center;gap:8px">
           <div class="av" style="background:${u.col}">${u.av}</div>
           <div>
-            <span class="tp">${escapeHTML(u.n)} ${isMe ? '<b style="color:var(--pri)">(You)</b>' : ''}</span>
-            ${authKey ? `<br><small style="color:var(--t4)">ID: ${authKey}</small>` : ''}
+            <span class="tp">${escapeHTML(u.n)}</span>
+            ${hasLogin ? `<br><small style="color:var(--pri)">Login Active: ${authKey}</small>` : ''}
           </div>
         </div>
       </td>
@@ -1514,8 +1510,16 @@ function rUsers(){
       <td>${bd(u.s)}</td>
       <td>
         <div style="display:flex;gap:2px">
-          <button class="bt bt-gh bt-ic" onclick="editRecord('user',${i})" title="Edit Permissions"><i class="fas fa-edit"></i></button>
-          <button class="bt bt-gh bt-ic" onclick="toggleUserStatus(${i})" title="Toggle Active"><i class="fas fa-power-off"></i></button>
+          <button class="bt bt-gh bt-ic" onclick="editRecord('user',${i})" title="Edit Permissions">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="bt bt-gh bt-ic" onclick="toggleUserStatus(${i})" title="Toggle Active">
+            <i class="fas fa-power-off"></i>
+          </button>
+          ${hasLogin ? `
+          <button class="bt bt-gh bt-ic" onclick="promptResetPassword('${authKey}')" title="Reset Login Password">
+            <i class="fas fa-key" style="color:var(--warn)"></i>
+          </button>` : ''}
         </div>
       </td>
     </tr>`;
@@ -2199,9 +2203,8 @@ function initializeSession() {
 function login() {
   const email = document.getElementById('lu').value.trim().toLowerCase();
   const pass  = document.getElementById('lp').value;
-  const user  = USERS[email]; // Looks up your USERS object
+  const user  = USERS[email];
 
-  // Ensure 'user.password' matches the key used in your USERS object
   if (user && user.password === pass) {
     currentUser = { email };
     sessionStorage.setItem('afcco_user', JSON.stringify(currentUser));
@@ -2215,7 +2218,6 @@ function login() {
     setTimeout(initCharts, 200);
     toast('Welcome back, ' + escapeHTML(user.name) + '!');
   } else {
-    // Show error if login fails
     document.getElementById('lerr').style.display = 'block';
     setTimeout(() => document.getElementById('lerr').style.display = 'none', 3000);
   }
