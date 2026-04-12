@@ -257,6 +257,7 @@ tbody tr:hover{background:var(--b2)}
 </head>
 <body>
 
+<!-- LOGIN -->
 <div id="loginPage">
   <div class="lo-left">
     <div class="lo-inner">
@@ -280,14 +281,15 @@ tbody tr:hover{background:var(--b2)}
       <div class="lo-ft">Welcome back</div>
       <div class="lo-fs">Sign in to access the AFCCO Management Portal</div>
       <div class="lf"><label>Email Address</label><input id="lu" value="admin@afcco.com" placeholder="your@email.com"/></div>
-      <div class="lf"><label>Password</label><input type="password" id="lp" value="Admin#2026" placeholder="••••••••"/></div>
+      <div class="lf"><label>Password</label><input type="password" id="lp" value="admin123" placeholder="••••••••"/></div>
       <button class="btn-lo" onclick="login()">Sign In →</button>
       <div class="lo-err" id="lerr">Invalid credentials. Please check and try again.</div>
-      <div class="lo-hint"><b>Official Access:</b> admin@afcco.com &nbsp;/&nbsp; Admin#2026</div>
+      <div class="lo-hint"><b>Demo access:</b> admin@afcco.com &nbsp;/&nbsp; admin123</div>
     </div>
   </div>
 </div>
 
+<!-- APP -->
 <div id="app">
 <aside class="side" id="side">
   <div class="si-top">
@@ -313,8 +315,8 @@ tbody tr:hover{background:var(--b2)}
   </nav>
   <div class="si-ft">
     <div class="si-user">
-      <div class="si-av" id="si-av-init">??</div>
-      <div style="flex:1"><div class="si-un">Username</div><div class="si-ur">Role</div></div>
+      <div class="si-av">AM</div>
+      <div style="flex:1"><div class="si-un">Ahmed Malik</div><div class="si-ur">System Administrator</div></div>
       <div class="si-on"></div>
     </div>
   </div>
@@ -327,7 +329,7 @@ tbody tr:hover{background:var(--b2)}
   <div class="hd-acts">
     <button class="hd-btn" onclick="toggleNotif(event)"><i class="fas fa-bell"></i><div class="hd-dot" id="notDot"></div></button>
     <div class="hd-div"></div>
-    <div class="hd-av" id="hd-av-init" title="Account">??</div>
+    <div class="hd-av" title="Ahmed Malik — Admin">AM</div>
     <button class="hd-btn" onclick="logout()" title="Sign Out"><i class="fas fa-sign-out-alt"></i></button>
   </div>
 </header>
@@ -339,14 +341,16 @@ tbody tr:hover{background:var(--b2)}
 
 <main class="mn">
 
+<!-- ████ DASHBOARD ████ -->
 <div class="pg on" id="pg-dash">
   <div class="ph">
-    <div><h2>Executive Dashboard</h2><p>Good morning, <span id="user-name-greeting">Admin</span> — <span id="today"></span></p></div>
+    <div><h2>Executive Dashboard</h2><p>Good morning, Ahmed — <span id="today"></span></p></div>
     <div class="ph-acts">
       <button class="bt bt-out bt-sm" onclick="genR('fin')"><i class="fas fa-download"></i> Export</button>
       <button class="bt bt-pri bt-sm" onclick="refreshDash()"><i class="fas fa-sync-alt"></i> Refresh</button>
     </div>
   </div>
+  <!-- Live KPIs from data -->
   <div class="kpis" id="dashKPIs"></div>
   <div class="g21">
     <div class="cd">
@@ -388,6 +392,7 @@ tbody tr:hover{background:var(--b2)}
   </div>
 </div>
 
+<!-- ████ PROJECTS ████ -->
 <div class="pg" id="pg-proj">
   <div class="ph"><div><h2>Project Management</h2><p>Monitor all active construction and O&G field service projects</p></div><div class="ph-acts"><button class="bt bt-out bt-sm" onclick="exportTable('tP','Projects')"><i class="fas fa-download"></i> Export CSV</button><button class="bt bt-pri bt-sm" onclick="openAddModal('proj')"><i class="fas fa-plus"></i> New Project</button></div></div>
   <div class="kpis" id="projKPIs"></div>
@@ -406,6 +411,7 @@ tbody tr:hover{background:var(--b2)}
   <div class="cd"><div class="cd-h"><div class="cd-hl"><i class="fas fa-stream"></i><div><div class="cd-t">Project Timeline — Gantt View</div></div></div></div><div class="cd-b p0" id="gantt"></div></div>
 </div>
 
+<!-- ████ FINANCE ████ -->
 <div class="pg" id="pg-fin">
   <div class="ph"><div><h2>Financial Management</h2><p>Budget tracking, invoicing, expenses, and financial analysis</p></div><div class="ph-acts"><button class="bt bt-out bt-sm" onclick="openAddModal('expense')"><i class="fas fa-minus-circle"></i> Add Expense</button><button class="bt bt-pri bt-sm" onclick="openAddModal('invoice')"><i class="fas fa-plus"></i> New Invoice</button></div></div>
   <div class="kpis" id="finKPIs"></div>
@@ -423,6 +429,7 @@ tbody tr:hover{background:var(--b2)}
   </div>
 </div>
 
+<!-- ████ PROCUREMENT ████ -->
 <div class="pg" id="pg-proc">
   <div class="ph"><div><h2>Procurement & Materials</h2><p>Purchase orders, inventory control, and vendor management</p></div><div class="ph-acts"><button class="bt bt-pri bt-sm" onclick="openAddModal('po')"><i class="fas fa-plus"></i> New Purchase Order</button></div></div>
   <div class="kpis" id="procKPIs"></div>
@@ -447,6 +454,7 @@ tbody tr:hover{background:var(--b2)}
   </div>
 </div>
 
+<!-- ████ EQUIPMENT ████ -->
 <div class="pg" id="pg-equip">
   <div class="ph"><div><h2>Equipment & Plant</h2><p>Asset register, utilization tracking, and maintenance scheduling</p></div><div class="ph-acts"><button class="bt bt-pri bt-sm" onclick="openAddModal('equip')"><i class="fas fa-plus"></i> Add Equipment</button></div></div>
   <div class="kpis" id="equipKPIs"></div>
@@ -463,6 +471,7 @@ tbody tr:hover{background:var(--b2)}
   </div>
 </div>
 
+<!-- ████ HR ████ -->
 <div class="pg" id="pg-hr">
   <div class="ph"><div><h2>HR & Payroll Management</h2><p>Employee directory, attendance, payroll processing, and training records</p></div><div class="ph-acts"><button class="bt bt-pri bt-sm" onclick="openAddModal('emp')"><i class="fas fa-user-plus"></i> Add Employee</button></div></div>
   <div class="kpis" id="hrKPIs"></div>
@@ -498,6 +507,7 @@ tbody tr:hover{background:var(--b2)}
   </div>
 </div>
 
+<!-- ████ HSE ████ -->
 <div class="pg" id="pg-hse">
   <div class="ph"><div><h2>Health, Safety & Environment</h2><p>Incident tracking, risk management, inspections, and permit control</p></div><div class="ph-acts"><button class="bt bt-err bt-sm" onclick="openAddModal('incident')"><i class="fas fa-plus"></i> Report Incident</button></div></div>
   <div class="kpis" id="hseKPIs"></div>
@@ -516,6 +526,7 @@ tbody tr:hover{background:var(--b2)}
   </div>
 </div>
 
+<!-- ████ DOCUMENTS ████ -->
 <div class="pg" id="pg-docs">
   <div class="ph"><div><h2>Document Management</h2><p>Centralized repository for all project drawings, contracts, and records</p></div><div class="ph-acts"><button class="bt bt-pri bt-sm" onclick="openAddModal('doc')"><i class="fas fa-upload"></i> Upload Document</button></div></div>
   <div class="kpis" id="docsKPIs"></div>
@@ -531,6 +542,7 @@ tbody tr:hover{background:var(--b2)}
   </div>
 </div>
 
+<!-- ████ CRM ████ -->
 <div class="pg" id="pg-crm">
   <div class="ph"><div><h2>CRM & Client Management</h2><p>Client directory, tender tracking, and business development pipeline</p></div><div class="ph-acts"><button class="bt bt-out bt-sm" onclick="openAddModal('tender')"><i class="fas fa-plus"></i> Add Tender</button><button class="bt bt-pri bt-sm" onclick="openAddModal('client')"><i class="fas fa-plus"></i> Add Client</button></div></div>
   <div class="kpis" id="crmKPIs"></div>
@@ -547,6 +559,7 @@ tbody tr:hover{background:var(--b2)}
   </div>
 </div>
 
+<!-- ████ REPORTS ████ -->
 <div class="pg" id="pg-rpt">
   <div class="ph"><div><h2>Reports & Business Intelligence</h2><p>Generate, view, and export management reports</p></div></div>
   <div class="g3" style="margin-bottom:20px">
@@ -560,6 +573,7 @@ tbody tr:hover{background:var(--b2)}
   <div class="cd"><div class="cd-h"><div class="cd-hl"><i class="fas fa-chart-area"></i><div><div class="cd-t">Executive KPI Trend — 2022 to 2024</div></div></div></div><div class="cd-b"><canvas id="c10" height="80"></canvas></div></div>
 </div>
 
+<!-- ████ SETTINGS ████ -->
 <div class="pg" id="pg-set">
   <div class="ph"><div><h2>System Settings</h2><p>Company details, user management, and notification preferences</p></div></div>
   <div class="g2">
@@ -597,6 +611,7 @@ tbody tr:hover{background:var(--b2)}
 </main>
 </div>
 
+<!-- ====== UNIVERSAL MODAL ====== -->
 <div class="ov" id="uModal">
   <div class="md" id="uMd">
     <div class="md-h">
@@ -608,6 +623,7 @@ tbody tr:hover{background:var(--b2)}
   </div>
 </div>
 
+<!-- VIEW MODAL -->
 <div class="ov" id="vModal">
   <div class="md" style="width:500px">
     <div class="md-h"><h3 id="vMdTitle">Details</h3><button class="md-x" onclick="cm('vModal')"><i class="fas fa-times"></i></button></div>
@@ -616,6 +632,7 @@ tbody tr:hover{background:var(--b2)}
   </div>
 </div>
 
+<!-- REPORT MODAL -->
 <div class="ov" id="mRPT">
   <div class="md" style="width:700px">
     <div class="md-h"><h3 id="rptT">Report</h3><button class="md-x" onclick="cm('mRPT')"><i class="fas fa-times"></i></button></div>
@@ -625,14 +642,7 @@ tbody tr:hover{background:var(--b2)}
 </div>
 
 <script>
-// ===================== DATA STORE & SECURITY =====================
-// 1. Secure Authentication logic with USERS object
-const USERS = {
-  "admin@afcco.com": { pass: "Admin#2026", role: "Administrator", name: "Ahmed Malik", start: "dash" },
-  "manager@afcco.com": { pass: "AFCCO_OM_26", role: "Operations Manager", name: "Suhaib Sheth", start: "proj" }
-};
-
-// 2. Original AFCCO Data (Preserved)
+// ===================== DATA STORE =====================
 const D = {
   projects:[
     {id:'PRJ-001',n:'KPD-2 Drilling Pad',cl:'OGDCL',tp:'O&G',loc:'Sindh',bgt:120000000,pr:68,st:'Active',pm:'Ahmed Malik',s:'2024-01-15',e:'2024-09-30',desc:'Drilling pad construction including earthworks, civil, piping'},
@@ -787,81 +797,6 @@ const D = {
 // Counters
 let cnt={p:9,e:9,i:6,x:6,po:5,eq:7,inc:4,dc:6,cl:7,vnd:5,inv:6,ins:4,ptw:90,rsk:4,mnt:5,trn:5,att:6,usr:5};
 
-// ===================== SECURITY HELPERS =====================
-// 3. XSS Protection: escapeHTML helper function
-function escapeHTML(str) {
-  if (!str) return '—';
-  if (typeof str !== 'string') return str;
-  const p = document.createElement('p');
-  p.textContent = str;
-  return p.innerHTML;
-}
-
-// 1 & 2. Secure Authentication & Session Management
-async function login() {
-  const email = document.getElementById('lu').value.trim();
-  const password = document.getElementById('lp').value;
-  const loginBtn = document.querySelector('.btn-lo');
-  const user = USERS[email];
-
-  loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
-
-  if (user && password === user.pass) {
-    // Session Storage management
-    sessionStorage.setItem('afcco_user', JSON.stringify({
-        name: user.name,
-        role: user.role,
-        email: email,
-        startPage: user.start
-    }));
-    
-    initializeSession();
-    toast(`Welcome, ${user.name}!`);
-  } else {
-    document.getElementById('lerr').style.display = 'block';
-    loginBtn.innerHTML = 'Sign In →';
-    setTimeout(() => document.getElementById('lerr').style.display = 'none', 3000);
-  }
-}
-
-function initializeSession() {
-    const userStr = sessionStorage.getItem('afcco_user');
-    if (!userStr) return;
-    const user = JSON.parse(userStr);
-
-    document.getElementById('loginPage').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-    
-    // Update UI with User Data
-    document.querySelector('.si-un').textContent = user.name;
-    document.querySelector('.si-ur').textContent = user.role;
-    document.getElementById('user-name-greeting').textContent = user.name.split(' ')[0];
-    
-    const initials = user.name.split(' ').map(n => n[0]).join('').toUpperCase();
-    const avEls = [document.getElementById('si-av-init'), document.getElementById('hd-av-init')];
-    avEls.forEach(el => { if(el) el.textContent = initials; });
-
-    document.getElementById('today').textContent = new Date().toLocaleDateString('en-PK', {
-      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-    });
-
-    go(user.startPage || 'dash', document.querySelector('.si-item'));
-    rAll();
-    setTimeout(initCharts, 200);
-}
-
-function logout() {
-  if (confirm('Sign out of AFCCO MIS?')) {
-    sessionStorage.removeItem('afcco_user');
-    window.location.reload();
-  }
-}
-
-// Persistent Login Check on Load
-window.onload = () => {
-    if(sessionStorage.getItem('afcco_user')) initializeSession();
-};
-
 // ===================== UTILS =====================
 const avc=['var(--pri)','var(--acc)','var(--ok)','var(--warn)','#6b7280','#8b5cf6','#ec4899'];
 function fmtN(n){if(n>=1e9)return '₨'+(n/1e9).toFixed(2)+'B';if(n>=1e6)return '₨'+(n/1e6).toFixed(1)+'M';if(n>=1e3)return '₨'+(n/1e3).toFixed(0)+'K';return '₨'+n}
@@ -905,6 +840,7 @@ function toast(msg,tp='ok'){
 function om(id){document.getElementById(id).classList.add('op')}
 function cm(id){document.getElementById(id).classList.remove('op')}
 
+// Table filter
 function ft(tblId,q,statusMode=false){
   const t=document.getElementById(tblId);
   if(!t)return;
@@ -917,6 +853,7 @@ function ft(tblId,q,statusMode=false){
   });
 }
 
+// Export CSV
 function exportTable(tblId,name){
   const t=document.getElementById(tblId);
   if(!t){toast('No table to export','w');return;}
@@ -929,6 +866,7 @@ function exportTable(tblId,name){
   toast('CSV exported successfully');
 }
 
+// Filter project by status
 function filterProj(status){
   const rows=document.querySelectorAll('#bP tr');
   rows.forEach(r=>{
@@ -976,17 +914,26 @@ function buildProjectTypeMix(){
 function initCharts(){
   updateRevChart(document.getElementById('revChartMode')?.value||'monthly');
   buildProjectTypeMix();
+
+  // Expenses bar — from real data
   const expByMonth=[120,145,138,165,152,185];
   mk('c3',()=>new Chart(document.getElementById('c3'),{
     type:'bar',data:{labels:['Jan','Feb','Mar','Apr','May','Jun'],datasets:[{data:expByMonth,backgroundColor:'#0284c7',borderRadius:5,borderSkipped:false}]},
     options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'rgba(0,0,0,.04)'},ticks:{callback:v=>v+'M'}},x:{grid:{display:false}}}}
   }));
+
+  // Workforce from employees
+  const depts={};
+  D.emps.forEach(e=>{depts[e.dp]=(depts[e.dp]||0)+1;});
+  // augment with field workers
   const wfLabels=['Engineers','Technicians','Laborers','Admin','HSE'];
   const wfData=[85,95,120,28,14];
   mk('c4',()=>new Chart(document.getElementById('c4'),{
     type:'doughnut',data:{labels:wfLabels,datasets:[{data:wfData,backgroundColor:['#0d9488','#0284c7','#16a34a','#d97706','#6b7280'],borderWidth:0}]},
     options:{responsive:true,cutout:'55%',plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:12,family:'Plus Jakarta Sans'}}}}}
   }));
+
+  // Finance cash flow
   mk('c5',()=>new Chart(document.getElementById('c5'),{
     type:'bar',data:{labels:['Jan','Feb','Mar','Apr','May','Jun'],datasets:[
       {label:'Inflow',data:[200,240,220,280,260,310],backgroundColor:'rgba(13,148,136,.8)',borderRadius:4},
@@ -994,26 +941,36 @@ function initCharts(){
     ]},
     options:{responsive:true,interaction:{mode:'index'},plugins:{legend:{position:'top',labels:{boxWidth:12,font:{size:12,family:'Plus Jakarta Sans'}}}},scales:{y:{beginAtZero:true,grid:{color:'rgba(0,0,0,.04)'},ticks:{callback:v=>v+'M'}},x:{grid:{display:false}}}}
   }));
+
+  // Cost breakdown
   mk('c6',()=>new Chart(document.getElementById('c6'),{
     type:'doughnut',data:{labels:['Labor 42%','Materials 28%','Equipment 15%','Subcontract 10%','Admin 5%'],datasets:[{data:[42,28,15,10,5],backgroundColor:['#0d9488','#0284c7','#16a34a','#d97706','#9ca3af'],borderWidth:0}]},
     options:{responsive:true,cutout:'60%',plugins:{legend:{position:'right',labels:{boxWidth:12,font:{size:12,family:'Plus Jakarta Sans'}}}}}
   }));
+
+  // Equipment utilization from real data
   const eqLabels=D.eqs.map(e=>e.n.split(' ').slice(0,2).join(' '));
   const eqUtil=D.eqs.map(e=>e.util);
   mk('c7',()=>new Chart(document.getElementById('c7'),{
     type:'bar',data:{labels:eqLabels,datasets:[{data:eqUtil,backgroundColor:eqUtil.map(v=>v>=70?'#0d9488':v>=40?'#0284c7':'#d97706'),borderRadius:5,borderSkipped:false}]},
     options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{max:100,ticks:{callback:v=>v+'%'},grid:{color:'rgba(0,0,0,.04)'}},x:{grid:{display:false}}}}
   }));
+
+  // Attendance chart
   const present=D.att.filter(a=>a.s==='Present').length;
   const onLeave=D.att.filter(a=>a.s==='Leave').length;
   mk('c8',()=>new Chart(document.getElementById('c8'),{
     type:'doughnut',data:{labels:[`Present (${present})`,`On Leave (${onLeave})`],datasets:[{data:[present,onLeave],backgroundColor:['#0d9488','#d97706'],borderWidth:0}]},
     options:{responsive:true,cutout:'70%',plugins:{legend:{position:'bottom',labels:{boxWidth:12,font:{size:12,family:'Plus Jakarta Sans'}}}}}
   }));
+
+  // CRM pipeline
   mk('c9',()=>new Chart(document.getElementById('c9'),{
     type:'bar',data:{labels:['Prospect','Proposal','Bid Submitted','Negotiation','Won'],datasets:[{data:[850,420,280,150,95],backgroundColor:['#9ca3af','#0284c7','#d97706','#0d9488','#16a34a'],borderRadius:5}]},
     options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,grid:{color:'rgba(0,0,0,.04)'},ticks:{callback:v=>'₨'+v+'M'}},y:{grid:{display:false}}}}
   }));
+
+  // Executive KPI trend
   mk('c10',()=>new Chart(document.getElementById('c10'),{
     type:'line',
     data:{labels:['Q1 22','Q2 22','Q3 22','Q4 22','Q1 23','Q2 23','Q3 23','Q4 23','Q1 24','Q2 24'],
@@ -1028,7 +985,6 @@ function initCharts(){
 }
 
 // ===================== RENDER ALL =====================
-// 4. Database Readiness Prep
 function rAll(){
   rDash();rProj();rGantt();rFin();rProc();rEq();rHR();rHSE();rDocs();rCRM();rKPIs();rNotifs();rUsers();
   rPayMonth();
@@ -1041,6 +997,9 @@ function rPayMonth(){
 
 // ====== DASHBOARD ======
 function rDash(){
+  // KPIs from live data
+  const activeP=D.projects.filter(p=>p.st==='Active').length;
+  const totalRev=D.inv.filter(i=>i.s==='Paid').reduce((s,i)=>s+i.am,0);
   const openHSE=D.incs.filter(i=>i.s==='Open').length;
   const pendPO=D.pos.filter(p=>p.s==='Pending').length;
   const el=document.getElementById('dashKPIs');
@@ -1052,24 +1011,27 @@ function rDash(){
     <div class="kpi"><div class="ki red"><i class="fas fa-exclamation-triangle"></i></div><div><div class="kv">${openHSE}</div><div class="kl">Open HSE Incidents</div><div class="kc ${openHSE>2?'dn':'fl'}">Target: 0</div></div></div>
     <div class="kpi"><div class="ki gray"><i class="fas fa-shopping-cart"></i></div><div><div class="kv">${pendPO}</div><div class="kl">Pending POs</div><div class="kc dn">${D.pos.length} total this month</div></div></div>`;
 
+  // Project progress
   const dp=document.getElementById('dProj');
   if(dp) dp.innerHTML=D.projects.slice(0,6).map(p=>`
     <div style="padding:12px 0;border-bottom:1px solid var(--b3)">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
         <div>
-          <div style="font-size:13.5px;font-weight:600;color:var(--t1);cursor:pointer" onclick="viewRecord('proj',${D.projects.indexOf(p)})">${escapeHTML(p.n)}</div>
-          <div style="font-size:12px;color:var(--t4);margin-top:1px">${escapeHTML(p.cl)} · ${escapeHTML(p.loc)} · ${escapeHTML(p.pm)}</div>
+          <div style="font-size:13.5px;font-weight:600;color:var(--t1);cursor:pointer" onclick="viewRecord('proj',${D.projects.indexOf(p)})">${p.n}</div>
+          <div style="font-size:12px;color:var(--t4);margin-top:1px">${p.cl} · ${p.loc} · ${p.pm}</div>
         </div>${bd(p.st)}
       </div>${pgb(p.pr)}
     </div>`).join('');
 
+  // Activity feed
   const af=document.getElementById('activityFeed');
   if(af) af.innerHTML=D.activity.map((a,i)=>`
     <div class="tl-i">
       <div class="tl-l"><div class="tl-d" style="background:${a.col}"></div>${i<D.activity.length-1?'<div class="tl-ln"></div>':''}</div>
-      <div><div class="tl-tm">${a.time}</div><div class="tl-tt">${escapeHTML(a.title)}</div><div class="tl-ds">${escapeHTML(a.desc)}</div></div>
+      <div><div class="tl-tm">${a.time}</div><div class="tl-tt">${a.title}</div><div class="tl-ds">${a.desc}</div></div>
     </div>`).join('');
 
+  // HSE snapshot
   const hs=document.getElementById('hseSnap');
   if(hs){
     const openI=D.incs.filter(i=>i.s==='Open').length;
@@ -1083,19 +1045,20 @@ function rDash(){
       <div style="margin-top:12px"><div class="al al-g"><i class="fas fa-check-circle"></i><div><strong>180 consecutive days</strong> without a Lost Time Injury</div></div></div>`;
   }
 
+  // Alerts from live data
   const da=document.getElementById('dashAlerts');
   if(da){
     const alerts=[];
     const bdEq=D.eqs.find(e=>e.s==='Breakdown');
-    if(bdEq) alerts.push(`<div class="al al-r"><i class="fas fa-exclamation-circle"></i><div><strong>Urgent:</strong> ${escapeHTML(bdEq.n)} is in BREAKDOWN status — immediate attention required</div></div>`);
+    if(bdEq) alerts.push(`<div class="al al-r"><i class="fas fa-exclamation-circle"></i><div><strong>Urgent:</strong> ${bdEq.n} is in BREAKDOWN status — immediate attention required</div></div>`);
     const expTrn=D.trn.filter(t=>t.s==='Expiring Soon');
-    if(expTrn.length) alerts.push(`<div class="al al-a"><i class="fas fa-clock"></i><div><strong>Reminder:</strong> ${expTrn.length} employee certification(s) expiring soon — ${escapeHTML(expTrn.map(t=>t.n).join(', '))}</div></div>`);
+    if(expTrn.length) alerts.push(`<div class="al al-a"><i class="fas fa-clock"></i><div><strong>Reminder:</strong> ${expTrn.length} employee certification(s) expiring soon — ${expTrn.map(t=>t.n).join(', ')}</div></div>`);
     const ovInv=D.inv.filter(i=>i.s==='Overdue');
     if(ovInv.length) alerts.push(`<div class="al al-r"><i class="fas fa-file-invoice"></i><div><strong>Finance Alert:</strong> ${ovInv.length} invoice(s) overdue — total ${fmtN(ovInv.reduce((s,i)=>s+i.am,0))}</div></div>`);
     const lowInvt=D.invt.filter(i=>i.s==='Low');
-    if(lowInvt.length) alerts.push(`<div class="al al-a"><i class="fas fa-boxes"></i><div><strong>Inventory:</strong> ${lowInvt.length} material(s) below minimum stock — ${escapeHTML(lowInvt.map(i=>i.mt).join(', '))}</div></div>`);
+    if(lowInvt.length) alerts.push(`<div class="al al-a"><i class="fas fa-boxes"></i><div><strong>Inventory:</strong> ${lowInvt.length} material(s) below minimum stock — ${lowInvt.map(i=>i.mt).join(', ')}</div></div>`);
     const delP=D.projects.filter(p=>p.st==='Delayed');
-    if(delP.length) alerts.push(`<div class="al al-a"><i class="fas fa-hard-hat"></i><div><strong>Projects:</strong> ${delP.length} project(s) delayed — ${escapeHTML(delP.map(p=>p.n).join(', '))}</div></div>`);
+    if(delP.length) alerts.push(`<div class="al al-a"><i class="fas fa-hard-hat"></i><div><strong>Projects:</strong> ${delP.length} project(s) delayed — ${delP.map(p=>p.n).join(', ')}</div></div>`);
     alerts.push(`<div class="al al-g"><i class="fas fa-check-circle"></i><div><strong>HSE:</strong> 180 consecutive days without a Lost Time Injury across all sites</div></div>`);
     da.innerHTML=alerts.join('');
   }
@@ -1110,14 +1073,14 @@ function rProj(){
   b.innerHTML=D.projects.map((p,i)=>`
     <tr>
       <td class="tm">${p.id}</td>
-      <td class="tp">${escapeHTML(p.n)}</td>
-      <td>${escapeHTML(p.cl)}</td>
-      <td><span class="bg bg-b">${escapeHTML(p.tp)}</span></td>
-      <td>${escapeHTML(p.loc)}</td>
+      <td class="tp">${p.n}</td>
+      <td>${p.cl}</td>
+      <td><span class="bg bg-b">${p.tp}</span></td>
+      <td>${p.loc}</td>
       <td>₨${fmtNP(p.bgt)}</td>
       <td>${pgb(p.pr)}</td>
       <td>${bd(p.st)}</td>
-      <td>${escapeHTML(p.pm)}</td>
+      <td>${p.pm}</td>
       <td>
         <div style="display:flex;gap:2px">
           <button class="bt bt-gh bt-ic" onclick="viewRecord('proj',${i})" title="View"><i class="fas fa-eye"></i></button>
@@ -1150,10 +1113,10 @@ function rGantt(){
   const ms=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   const cs=['var(--pri)','var(--acc)','var(--ok)','var(--pri)','var(--acc)','var(--ok)','var(--warn)','var(--pri)'];
   w.innerHTML=`<div style="overflow-x:auto"><table><thead><tr><th style="min-width:200px">Project</th>${ms.map(m=>`<th style="min-width:52px;text-align:center">${m}</th>`).join('')}</tr></thead><tbody>${
-    D.projects.map((p,i)=>`<tr><td class="tp" style="font-size:13px;cursor:pointer" onclick="viewRecord('proj',${i})">${escapeHTML(p.n)}</td>${ms.map((_,m)=>{
+    D.projects.map((p,i)=>`<tr><td class="tp" style="font-size:13px;cursor:pointer" onclick="viewRecord('proj',${i})">${p.n}</td>${ms.map((_,m)=>{
       const s=new Date(p.s).getMonth();const e=new Date(p.e||'2025-12-31').getMonth();
       const on=m>=s&&m<=e;
-      return `<td style="padding:4px 2px">${on?`<div class="gb" style="background:${cs[i%cs.length]};opacity:${p.st==='Delayed'?0.6:1}">${m===s?escapeHTML(p.cl):''}</div>`:''}</td>`;
+      return `<td style="padding:4px 2px">${on?`<div class="gb" style="background:${cs[i%cs.length]};opacity:${p.st==='Delayed'?0.6:1}">${m===s?p.cl:''}</div>`:''}</td>`;
     }).join('')}</tr>`).join('')
   }</tbody></table></div>`;
 }
@@ -1164,8 +1127,8 @@ function rFin(){
   if(bi) bi.innerHTML=D.inv.map((inv,i)=>`
     <tr>
       <td class="tm">${inv.no}</td>
-      <td class="tp">${escapeHTML(inv.cl)}</td>
-      <td>${escapeHTML(inv.pr)}</td>
+      <td class="tp">${inv.cl}</td>
+      <td>${inv.pr}</td>
       <td style="font-weight:700">₨${fmtNP(inv.am)}</td>
       <td>${inv.dt}</td>
       <td>${inv.du}</td>
@@ -1183,11 +1146,11 @@ function rFin(){
   if(be) be.innerHTML=D.exp.map((ex,i)=>`
     <tr>
       <td>${ex.dt}</td>
-      <td><span class="bg bg-s">${escapeHTML(ex.ct)}</span></td>
-      <td>${escapeHTML(ex.ds)}</td>
-      <td>${escapeHTML(ex.pr)}</td>
+      <td><span class="bg bg-s">${ex.ct}</span></td>
+      <td>${ex.ds}</td>
+      <td>${ex.pr}</td>
       <td style="font-weight:700">₨${fmtNP(ex.am)}</td>
-      <td>${escapeHTML(ex.by)}</td>
+      <td>${ex.by}</td>
       <td>${bd(ex.s)}</td>
       <td>
         <div style="display:flex;gap:2px">
@@ -1216,7 +1179,7 @@ function rProc(){
   const bp=document.getElementById('bPO');
   if(bp) bp.innerHTML=D.pos.map((p,i)=>`
     <tr>
-      <td class="tm">${p.no}</td><td class="tp">${escapeHTML(p.vn)}</td><td>${escapeHTML(p.mt)}</td><td>${escapeHTML(p.pr)}</td><td>${escapeHTML(p.qt)}</td>
+      <td class="tm">${p.no}</td><td class="tp">${p.vn}</td><td>${p.mt}</td><td>${p.pr}</td><td>${p.qt}</td>
       <td style="font-weight:700">₨${fmtNP(p.am)}</td><td>${p.dt}</td><td>${bd(p.s)}</td>
       <td><div style="display:flex;gap:2px">
         <button class="bt bt-gh bt-ic" onclick="editRecord('po',${i})" title="Edit"><i class="fas fa-edit"></i></button>
@@ -1228,9 +1191,9 @@ function rProc(){
   const bi=document.getElementById('bInvt');
   if(bi) bi.innerHTML=D.invt.map((it,i)=>`
     <tr>
-      <td class="tm">${it.cd}</td><td class="tp">${escapeHTML(it.mt)}</td><td>${escapeHTML(it.un)}</td>
+      <td class="tm">${it.cd}</td><td class="tp">${it.mt}</td><td>${it.un}</td>
       <td style="font-weight:700;color:${it.sk<=it.mn?'var(--err)':'var(--t1)'}">${it.sk}</td>
-      <td>${it.mn}</td><td>₨${fmtNP(it.vl)}</td><td>${escapeHTML(it.wh)}</td><td>${bd(it.s)}</td>
+      <td>${it.mn}</td><td>₨${fmtNP(it.vl)}</td><td>${it.wh}</td><td>${bd(it.s)}</td>
       <td><div style="display:flex;gap:2px">
         <button class="bt bt-gh bt-ic" onclick="editRecord('invt',${i})" title="Edit"><i class="fas fa-edit"></i></button>
         <button class="bt bt-gh bt-ic" onclick="delRecord('invt',${i},'rProc')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
@@ -1240,7 +1203,7 @@ function rProc(){
   const bv=document.getElementById('bVnd');
   if(bv) bv.innerHTML=D.vnds.map((v,i)=>`
     <tr>
-      <td class="tm">${v.id}</td><td class="tp">${escapeHTML(v.co)}</td><td>${escapeHTML(v.ct)}</td><td>${escapeHTML(v.cn)}</td>
+      <td class="tm">${v.id}</td><td class="tp">${v.co}</td><td>${v.ct}</td><td>${v.cn}</td>
       <td style="color:var(--warn);font-weight:700">${v.rt} ★</td><td>${v.od}</td><td>${bd(v.s)}</td>
       <td><div style="display:flex;gap:2px">
         <button class="bt bt-gh bt-ic" onclick="viewRecord('vendor',${i})" title="View"><i class="fas fa-eye"></i></button>
@@ -1277,8 +1240,8 @@ function rEq(){
   const be=document.getElementById('bEq');
   if(be) be.innerHTML=D.eqs.map((e,i)=>`
     <tr>
-      <td class="tm">${e.id}</td><td class="tp">${escapeHTML(e.n)}</td><td>${escapeHTML(e.ct)}</td><td>${escapeHTML(e.md)}</td><td>${e.yr}</td>
-      <td>${escapeHTML(e.st)}</td><td>${e.fu>0?e.fu+' L':'—'}</td><td>${bd(e.s)}</td>
+      <td class="tm">${e.id}</td><td class="tp">${e.n}</td><td>${e.ct}</td><td>${e.md}</td><td>${e.yr}</td>
+      <td>${e.st}</td><td>${e.fu>0?e.fu+' L':'—'}</td><td>${bd(e.s)}</td>
       <td><div style="display:flex;gap:2px">
         <button class="bt bt-gh bt-ic" onclick="viewRecord('equip',${i})" title="View"><i class="fas fa-eye"></i></button>
         <button class="bt bt-gh bt-ic" onclick="editRecord('equip',${i})" title="Edit"><i class="fas fa-edit"></i></button>
@@ -1289,7 +1252,7 @@ function rEq(){
   const bm=document.getElementById('bMnt');
   if(bm) bm.innerHTML=D.mnt.map((m,i)=>`
     <tr>
-      <td class="tp">${escapeHTML(m.eq)}</td><td>${escapeHTML(m.tp)}</td><td>${m.du}</td><td>${bd(m.pr)}</td>
+      <td class="tp">${m.eq}</td><td>${m.tp}</td><td>${m.du}</td><td>${bd(m.pr)}</td>
       <td><div style="display:flex;gap:2px">
         <button class="bt bt-gh bt-ic" onclick="editRecord('mnt',${i})" title="Edit"><i class="fas fa-edit"></i></button>
         <button class="bt bt-gh bt-ic" onclick="delRecord('mnt',${i},'rEq')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
@@ -1315,8 +1278,8 @@ function rHR(){
   if(bh) bh.innerHTML=D.emps.map((e,i)=>`
     <tr>
       <td class="tm">${e.id}</td>
-      <td><div style="display:flex;align-items:center;gap:8px"><div class="av" style="background:${avc[i%7]}">${e.n[0]}</div><span class="tp">${escapeHTML(e.n)}</span></div></td>
-      <td>${escapeHTML(e.dg)}</td><td>${escapeHTML(e.dp)}</td><td>${escapeHTML(e.st)}</td>
+      <td><div style="display:flex;align-items:center;gap:8px"><div class="av" style="background:${avc[i%7]}">${e.n[0]}</div><span class="tp">${e.n}</span></div></td>
+      <td>${e.dg}</td><td>${e.dp}</td><td>${e.st}</td>
       <td>₨${fmtNP(e.sl)}</td><td>${bd(e.s)}</td>
       <td><div style="display:flex;gap:2px">
         <button class="bt bt-gh bt-ic" onclick="viewRecord('emp',${i})" title="View"><i class="fas fa-eye"></i></button>
@@ -1328,7 +1291,7 @@ function rHR(){
   const bp=document.getElementById('bPay');
   if(bp) bp.innerHTML=D.pay.map((p,i)=>`
     <tr>
-      <td class="tp">${escapeHTML(p.n)}</td><td>${escapeHTML(p.r)}</td>
+      <td class="tp">${p.n}</td><td>${p.r}</td>
       <td>₨${fmtNP(p.b)}</td><td>₨${fmtNP(p.a)}</td><td>₨${fmtNP(p.o)}</td><td>₨${fmtNP(p.d)}</td>
       <td style="font-weight:700;color:var(--ok)">₨${fmtNP(p.ne)}</td><td>${bd(p.s)}</td>
       <td><div style="display:flex;gap:2px">
@@ -1340,7 +1303,7 @@ function rHR(){
   const ba=document.getElementById('bAtt');
   if(ba) ba.innerHTML=D.att.map((a,i)=>`
     <tr>
-      <td class="tp">${escapeHTML(a.n)}</td><td>${a.i}</td><td>${a.o}</td><td>${a.h||'—'}</td><td>${escapeHTML(a.st)}</td>
+      <td class="tp">${a.n}</td><td>${a.i}</td><td>${a.o}</td><td>${a.h||'—'}</td><td>${a.st}</td>
       <td>${bd(a.s)}</td>
       <td><div style="display:flex;gap:2px">
         <button class="bt bt-gh bt-ic" onclick="editRecord('att',${i})" title="Edit"><i class="fas fa-edit"></i></button>
@@ -1350,7 +1313,7 @@ function rHR(){
   const bt=document.getElementById('bTrn');
   if(bt) bt.innerHTML=D.trn.map((t,i)=>`
     <tr>
-      <td class="tp">${escapeHTML(t.n)}</td><td>${escapeHTML(t.t)}</td><td>${escapeHTML(t.p)}</td><td>${t.d}</td><td>${t.x}</td>
+      <td class="tp">${t.n}</td><td>${t.t}</td><td>${t.p}</td><td>${t.d}</td><td>${t.x}</td>
       <td>${bd(t.s)}</td>
       <td><div style="display:flex;gap:2px">
         <button class="bt bt-gh bt-ic" onclick="editRecord('trn',${i})" title="Edit"><i class="fas fa-edit"></i></button>
@@ -1388,8 +1351,8 @@ function rHSE(){
   const bi=document.getElementById('bInc');
   if(bi) bi.innerHTML=D.incs.map((inc,i)=>`
     <tr>
-      <td class="tm">${inc.rf}</td><td>${inc.dt}</td><td>${escapeHTML(inc.st)}</td><td>${escapeHTML(inc.tp)}</td>
-      <td style="max-width:200px">${escapeHTML(inc.ds)}</td><td>${bd(inc.sv)}</td><td>${bd(inc.s)}</td>
+      <td class="tm">${inc.rf}</td><td>${inc.dt}</td><td>${inc.st}</td><td>${inc.tp}</td>
+      <td style="max-width:200px">${inc.ds}</td><td>${bd(inc.sv)}</td><td>${bd(inc.s)}</td>
       <td><div style="display:flex;gap:2px">
         <button class="bt bt-gh bt-ic" onclick="viewRecord('incident',${i})" title="View"><i class="fas fa-eye"></i></button>
         <button class="bt bt-gh bt-ic" onclick="editRecord('incident',${i})" title="Edit"><i class="fas fa-edit"></i></button>
@@ -1400,9 +1363,9 @@ function rHSE(){
   const br=document.getElementById('bRsk');
   if(br) br.innerHTML=D.rsks.map((r,i)=>`
     <tr>
-      <td class="tm">${r.id}</td><td class="tp">${escapeHTML(r.hz)}</td><td>${escapeHTML(r.ct)}</td>
+      <td class="tm">${r.id}</td><td class="tp">${r.hz}</td><td>${r.ct}</td>
       <td>${r.lk}</td><td>${r.sv}</td><td>${bd(r.lv)}</td>
-      <td style="max-width:180px;font-size:12px">${escapeHTML(r.cm)}</td><td>${escapeHTML(r.ow)}</td>
+      <td style="max-width:180px;font-size:12px">${r.cm}</td><td>${r.ow}</td>
       <td><div style="display:flex;gap:2px">
         <button class="bt bt-gh bt-ic" onclick="editRecord('risk',${i})" title="Edit"><i class="fas fa-edit"></i></button>
         <button class="bt bt-gh bt-ic" onclick="delRecord('rsks',${i},'rHSE')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
@@ -1412,7 +1375,7 @@ function rHSE(){
   const bins=document.getElementById('bIns');
   if(bins) bins.innerHTML=D.insps.map((ins,i)=>`
     <tr>
-      <td class="tm">${ins.id}</td><td>${escapeHTML(ins.st)}</td><td>${escapeHTML(ins.by)}</td><td>${ins.dt}</td>
+      <td class="tm">${ins.id}</td><td>${ins.st}</td><td>${ins.by}</td><td>${ins.dt}</td>
       <td style="font-weight:700;color:${ins.sc>=90?'var(--ok)':'var(--warn)'}">${ins.sc}%</td>
       <td>${ins.ob} obs.</td><td>${bd(ins.s)}</td>
       <td><div style="display:flex;gap:2px">
@@ -1424,7 +1387,7 @@ function rHSE(){
   const bp=document.getElementById('bPtw');
   if(bp) bp.innerHTML=D.ptw.map((p,i)=>`
     <tr>
-      <td class="tm">${p.no}</td><td>${escapeHTML(p.tp)}</td><td>${escapeHTML(p.lc)}</td><td>${escapeHTML(p.cn)}</td>
+      <td class="tm">${p.no}</td><td>${p.tp}</td><td>${p.lc}</td><td>${p.cn}</td>
       <td>${p.s1}</td><td>${p.s2}</td><td>${bd(p.s)}</td>
       <td><div style="display:flex;gap:2px">
         <button class="bt bt-gh bt-ic" onclick="editRecord('ptw',${i})" title="Edit"><i class="fas fa-edit"></i></button>
@@ -1465,9 +1428,9 @@ function rDocs(){
   b.innerHTML=D.docs.map((d,i)=>`
     <tr>
       <td class="tm">${d.id}</td>
-      <td><div style="display:flex;align-items:center;gap:7px"><i class="fas ${icons[d.ct]||'fa-file'}" style="color:var(--acc);font-size:13px"></i><span class="tp">${escapeHTML(d.t)}</span></div></td>
-      <td><span class="bg bg-b">${escapeHTML(d.ct)}</span></td>
-      <td>${escapeHTML(d.pr)}</td><td>${escapeHTML(d.vr)}</td><td>${escapeHTML(d.by)}</td><td>${d.dt}</td><td>${escapeHTML(d.sz)}</td>
+      <td><div style="display:flex;align-items:center;gap:7px"><i class="fas ${icons[d.ct]||'fa-file'}" style="color:var(--acc);font-size:13px"></i><span class="tp">${d.t}</span></div></td>
+      <td><span class="bg bg-b">${d.ct}</span></td>
+      <td>${d.pr}</td><td>${d.vr}</td><td>${d.by}</td><td>${d.dt}</td><td>${d.sz}</td>
       <td><div style="display:flex;gap:2px">
         <button class="bt bt-gh bt-ic" onclick="viewRecord('doc',${i})" title="View"><i class="fas fa-eye"></i></button>
         <button class="bt bt-gh bt-ic" onclick="editRecord('doc',${i})" title="Edit"><i class="fas fa-edit"></i></button>
@@ -1489,7 +1452,7 @@ function rCRM(){
   const bc=document.getElementById('bCl');
   if(bc) bc.innerHTML=D.cls.map((c,i)=>`
     <tr>
-      <td class="tp">${escapeHTML(c.n)}</td><td>${escapeHTML(c.sc)}</td><td>${escapeHTML(c.cn)}</td><td>${c.pj}</td>
+      <td class="tp">${c.n}</td><td>${c.sc}</td><td>${c.cn}</td><td>${c.pj}</td>
       <td style="font-weight:700">${fmtN(c.rv)}</td><td>${bd(c.s)}</td>
       <td><div style="display:flex;gap:2px">
         <button class="bt bt-gh bt-ic" onclick="viewRecord('client',${i})" title="View"><i class="fas fa-eye"></i></button>
@@ -1501,8 +1464,8 @@ function rCRM(){
   const bt=document.getElementById('bTnd');
   if(bt) bt.innerHTML=D.tnds.map((t,i)=>`
     <tr>
-      <td class="tp">${escapeHTML(t.t)}</td><td>${escapeHTML(t.cl)}</td><td style="font-weight:700">₨${fmtNP(t.vl)}</td>
-      <td>${t.sb}</td><td>${t.dc}</td><td>${bd(t.s)}</td><td>${escapeHTML(t.pm)}</td>
+      <td class="tp">${t.t}</td><td>${t.cl}</td><td style="font-weight:700">₨${fmtNP(t.vl)}</td>
+      <td>${t.sb}</td><td>${t.dc}</td><td>${bd(t.s)}</td><td>${t.pm}</td>
       <td><div style="display:flex;gap:2px">
         <button class="bt bt-gh bt-ic" onclick="editRecord('tender',${i})" title="Edit"><i class="fas fa-edit"></i></button>
         <button class="bt bt-gh bt-ic" onclick="delRecord('tnds',${i},'rCRM')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
@@ -1527,8 +1490,8 @@ function rUsers(){
   if(!b)return;
   b.innerHTML=D.users.map((u,i)=>`
     <tr>
-      <td><div style="display:flex;align-items:center;gap:8px"><div class="av" style="background:${u.col}">${u.av}</div><span class="tp">${escapeHTML(u.n)}</span></div></td>
-      <td>${escapeHTML(u.r)}</td><td>${escapeHTML(u.em)}</td><td>${bd(u.s)}</td>
+      <td><div style="display:flex;align-items:center;gap:8px"><div class="av" style="background:${u.col}">${u.av}</div><span class="tp">${u.n}</span></div></td>
+      <td>${u.r}</td><td>${u.em}</td><td>${bd(u.s)}</td>
       <td><div style="display:flex;gap:2px">
         <button class="bt bt-gh bt-ic" onclick="editRecord('user',${i})" title="Edit"><i class="fas fa-edit"></i></button>
         <button class="bt bt-gh bt-ic" onclick="toggleUserStatus(${i})" title="Toggle Status"><i class="fas fa-power-off"></i></button>
@@ -1549,7 +1512,7 @@ function rNotifs(){
     <div class="np-i" style="${n.read?'opacity:.6':''}" onclick="markNotifRead(${i})">
       <div class="np-ic" style="background:${n.icBg};color:${n.icC}"><i class="${n.ic}"></i></div>
       <div>
-        <div class="np-tx" style="font-weight:${n.read?400:600}">${escapeHTML(n.tx)}</div>
+        <div class="np-tx" style="font-weight:${n.read?400:600}">${n.tx}</div>
         <div class="np-tm">${n.tm}</div>
       </div>
       ${!n.read?'<div style="width:7px;height:7px;background:var(--pri);border-radius:50%;margin-top:4px;flex-shrink:0"></div>':''}
@@ -1567,50 +1530,12 @@ function toggleNotif(e){e.stopPropagation();document.getElementById('notP').clas
 
 function rKPIs(){rProjKPIs();rDash();}
 
+// Add activity log
 function addActivity(desc,title){
   const now=new Date();
   const time='Today, '+now.toLocaleTimeString('en-PK',{hour:'2-digit',minute:'2-digit'});
   D.activity.unshift({col:'var(--pri)',time,title:title||'Record Updated',desc});
   if(D.activity.length>10)D.activity.pop();
-}
-
-// ===================== NAVIGATION =====================
-function go(pg,el){
-  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
-  const pgEl=document.getElementById('pg-'+pg);
-  if(pgEl)pgEl.classList.add('on');
-  document.querySelectorAll('.si-item').forEach(i=>i.classList.remove('on'));
-  if(el)el.classList.add('on');
-  const ts={dash:'Dashboard',proj:'Project Management',fin:'Financial Management',hr:'HR & Payroll',proc:'Procurement & Materials',equip:'Equipment & Plant',hse:'HSE',docs:'Document Management',crm:'CRM & Clients',rpt:'Reports & BI',set:'System Settings'};
-  document.getElementById('hdT').textContent=ts[pg]||pg;
-  document.getElementById('notP').classList.remove('op');
-  document.getElementById('side').classList.remove('show');
-  setTimeout(initCharts,80);
-}
-
-function stab(btn,pane){
-  const pg=btn.closest('.pg')||btn.closest('.mn');
-  pg.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
-  pg.querySelectorAll('.tp-pane').forEach(p=>p.classList.remove('on'));
-  btn.classList.add('on');
-  const pEl=document.getElementById(pane);
-  if(pEl)pEl.classList.add('on');
-  setTimeout(initCharts,80);
-}
-
-function globalSrch(q){
-  if(!q.trim())return;
-  const ql=q.toLowerCase();
-  const res=[];
-  D.projects.forEach(p=>{if(p.n.toLowerCase().includes(ql)||p.cl.toLowerCase().includes(ql))res.push({type:'Project',label:p.n,sub:p.cl,click:"go('proj',null)"});});
-  D.emps.forEach(e=>{if(e.n.toLowerCase().includes(ql))res.push({type:'Employee',label:e.n,sub:e.dg,click:"go('hr',null)"});});
-  D.docs.forEach(d=>{if(d.t.toLowerCase().includes(ql))res.push({type:'Document',label:d.t,sub:d.ct,click:"go('docs',null)"});});
-  if(res.length>0)toast(`Found ${res.length} result(s) for "${q}" — check relevant modules`);
-}
-
-function saveSettings(){
-  toast('Company settings saved successfully');
-  addActivity('Company settings updated','Settings saved');
 }
 
 // ===================== UNIVERSAL ADD/EDIT MODAL =====================
@@ -1964,12 +1889,15 @@ function saveRecord(type){
   if(!valid){toast('Please fill in all required fields (*)','w');return;}
 
   if(editingIdx!==null){
+    // Edit existing
     const old=D[cfg.arr][editingIdx];
     cfg.fields.forEach(f=>old[f.key]=data[f.key]);
+    // recalc computed
     if(type==='invt'){old.s=parseInt(old.sk)<=parseInt(old.mn)?'Low':'OK';}
     if(type==='pay'){old.ne=(parseFloat(old.b)||0)+(parseFloat(old.a)||0)+(parseFloat(old.o)||0)-(parseFloat(old.d)||0);}
     toast(cfg.title+' updated successfully');
   }else{
+    // Add new
     const rec=cfg.newFn(data);
     D[cfg.arr].unshift(rec);
     toast(cfg.title+' added successfully');
@@ -1990,6 +1918,7 @@ function delRecord(arr,idx,rerenderFn,fromModal=false){
   toast('Record deleted','w');
 }
 
+// VIEW MODAL
 function viewRecord(type,idx){
   const viewers={
     proj:(p)=>({title:'Project: '+p.n,fields:[['ID',p.id],['Client',p.cl],['Type',p.tp],['Location',p.loc],['Budget','₨'+fmtNP(p.bgt)],['Progress',p.pr+'%'],['Status',bd(p.st)],['Project Manager',p.pm],['Start Date',p.s],['End Date',p.e||'TBD'],['Description',p.desc||'—']]}),
@@ -2007,6 +1936,133 @@ function viewRecord(type,idx){
   document.getElementById('vMdTitle').textContent=title;
   document.getElementById('vMdBody').innerHTML=fields.map(([l,v])=>`<div class="vd-row"><div class="vd-l">${l}</div><div class="vd-v">${v}</div></div>`).join('');
   om('vModal');
+}
+
+// ===================== REPORTS =====================
+function genR(tp){
+  const ts={proj:'Project Progress Report',fin:'Financial Summary Report',hr:'HR & Workforce Report',hse:'HSE Performance Report',equip:'Equipment Status Report',proc:'Procurement Report'};
+  const genDate=new Date().toLocaleString('en-PK');
+  let content='';
+  if(tp==='proj'){
+    const avgPr=Math.round(D.projects.reduce((s,p)=>s+p.pr,0)/D.projects.length);
+    content=`<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px">
+      <div style="padding:12px;background:var(--pri-p);border:1px solid var(--pri-l);border-radius:8px;text-align:center"><div style="font-size:20px;font-weight:800;color:var(--pri)">${D.projects.length}</div><div style="font-size:11px;color:var(--t3)">Total</div></div>
+      <div style="padding:12px;background:var(--ok-l);border:1px solid #bbf7d0;border-radius:8px;text-align:center"><div style="font-size:20px;font-weight:800;color:var(--ok)">${D.projects.filter(p=>p.st==='Active').length}</div><div style="font-size:11px;color:var(--t3)">Active</div></div>
+      <div style="padding:12px;background:var(--err-l);border:1px solid #fecaca;border-radius:8px;text-align:center"><div style="font-size:20px;font-weight:800;color:var(--err)">${D.projects.filter(p=>p.st==='Delayed').length}</div><div style="font-size:11px;color:var(--t3)">Delayed</div></div>
+      <div style="padding:12px;background:var(--acc-l);border:1px solid var(--acc-l);border-radius:8px;text-align:center"><div style="font-size:20px;font-weight:800;color:var(--acc)">${avgPr}%</div><div style="font-size:11px;color:var(--t3)">Avg Progress</div></div>
+    </div>`+D.projects.map(p=>`<div style="padding:12px 14px;background:var(--b2);margin-bottom:6px;border-radius:8px;border:1px solid var(--b4)"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div><div style="font-weight:700;font-size:13.5px;color:var(--t1)">${p.id} — ${p.n}</div><div style="font-size:12px;color:var(--t3)">${p.cl} · ${p.loc} · PM: ${p.pm}</div></div><div style="display:flex;align-items:center;gap:8px">${bd(p.st)}<span style="font-weight:700">₨${fmtNP(p.bgt)}</span></div></div>${pgb(p.pr)}</div>`).join('');
+  }else if(tp==='fin'){
+    const totPaid=D.inv.filter(i=>i.s==='Paid').reduce((s,i)=>s+i.am,0);
+    const totPend=D.inv.filter(i=>i.s==='Pending').reduce((s,i)=>s+i.am,0);
+    const totOvd=D.inv.filter(i=>i.s==='Overdue').reduce((s,i)=>s+i.am,0);
+    const totExp=D.exp.reduce((s,e)=>s+e.am,0);
+    content=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+      <div style="padding:16px;background:var(--ok-l);border:1px solid #bbf7d0;border-radius:8px;text-align:center"><div style="font-size:22px;font-weight:800;color:var(--ok)">${fmtN(totPaid)}</div><div style="font-size:12px;color:var(--t3)">Revenue Collected</div></div>
+      <div style="padding:16px;background:var(--err-l);border:1px solid #fecaca;border-radius:8px;text-align:center"><div style="font-size:22px;font-weight:800;color:var(--err)">${fmtN(totExp)}</div><div style="font-size:12px;color:var(--t3)">Total Expenses</div></div>
+      <div style="padding:16px;background:var(--warn-l);border:1px solid #fde68a;border-radius:8px;text-align:center"><div style="font-size:22px;font-weight:800;color:var(--warn)">${fmtN(totPend)}</div><div style="font-size:12px;color:var(--t3)">Pending Invoices</div></div>
+      <div style="padding:16px;background:var(--b3);border:1px solid var(--b4);border-radius:8px;text-align:center"><div style="font-size:22px;font-weight:800;color:var(--err)">${fmtN(totOvd)}</div><div style="font-size:12px;color:var(--t3)">Overdue</div></div>
+    </div><div style="font-weight:700;margin-bottom:8px;color:var(--t1)">Invoice Register</div>`+D.inv.map(i=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--b2);border:1px solid var(--b4);border-radius:6px;margin-bottom:4px"><div><span style="font-weight:700">${i.no}</span> — ${i.cl}</div><div style="display:flex;gap:8px;align-items:center"><span>₨${fmtNP(i.am)}</span>${bd(i.s)}</div></div>`).join('');
+  }else if(tp==='hr'){
+    const totPay=D.pay.reduce((s,p)=>s+p.ne,0);
+    content=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px">
+      <div style="padding:12px;background:var(--pri-p);border:1px solid var(--pri-l);border-radius:8px;text-align:center"><div style="font-size:20px;font-weight:800;color:var(--pri)">${D.emps.length}</div><div style="font-size:11px;color:var(--t3)">Employees</div></div>
+      <div style="padding:12px;background:var(--ok-l);border:1px solid #bbf7d0;border-radius:8px;text-align:center"><div style="font-size:20px;font-weight:800;color:var(--ok)">${D.att.filter(a=>a.s==='Present').length}</div><div style="font-size:11px;color:var(--t3)">Present Today</div></div>
+      <div style="padding:12px;background:var(--acc-l);border:1px solid var(--acc-l);border-radius:8px;text-align:center"><div style="font-size:20px;font-weight:800;color:var(--acc)">${fmtN(totPay)}</div><div style="font-size:11px;color:var(--t3)">Monthly Payroll</div></div>
+    </div>`+D.emps.map((e,i)=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:var(--b2);border:1px solid var(--b4);border-radius:6px;margin-bottom:4px"><div style="display:flex;align-items:center;gap:8px"><div class="av" style="background:${avc[i%7]};width:28px;height:28px;font-size:11px">${e.n[0]}</div><div><div style="font-weight:600;font-size:13px">${e.n}</div><div style="font-size:11px;color:var(--t4)">${e.dg} · ${e.st}</div></div></div><span style="font-weight:700">₨${fmtNP(e.sl)}</span></div>`).join('');
+  }else if(tp==='hse'){
+    const open=D.incs.filter(i=>i.s==='Open').length;
+    const nm=D.incs.filter(i=>i.tp==='Near Miss').length;
+    content=`<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px">
+      <div style="padding:12px;background:var(--ok-l);border:1px solid #bbf7d0;border-radius:8px;text-align:center"><div style="font-size:20px;font-weight:800;color:var(--ok)">0</div><div style="font-size:11px;color:var(--t3)">LTIs</div></div>
+      <div style="padding:12px;background:var(--err-l);border:1px solid #fecaca;border-radius:8px;text-align:center"><div style="font-size:20px;font-weight:800;color:var(--err)">${open}</div><div style="font-size:11px;color:var(--t3)">Open Incidents</div></div>
+      <div style="padding:12px;background:var(--warn-l);border:1px solid #fde68a;border-radius:8px;text-align:center"><div style="font-size:20px;font-weight:800;color:var(--warn)">${nm}</div><div style="font-size:11px;color:var(--t3)">Near Misses</div></div>
+      <div style="padding:12px;background:var(--acc-l);border:1px solid var(--acc-l);border-radius:8px;text-align:center"><div style="font-size:20px;font-weight:800;color:var(--acc)">98%</div><div style="font-size:11px;color:var(--t3)">Compliance</div></div>
+    </div><div style="font-weight:700;margin-bottom:8px;color:var(--t1)">Incident Register</div>`+D.incs.map(i=>`<div style="padding:10px 12px;background:var(--b2);border:1px solid var(--b4);border-radius:6px;margin-bottom:4px"><div style="font-weight:600;font-size:13px">${i.rf} — ${i.tp} — ${i.st}</div><div style="font-size:12px;color:var(--t3);margin-top:2px">${i.ds}</div><div style="margin-top:4px">${bd(i.sv)} ${bd(i.s)}</div></div>`).join('');
+  }else if(tp==='equip'){
+    content=`<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px">
+      <div style="padding:12px;background:var(--acc-l);border:1px solid var(--acc-l);border-radius:8px;text-align:center"><div style="font-size:20px;font-weight:800;color:var(--acc)">${D.eqs.length}</div><div style="font-size:11px;color:var(--t3)">Total Assets</div></div>
+      <div style="padding:12px;background:var(--ok-l);border:1px solid #bbf7d0;border-radius:8px;text-align:center"><div style="font-size:20px;font-weight:800;color:var(--ok)">${D.eqs.filter(e=>e.s==='Operational').length}</div><div style="font-size:11px;color:var(--t3)">Operational</div></div>
+      <div style="padding:12px;background:var(--warn-l);border:1px solid #fde68a;border-radius:8px;text-align:center"><div style="font-size:20px;font-weight:800;color:var(--warn)">${D.eqs.filter(e=>e.s==='Maintenance').length}</div><div style="font-size:11px;color:var(--t3)">Maintenance</div></div>
+      <div style="padding:12px;background:var(--err-l);border:1px solid #fecaca;border-radius:8px;text-align:center"><div style="font-size:20px;font-weight:800;color:var(--err)">${D.eqs.filter(e=>e.s==='Breakdown').length}</div><div style="font-size:11px;color:var(--t3)">Breakdown</div></div>
+    </div>`+D.eqs.map(e=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:var(--b2);border:1px solid var(--b4);border-radius:6px;margin-bottom:4px"><div><div style="font-weight:600;font-size:13px">${e.id} — ${e.n}</div><div style="font-size:11px;color:var(--t4)">${e.md} · ${e.st}</div></div><div style="display:flex;gap:8px;align-items:center"><span style="font-size:12px;font-weight:700">${e.util}%</span>${bd(e.s)}</div></div>`).join('');
+  }else if(tp==='proc'){
+    const totAmt=D.pos.reduce((s,p)=>s+p.am,0);
+    content=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px">
+      <div style="padding:12px;background:var(--acc-l);border:1px solid var(--acc-l);border-radius:8px;text-align:center"><div style="font-size:20px;font-weight:800;color:var(--acc)">${D.pos.length}</div><div style="font-size:11px;color:var(--t3)">Total POs</div></div>
+      <div style="padding:12px;background:var(--warn-l);border:1px solid #fde68a;border-radius:8px;text-align:center"><div style="font-size:20px;font-weight:800;color:var(--warn)">${D.pos.filter(p=>p.s==='Pending').length}</div><div style="font-size:11px;color:var(--t3)">Pending</div></div>
+      <div style="padding:12px;background:var(--pri-p);border:1px solid var(--pri-l);border-radius:8px;text-align:center"><div style="font-size:20px;font-weight:800;color:var(--pri)">${fmtN(totAmt)}</div><div style="font-size:11px;color:var(--t3)">Total Value</div></div>
+    </div><div style="font-weight:700;margin-bottom:8px;color:var(--t1)">Purchase Orders</div>`+D.pos.map(p=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--b2);border:1px solid var(--b4);border-radius:6px;margin-bottom:4px"><div><div style="font-weight:600;font-size:13px">${p.no} — ${p.mt}</div><div style="font-size:11px;color:var(--t4)">${p.vn} · ${p.pr}</div></div><div style="display:flex;gap:8px;align-items:center"><span style="font-weight:700">₨${fmtNP(p.am)}</span>${bd(p.s)}</div></div>`).join('');
+  }
+
+  document.getElementById('rptT').innerHTML=`<i class="fas fa-file-alt" style="color:var(--pri);margin-right:8px"></i>${ts[tp]}`;
+  document.getElementById('rptB').innerHTML=`<div style="margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--b3)"><div style="font-weight:700;font-size:14px;color:var(--t1)">AFCCO Oil & Gas Field Services (Pvt.) Ltd.</div><div style="font-size:12px;color:var(--t4);margin-top:2px">Generated: ${genDate} &nbsp;|&nbsp; By: Ahmed Malik &nbsp;|&nbsp; System: AFCCO MIS v2.0</div></div>${content}`;
+  om('mRPT');
+}
+
+// ===================== NAVIGATION =====================
+function go(pg,el){
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
+  const pgEl=document.getElementById('pg-'+pg);
+  if(pgEl)pgEl.classList.add('on');
+  document.querySelectorAll('.si-item').forEach(i=>i.classList.remove('on'));
+  if(el)el.classList.add('on');
+  const ts={dash:'Dashboard',proj:'Project Management',fin:'Financial Management',hr:'HR & Payroll',proc:'Procurement & Materials',equip:'Equipment & Plant',hse:'HSE',docs:'Document Management',crm:'CRM & Clients',rpt:'Reports & BI',set:'System Settings'};
+  document.getElementById('hdT').textContent=ts[pg]||pg;
+  document.getElementById('notP').classList.remove('op');
+  document.getElementById('side').classList.remove('show');
+  setTimeout(initCharts,80);
+}
+
+function stab(btn,pane){
+  const pg=btn.closest('.pg')||btn.closest('.mn');
+  pg.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  pg.querySelectorAll('.tp-pane').forEach(p=>p.classList.remove('on'));
+  btn.classList.add('on');
+  const pEl=document.getElementById(pane);
+  if(pEl)pEl.classList.add('on');
+  setTimeout(initCharts,80);
+}
+
+// Global search
+function globalSrch(q){
+  if(!q.trim())return;
+  const ql=q.toLowerCase();
+  const res=[];
+  D.projects.forEach(p=>{if(p.n.toLowerCase().includes(ql)||p.cl.toLowerCase().includes(ql))res.push({type:'Project',label:p.n,sub:p.cl,click:"go('proj',null)"});});
+  D.emps.forEach(e=>{if(e.n.toLowerCase().includes(ql))res.push({type:'Employee',label:e.n,sub:e.dg,click:"go('hr',null)"});});
+  D.docs.forEach(d=>{if(d.t.toLowerCase().includes(ql))res.push({type:'Document',label:d.t,sub:d.ct,click:"go('docs',null)"});});
+  if(res.length>0)toast(`Found ${res.length} result(s) for "${q}" — check relevant modules`);
+}
+
+// Settings
+function saveSettings(){
+  toast('Company settings saved successfully');
+  addActivity('Company settings updated','Settings saved');
+}
+
+// Login / Logout
+function login(){
+  const u=document.getElementById('lu').value.trim();
+  const p=document.getElementById('lp').value;
+  if(u==='admin@afcco.com'&&p==='admin123'){
+    document.getElementById('loginPage').style.display='none';
+    document.getElementById('app').style.display='block';
+    document.getElementById('today').textContent=new Date().toLocaleDateString('en-PK',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+    rAll();
+    setTimeout(initCharts,200);
+    toast('Welcome back, Ahmed Malik!');
+  }else{
+    document.getElementById('lerr').style.display='block';
+    setTimeout(()=>document.getElementById('lerr').style.display='none',3000);
+  }
+}
+
+function logout(){
+  if(confirm('Sign out of AFCCO MIS?')){
+    document.getElementById('app').style.display='none';
+    document.getElementById('loginPage').style.display='flex';
+    toast('Signed out successfully');
+  }
 }
 
 // Click outside modals to close
@@ -2027,6 +2083,7 @@ document.addEventListener('keydown',e=>{
   }
 });
 
+// Make fi-ctrl styled properly
 const s=document.createElement('style');
 s.textContent='.fi-ctrl{padding:9px 13px;border:1.5px solid var(--b4);border-radius:var(--rs);font-size:13.5px;color:var(--t1);outline:none;background:var(--b1);transition:.2s;font-family:inherit;width:100%}.fi-ctrl:focus{border-color:var(--pri);box-shadow:0 0 0 3px rgba(13,148,136,.08)}';
 document.head.appendChild(s);
