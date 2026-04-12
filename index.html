@@ -2199,8 +2199,9 @@ function initializeSession() {
 function login() {
   const email = document.getElementById('lu').value.trim().toLowerCase();
   const pass  = document.getElementById('lp').value;
-  const user  = USERS[email];
+  const user  = USERS[email]; // Looks up your USERS object
 
+  // Ensure 'user.password' matches the key used in your USERS object
   if (user && user.password === pass) {
     currentUser = { email };
     sessionStorage.setItem('afcco_user', JSON.stringify(currentUser));
@@ -2214,6 +2215,7 @@ function login() {
     setTimeout(initCharts, 200);
     toast('Welcome back, ' + escapeHTML(user.name) + '!');
   } else {
+    // Show error if login fails
     document.getElementById('lerr').style.display = 'block';
     setTimeout(() => document.getElementById('lerr').style.display = 'none', 3000);
   }
