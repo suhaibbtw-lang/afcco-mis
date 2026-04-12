@@ -1489,10 +1489,14 @@ function rUsers(){
   const b = document.getElementById('bUsers');
   if(!b) return;
 
+  // Get the email of the person currently logged in
+  const session = JSON.parse(sessionStorage.getItem('afcco_user') || '{}');
+  const currentEmail = session.email;
+
   b.innerHTML = D.users.map((u, i) => {
-    // Check if this display user has a corresponding login in USERS object
+    // Find if this user has credentials in the USERS object
     const authKey = Object.keys(USERS).find(email => USERS[email].name === u.n);
-    const hasLogin = !!authKey;
+    const isMe = (authKey === currentEmail);
     
     return `
     <tr>
@@ -1500,8 +1504,8 @@ function rUsers(){
         <div style="display:flex;align-items:center;gap:8px">
           <div class="av" style="background:${u.col}">${u.av}</div>
           <div>
-            <span class="tp">${escapeHTML(u.n)}</span>
-            ${hasLogin ? `<br><small style="color:var(--pri)">Login Active: ${authKey}</small>` : ''}
+            <span class="tp">${escapeHTML(u.n)} ${isMe ? '<b style="color:var(--pri)">(You)</b>' : ''}</span>
+            ${authKey ? `<br><small style="color:var(--t4)">ID: ${authKey}</small>` : ''}
           </div>
         </div>
       </td>
@@ -1510,16 +1514,8 @@ function rUsers(){
       <td>${bd(u.s)}</td>
       <td>
         <div style="display:flex;gap:2px">
-          <button class="bt bt-gh bt-ic" onclick="editRecord('user',${i})" title="Edit Permissions">
-            <i class="fas fa-edit"></i>
-          </button>
-          <button class="bt bt-gh bt-ic" onclick="toggleUserStatus(${i})" title="Toggle Active">
-            <i class="fas fa-power-off"></i>
-          </button>
-          ${hasLogin ? `
-          <button class="bt bt-gh bt-ic" onclick="promptResetPassword('${authKey}')" title="Reset Login Password">
-            <i class="fas fa-key" style="color:var(--warn)"></i>
-          </button>` : ''}
+          <button class="bt bt-gh bt-ic" onclick="editRecord('user',${i})" title="Edit Permissions"><i class="fas fa-edit"></i></button>
+          <button class="bt bt-gh bt-ic" onclick="toggleUserStatus(${i})" title="Toggle Active"><i class="fas fa-power-off"></i></button>
         </div>
       </td>
     </tr>`;
