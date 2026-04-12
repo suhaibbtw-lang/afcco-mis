@@ -1864,15 +1864,22 @@ const FORMS={
     title:'System User',
     fields:[
       {id:'fus_n',label:'Full Name *',type:'text',key:'n'},
-      {id:'fus_r',label:'Role',type:'select',opts:['Administrator','Project Manager','Finance Manager','HSE Officer','Procurement Officer','Viewer'],key:'r'},
-      {id:'fus_em',label:'Email *',type:'text',key:'em'},
-      {id:'fus_s',label:'Status',type:'select',opts:['Active','Inactive'],key:'s'}
+      {id:'fus_em',label:'Login Email *',type:'text',key:'em'},
+      {id:'fus_r',label:'Display Role',type:'text',key:'r'},
+      {id:'fus_s',label:'System Status',type:'select',opts:['Active','Inactive'],key:'s'},
+      // New Manual Permission Toggles
+      {id:'fus_fin',label:'Access Finance?',type:'select',opts:['Yes','No'],key:'canFin'},
+      {id:'fus_set',label:'Access Settings?',type:'select',opts:['Yes','No'],key:'canSet'},
+      {id:'fus_del',label:'Can Delete Projects?',type:'select',opts:['Yes','No'],key:'canDel'}
     ],
     arr:'users',rerender:'rUsers',
-    newFn:(d)=>({...d,av:d.n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2),col:'var(--acc)'}),
-    actTitle:'User'
+    newFn:(d)=>({
+        ...d,
+        av:d.n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2),
+        col:'var(--pri)'
+    }),
+    actTitle:'User Permissions'
   }
-};
 
 let editingIdx=null,editingArr=null,editingRerender=null;
 
@@ -1943,24 +1950,24 @@ function saveRecord(type){
     const rec=cfg.newFn(data);
     D[cfg.arr].unshift(rec);
     // If adding a user, also create a USERS auth entry
-    if(type==='user'&&data.em){
-      const initials=(data.n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2));
-      const defaultPw='afcco'+new Date().getFullYear();
-      const roleMap={'Administrator':true,'Finance Manager':true};
-      USERS[data.em]={
-        password:defaultPw,
-        name:data.n,
-        initials:initials,
-        role:data.r||'Viewer',
-        canAccessFinance:!!(roleMap[data.r]),
-        canAccessSettings:data.r==='Administrator',
-        canDeleteProjects:data.r==='Administrator'
-      };
-      toast(cfg.title+' added — login: '+data.em+' / '+defaultPw);
-    }else{
-      toast(cfg.title+' added successfully');
+    // Inside saveRecord function...
+    if(type==='user') {
+        const email = data.em.toLowerCase();
+        
+        // If this login doesn't exist yet, create a default entry
+        if(!USERS[email]) {
+            USERS[email] = { password: 'afcco' + new Date().getFullYear() };
+        }
+        
+        // Manually assign the properties from the MIS Form to the Code Object
+        USERS[email].name = data.n;
+        USERS[email].role = data.r;
+        USERS[email].canAccessFinance = (data.canFin === 'Yes');
+        USERS[email].canAccessSettings = (data.canSet === 'Yes');
+        USERS[email].canDeleteProjects = (data.canDel === 'Yes');
+        
+        toast(`Permissions for ${data.n} manually updated.`);
     }
-  }
 
   addActivity((editingIdx!==null?'Updated ':'Added ')+cfg.actTitle+': '+(data[cfg.fields[0].key]||''),cfg.title+' '+(editingIdx!==null?'Updated':'Added'));
   cm('uModal');
