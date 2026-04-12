@@ -23,34 +23,56 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:14px;color:v
 ::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--b5);border-radius:99px}
 ::placeholder{color:var(--t4)}
 /* LOGIN */
-#loginPage{min-height:100vh;display:flex;background:var(--b2)}
-.lo-left{flex:1;display:flex;align-items:center;justify-content:center;padding:48px;background:linear-gradient(160deg,#f0fdfa 0%,#e0f2fe 100%);position:relative;overflow:hidden}
-.lo-left::before{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(13,148,136,.12) 0%,transparent 70%);top:-120px;right:-120px;border-radius:50%}
-.lo-left::after{content:'';position:absolute;width:350px;height:350px;background:radial-gradient(circle,rgba(2,132,199,.08) 0%,transparent 70%);bottom:-80px;left:-80px;border-radius:50%}
-.lo-inner{position:relative;z-index:2;max-width:440px}
-.lo-brand{display:flex;align-items:center;gap:12px;margin-bottom:44px}
-.lo-logo{width:48px;height:48px;border-radius:12px;background:var(--pri);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:20px;box-shadow:0 4px 14px rgba(13,148,136,.3)}
-.lo-bn{font-size:20px;font-weight:800;color:var(--t1);letter-spacing:.3px}
-.lo-bs{font-size:12px;color:var(--t3);margin-top:1px}
-.lo-h{font-size:34px;font-weight:800;color:var(--t1);line-height:1.2;margin-bottom:16px}
-.lo-h span{color:var(--pri)}
-.lo-p{font-size:14.5px;color:var(--t3);line-height:1.7}
-.lo-features{margin-top:36px;display:flex;flex-direction:column;gap:10px}
-.lo-feat{display:flex;align-items:center;gap:12px;padding:11px 16px;background:var(--b1);border:1px solid var(--b4);border-radius:var(--rs);font-size:13px;color:var(--t2);font-weight:500;box-shadow:var(--sh)}
-.lo-feat i{color:var(--pri);width:16px;font-size:14px}
-.lo-right{width:440px;display:flex;align-items:center;justify-content:center;padding:48px;background:var(--b1);border-left:1px solid var(--b4)}
-.lo-form{width:100%;max-width:360px}
-.lo-ft{font-size:26px;font-weight:800;color:var(--t1);margin-bottom:6px}
-.lo-fs{color:var(--t3);font-size:13.5px;margin-bottom:32px}
-.lf{margin-bottom:18px}
-.lf label{display:block;font-size:11.5px;font-weight:700;color:var(--t3);margin-bottom:6px;text-transform:uppercase;letter-spacing:.8px}
-.lf input{width:100%;padding:11px 14px;border:1.5px solid var(--b4);border-radius:var(--rs);font-size:14px;color:var(--t1);outline:none;background:var(--b2);transition:.2s}
-.lf input:focus{border-color:var(--pri);background:var(--b1);box-shadow:0 0 0 3px rgba(13,148,136,.1)}
-.btn-lo{width:100%;padding:13px;border:none;border-radius:var(--rs);background:var(--pri);color:#fff;font-size:14.5px;font-weight:700;cursor:pointer;transition:.2s;letter-spacing:.3px;margin-top:6px}
-.btn-lo:hover{background:var(--pri-h);transform:translateY(-1px);box-shadow:0 4px 12px rgba(13,148,136,.3)}
-.lo-hint{margin-top:18px;padding:11px 14px;background:var(--pri-p);border:1px solid var(--pri-l);border-radius:var(--rs);font-size:12px;color:var(--pri-h);line-height:1.5}
-.lo-hint b{color:var(--pri)}
-.lo-err{display:none;margin-top:10px;font-size:13px;color:var(--err);font-weight:600}
+// Define your official users and their roles
+const USERS = {
+  "admin@afcco.com": {
+    pass: "Admin#2026", 
+    role: "Administrator", 
+    name: "Ahmed Malik",
+    startPage: "dash" 
+  },
+  "manager@afcco.com": {
+    pass: "AFCCO_OM_26", 
+    role: "Operations Manager", 
+    name: "Suhaib Sheth",
+    startPage: "proj" // Managers might want to see Projects first
+  }
+};
+
+function login() {
+  const u = document.getElementById('lu').value.trim();
+  const p = document.getElementById('lp').value;
+  const user = USERS[u];
+
+  // Check if user exists and password matches
+  if (user && p === user.pass) {
+    // 1. Hide Login, Show App
+    document.getElementById('loginPage').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    
+    // 2. Update the UI with the logged-in user's info
+    document.querySelector('.si-un').textContent = user.name;
+    document.querySelector('.si-ur').textContent = user.role;
+    document.querySelector('.hd-av').textContent = user.name.split(' ').map(n => n[0]).join('');
+    
+    // 3. Set the date
+    document.getElementById('today').textContent = new Date().toLocaleDateString('en-PK', {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+    });
+
+    // 4. Navigate to their specific starting page
+    go(user.startPage, document.querySelector('.si-item'));
+    
+    rAll();
+    setTimeout(initCharts, 200);
+    toast(`Welcome, ${user.name}! Access granted as ${user.role}.`);
+  } else {
+    // Show error if login fails
+    document.getElementById('lerr').textContent = "Access Denied: Invalid Email or Password.";
+    document.getElementById('lerr').style.display = 'block';
+    setTimeout(() => document.getElementById('lerr').style.display = 'none', 3000);
+  }
+}
 /* SIDEBAR */
 #app{display:none}
 .side{position:fixed;top:0;left:0;width:var(--side);height:100vh;background:var(--b1);border-right:1px solid var(--b4);display:flex;flex-direction:column;z-index:200;overflow-y:auto;transition:.3s}
