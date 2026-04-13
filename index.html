@@ -2214,32 +2214,30 @@ function initializeSession() {
 
 // Login / Logout
 function login() {
-  const u = document.getElementById('lu').value.trim().toLowerCase();
-  const p = document.getElementById('lp').value;
-  const user = USERS[u];
+  const uInput = document.getElementById('lu').value.trim().toLowerCase();
+  const pInput = document.getElementById('lp').value;
+  const user = USERS[uInput]; // Looks up the ID in your USERS list
 
-  if (user && p === user.password) {
-    // 1. Save specific email to session
-    sessionStorage.setItem('afcco_user', JSON.stringify({ email: u }));
+  // Matches the "password" key in your USERS definition
+  if (user && pInput === user.password) {
+    // Save to session so refresh works
+    sessionStorage.setItem('afcco_user', JSON.stringify({ email: uInput }));
     
-    // 2. Hide login and show app
+    // Switch screens
     document.getElementById('loginPage').style.display = 'none';
     document.getElementById('app').style.display = 'block';
     
-    // 3. Set the date
+    // Set date and permissions
     document.getElementById('today').textContent = new Date().toLocaleDateString('en-PK', {
       weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
     });
 
-    // 4. Apply the roles we designed
     applyPermissions(user);
-    
-    // 5. Load data
     rAll();
     setTimeout(initCharts, 200);
     toast(`Welcome back, ${user.name}!`);
   } else {
-    // Show error message
+    // Show error if login fails
     document.getElementById('lerr').style.display = 'block';
     setTimeout(() => document.getElementById('lerr').style.display = 'none', 3000);
   }
@@ -2272,8 +2270,7 @@ window.onload = () => {
       setTimeout(initCharts, 200);
     }
   }
-};
-// Click outside modals to close
+};// Click outside modals to close
 document.addEventListener('click', e => {
   if (e.target.classList.contains('ov')) e.target.classList.remove('op');
   if (!e.target.closest('#notP') && !e.target.closest('.hd-btn')) {
