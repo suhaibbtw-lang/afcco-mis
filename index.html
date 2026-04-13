@@ -1584,19 +1584,25 @@ function addActivity(desc,title){
 }
 
 // ===================== UNIVERSAL ADD/EDIT MODAL =====================
-user: {
-    title: 'System User',
-    fields: [
-      { id: 'fus_n', label: 'Full Name *', type: 'text', key: 'n' },
-      { id: 'fus_em', label: 'Login ID (Email) *', type: 'text', key: 'em' },
-      { id: 'fus_pw', label: 'Password *', type: 'text', key: 'password' },
-      { id: 'fus_r', label: 'Display Role', type: 'text', key: 'r' },
-      { id: 'fus_fin', label: 'Access Finance?', type: 'select', opts: ['edit','view','none'], key: 'canFin' },
-      { id: 'fus_set', label: 'Access Settings?', type: 'select', opts: ['access','none'], key: 'canSet' },
-      { id: 'fus_del', label: 'Can Delete Projects?', type: 'select', opts: ['Yes','No'], key: 'canDel' }
+const FORMS={
+  proj:{
+    title:'Project',
+    fields:[
+      {id:'fp_n',label:'Project Name *',type:'text',key:'n'},
+      {id:'fp_c',label:'Client *',type:'text',key:'cl'},
+      {id:'fp_t',label:'Type',type:'select',opts:['O&G','Civil','Infrastructure'],key:'tp'},
+      {id:'fp_l',label:'Location',type:'text',key:'loc'},
+      {id:'fp_b',label:'Budget (PKR)',type:'number',key:'bgt'},
+      {id:'fp_pr',label:'Progress %',type:'number',key:'pr'},
+      {id:'fp_pm',label:'Project Manager',type:'text',key:'pm'},
+      {id:'fp_st',label:'Status',type:'select',opts:['Active','On Hold','Delayed','Completed'],key:'st'},
+      {id:'fp_s',label:'Start Date',type:'date',key:'s'},
+      {id:'fp_e',label:'End Date',type:'date',key:'e'},
+      {id:'fp_d',label:'Description',type:'textarea',key:'desc',fw:true}
     ],
-    arr: 'users', rerender: 'rUsers',
-    actTitle: 'User Access & Security'
+    arr:'projects',rerender:'rProj',
+    newFn:(d)=>({id:'PRJ-0'+String(cnt.p++).padStart(2,'0'),...d,pr:parseInt(d.pr)||0,bgt:parseFloat(d.bgt)||0}),
+    actTitle:'Project'
   },
   emp:{
     title:'Employee',
@@ -1914,47 +1920,56 @@ function buildFormHTML(fields,data){
   return `<div class="fg2">${rows.join('')}</div>`;
 }
 
-function saveRecord(type) {
-  const cfg = FORMS[type];
-  const data = {};
-  cfg.fields.forEach(f => {
-    const el = document.getElementById(f.id);
-    if(el) data[f.key] = el.value.trim();
+function saveRecord(type){
+  const cfg=FORMS[type];if(!cfg)return;
+  const data={};
+  let valid=true;
+  cfg.fields.forEach(f=>{
+    const el=document.getElementById(f.id);
+    if(!el)return;
+    data[f.key]=el.value.trim();
+    if(f.label.includes('*')&&!data[f.key]){valid=false;el.style.borderColor='var(--err)';}
+    else if(el)el.style.borderColor='';
   });
+  if(!valid){toast('Please fill in all required fields (*)','w');return;}
 
-  // NEW LOGIC FOR DYNAMIC USER CREATION
-  if (type === 'user') {
-    const email = data.em.toLowerCase();
-    
-    // This updates the actual login credentials object
-    USERS[email] = {
-      password: data.password,
-      name: data.n,
-      role: data.r,
-      initials: data.n.split(' ').map(w => w[0]).join('').toUpperCase(),
-      permissions: { 
-        finance: data.canFin, 
-        settings: data.canSet,
-        delete: data.canDel === 'Yes'
-      }
-    };
-    
-    // Also update the display list
-    const existingIdx = D.users.findIndex(u => u.em === data.em);
-    if(existingIdx > -1) {
-      D.users[existingIdx] = { ...data, av: USERS[email].initials, col: 'var(--pri)', s: 'Active' };
-    } else {
-      D.users.unshift({ ...data, av: USERS[email].initials, col: 'var(--pri)', s: 'Active' });
+  if(editingIdx!==null){
+    // Edit existing
+    const old=D[cfg.arr][editingIdx];
+    cfg.fields.forEach(f=>old[f.key]=data[f.key]);
+    // recalc computed
+    if(type==='invt'){old.s=parseInt(old.sk)<=parseInt(old.mn)?'Low':'OK';}
+    if(type==='pay'){old.ne=(parseFloat(old.b)||0)+(parseFloat(old.a)||0)+(parseFloat(old.o)||0)-(parseFloat(old.d)||0);}
+    // If editing a user, sync name/role in sidebar if it's the current user
+    if(type==='user'&&currentUser){
+      const authKey=Object.keys(USERS).find(k=>USERS[k].name===old.n||USERS[k].name===data.n);
+      if(authKey){USERS[authKey].name=data.n;USERS[authKey].initials=(data.n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2));applyPermissions(USERS[authKey]);}
     }
-    
-    toast(`Account for ${data.n} is now live with your assigned permissions.`);
-    cm('uModal');
-    rUsers();
-    return; // Exit function early for users
+    toast(cfg.title+' updated successfully');
+  }else{
+    // Add new
+    const rec=cfg.newFn(data);
+    D[cfg.arr].unshift(rec);
+    // If adding a user, also create a USERS auth entry
+    if(type==='user'&&data.em){
+      const initials=(data.n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2));
+      const defaultPw='afcco'+new Date().getFullYear();
+      const roleMap={'Administrator':true,'Finance Manager':true};
+      USERS[data.em]={
+        password:defaultPw,
+        name:data.n,
+        initials:initials,
+        role:data.r||'Viewer',
+        canAccessFinance:!!(roleMap[data.r]),
+        canAccessSettings:data.r==='Administrator',
+        canDeleteProjects:data.r==='Administrator'
+      };
+      toast(cfg.title+' added — login: '+data.em+' / '+defaultPw);
+    }else{
+      toast(cfg.title+' added successfully');
+    }
   }
 
-  // ... rest of your existing saveRecord logic for projects/emps ...
-}
   addActivity((editingIdx!==null?'Updated ':'Added ')+cfg.actTitle+': '+(data[cfg.fields[0].key]||''),cfg.title+' '+(editingIdx!==null?'Updated':'Added'));
   cm('uModal');
   window[cfg.rerender]&&window[cfg.rerender]();
@@ -2212,86 +2227,52 @@ function initializeSession() {
   }
 }
 
-// Login / Logout
 function login() {
-  const uInput = document.getElementById('lu').value.trim().toLowerCase();
-  const pInput = document.getElementById('lp').value;
-  const user = USERS[uInput]; // Looks up the ID in your USERS list
+  const email = document.getElementById('lu').value.trim().toLowerCase();
+  const pass  = document.getElementById('lp').value;
+  const user  = USERS[email];
 
-  // Matches the "password" key in your USERS definition
-  if (user && pInput === user.password) {
-    // Save to session so refresh works
-    sessionStorage.setItem('afcco_user', JSON.stringify({ email: uInput }));
-    
-    // Switch screens
+  if (user && user.password === pass) {
+    currentUser = { email };
+    sessionStorage.setItem('afcco_user', JSON.stringify(currentUser));
+
     document.getElementById('loginPage').style.display = 'none';
     document.getElementById('app').style.display = 'block';
-    
-    // Set date and permissions
-    document.getElementById('today').textContent = new Date().toLocaleDateString('en-PK', {
-      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-    });
+    document.getElementById('today').textContent = new Date().toLocaleDateString('en-PK',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
 
     applyPermissions(user);
     rAll();
     setTimeout(initCharts, 200);
-    toast(`Welcome back, ${user.name}!`);
+    toast('Welcome back, ' + escapeHTML(user.name) + '!');
   } else {
-    // Show error if login fails
     document.getElementById('lerr').style.display = 'block';
     setTimeout(() => document.getElementById('lerr').style.display = 'none', 3000);
   }
 }
-  function logout() {
+
+function logout() {
   if (confirm('Sign out of AFCCO MIS?')) {
     sessionStorage.removeItem('afcco_user');
     currentUser = null;
     document.getElementById('app').style.display = 'none';
     document.getElementById('loginPage').style.display = 'flex';
-    // Clear login fields for security
+    // Reset login form
     document.getElementById('lu').value = '';
     document.getElementById('lp').value = '';
     toast('Signed out successfully');
   }
 }
 
-// Ensure the system checks for an existing session when you refresh the page
-window.onload = () => {
-  const sessionStr = sessionStorage.getItem('afcco_user');
-  if (sessionStr) {
-    const session = JSON.parse(sessionStr);
-    const user = USERS[session.email];
-    
-    if (user) {
-      document.getElementById('loginPage').style.display = 'none';
-      document.getElementById('app').style.display = 'block';
-      applyPermissions(user);
-      rAll();
-      setTimeout(initCharts, 200);
-    }
-  }
-};// Click outside modals to close
-document.addEventListener('click', e => {
-  if (e.target.classList.contains('ov')) e.target.classList.remove('op');
-  if (!e.target.closest('#notP') && !e.target.closest('.hd-btn')) {
+// Run session check on load
+initializeSession();
+
+// Click outside modals to close
+document.addEventListener('click',e=>{
+  if(e.target.classList.contains('ov'))e.target.classList.remove('op');
+  if(!e.target.closest('#notP')&&!e.target.closest('.hd-btn')){
     document.getElementById('notP').classList.remove('op');
   }
 });
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'Enter') {
-    const lp = document.getElementById('loginPage');
-    if (lp && lp.style.display !== 'none') login();
-  }
-  if (e.key === 'Escape') {
-    document.querySelectorAll('.ov.op').forEach(o => o.classList.remove('op'));
-  }
-});
-
-// Final CSS Styling for the dynamic forms
-const finalStyle = document.createElement('style');
-finalStyle.textContent = '.fi-ctrl{padding:9px 13px;border:1.5px solid var(--b4);border-radius:var(--rs);font-size:13.5px;color:var(--t1);outline:none;background:var(--b1);transition:.2s;font-family:inherit;width:100%}.fi-ctrl:focus{border-color:var(--pri);box-shadow:0 0 0 3px rgba(13,148,136,.08)}';
-document.head.appendChild(finalStyle);
 
 document.addEventListener('keydown',e=>{
   if(e.key==='Enter'){
