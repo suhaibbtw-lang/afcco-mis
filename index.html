@@ -2214,38 +2214,37 @@ function initializeSession() {
 
 // Login / Logout
 function login() {
-  const email = document.getElementById('lu').value.trim().toLowerCase();
-  const pass = document.getElementById('lp').value;
-  
-  // 1. Check the USERS object for the ID and Password
-  const user = USERS[email];
+  const u = document.getElementById('lu').value.trim().toLowerCase();
+  const p = document.getElementById('lp').value;
+  const user = USERS[u];
 
-  if (user && user.password === pass) {
-    // 2. Save session and transition UI
-    currentUser = { email };
-    sessionStorage.setItem('afcco_user', JSON.stringify(currentUser));
+  if (user && p === user.password) {
+    // 1. Save specific email to session
+    sessionStorage.setItem('afcco_user', JSON.stringify({ email: u }));
     
+    // 2. Hide login and show app
     document.getElementById('loginPage').style.display = 'none';
     document.getElementById('app').style.display = 'block';
+    
+    // 3. Set the date
     document.getElementById('today').textContent = new Date().toLocaleDateString('en-PK', {
-        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
     });
 
-    // 3. Apply the specific role permissions (Hide sidebar/buttons)
+    // 4. Apply the roles we designed
     applyPermissions(user);
     
-    // 4. Load the dashboard data
+    // 5. Load data
     rAll();
     setTimeout(initCharts, 200);
-    toast('Welcome back, ' + escapeHTML(user.name) + '!');
+    toast(`Welcome back, ${user.name}!`);
   } else {
-    // Show error if credentials don't match
+    // Show error message
     document.getElementById('lerr').style.display = 'block';
     setTimeout(() => document.getElementById('lerr').style.display = 'none', 3000);
   }
 }
-
-function logout() {
+  function logout() {
   if (confirm('Sign out of AFCCO MIS?')) {
     sessionStorage.removeItem('afcco_user');
     currentUser = null;
@@ -2260,20 +2259,20 @@ function logout() {
 
 // Ensure the system checks for an existing session when you refresh the page
 window.onload = () => {
-    const session = sessionStorage.getItem('afcco_user');
-    if(session) {
-        const email = JSON.parse(session).email;
-        if(USERS[email]) {
-            currentUser = { email };
-            document.getElementById('loginPage').style.display = 'none';
-            document.getElementById('app').style.display = 'block';
-            applyPermissions(USERS[email]);
-            rAll();
-            setTimeout(initCharts, 200);
-        }
+  const sessionStr = sessionStorage.getItem('afcco_user');
+  if (sessionStr) {
+    const session = JSON.parse(sessionStr);
+    const user = USERS[session.email];
+    
+    if (user) {
+      document.getElementById('loginPage').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      applyPermissions(user);
+      rAll();
+      setTimeout(initCharts, 200);
     }
+  }
 };
-
 // Click outside modals to close
 document.addEventListener('click', e => {
   if (e.target.classList.contains('ov')) e.target.classList.remove('op');
