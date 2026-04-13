@@ -1489,43 +1489,51 @@ function rUsers(){
   const b = document.getElementById('bUsers');
   if(!b) return;
 
-  b.innerHTML = D.users.map((u, i) => {
-    // Check if this display user has a corresponding login in USERS object
-    const authKey = Object.keys(USERS).find(email => USERS[email].name === u.n);
-    const hasLogin = !!authKey;
+  // 1. Get the current user session
+  const session = JSON.parse(sessionStorage.getItem('afcco_user') || '{}');
+  const currentEmail = session.email;
+  const currentUserObj = USERS[currentEmail];
+  const isAdmin = currentUserObj.role === "Administrator";
+
+  // 2. Loop through the actual USERS authentication object to build the table
+  b.innerHTML = Object.keys(USERS).map(email => {
+    const user = USERS[email];
+    const isMe = (email === currentEmail);
     
     return `
-    <tr>
+    <tr ${isMe ? 'style="background:var(--pri-p)"' : ''}>
       <td>
         <div style="display:flex;align-items:center;gap:8px">
-          <div class="av" style="background:${u.col}">${u.av}</div>
+          <div class="av" style="background:var(--pri)">${user.initials}</div>
           <div>
-            <span class="tp">${escapeHTML(u.n)}</span>
-            ${hasLogin ? `<br><small style="color:var(--pri)">Login Active: ${authKey}</small>` : ''}
+            <span class="tp">${escapeHTML(user.name)} ${isMe ? '<b style="color:var(--pri)">(You)</b>' : ''}</span>
+            <br><small style="color:var(--t4)">${email}</small>
           </div>
         </div>
       </td>
-      <td>${escapeHTML(u.r)}</td>
-      <td>${escapeHTML(u.em)}</td>
-      <td>${bd(u.s)}</td>
+      <td>${escapeHTML(user.role)}</td>
+      <td><span class="bg bg-g">Active</span></td>
       <td>
         <div style="display:flex;gap:2px">
-          <button class="bt bt-gh bt-ic" onclick="editRecord('user',${i})" title="Edit Permissions">
-            <i class="fas fa-edit"></i>
-          </button>
-          <button class="bt bt-gh bt-ic" onclick="toggleUserStatus(${i})" title="Toggle Active">
-            <i class="fas fa-power-off"></i>
-          </button>
-          ${hasLogin ? `
-          <button class="bt bt-gh bt-ic" onclick="promptResetPassword('${authKey}')" title="Reset Login Password">
-            <i class="fas fa-key" style="color:var(--warn)"></i>
-          </button>` : ''}
+          ${isAdmin ? `
+            <button class="bt bt-gh bt-ic" onclick="editRecord('user', '${email}')" title="Edit Permissions">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button class="bt bt-gh bt-ic" onclick="toggleUserStatus('${email}')" title="Deactivate">
+              <i class="fas fa-power-off"></i>
+            </button>
+          ` : ''}
+
+          ${isMe ? `
+            <button class="bt bt-gh bt-ic" onclick="promptResetPassword('${email}')" title="Reset My Password">
+              <i class="fas fa-key" style="color:var(--warn)"></i>
+            </button>
+          ` : ''}
         </div>
       </td>
     </tr>`;
   }).join('');
 }
-
 // Function to reset password from the UI
 function promptResetPassword(email) {
     const newPass = prompt(`Enter new password for ${email}:`);
