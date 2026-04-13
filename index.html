@@ -253,11 +253,12 @@ tbody tr:hover{background:var(--b2)}
   .mn{margin:0;padding:20px}
   .cd{break-inside:avoid;border:1px solid #ccc}
 }
+.fi-ctrl{padding:9px 13px;border:1.5px solid var(--b4);border-radius:var(--rs);font-size:13.5px;color:var(--t1);outline:none;background:var(--b1);transition:.2s;font-family:inherit;width:100%}
+.fi-ctrl:focus{border-color:var(--pri);box-shadow:0 0 0 3px rgba(13,148,136,.08)}
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
 <div id="loginPage">
   <div class="lo-left">
     <div class="lo-inner">
@@ -284,12 +285,11 @@ tbody tr:hover{background:var(--b2)}
       <div class="lf"><label>Password</label><input type="password" id="lp" value="admin123" placeholder="••••••••"/></div>
       <button class="btn-lo" onclick="login()">Sign In →</button>
       <div class="lo-err" id="lerr">Invalid credentials. Please check and try again.</div>
-      <div class="lo-hint"><b>Demo access:</b> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="147570797d7a54757277777b3a777b79">[email&#160;protected]</a> &nbsp;/&nbsp; admin123</div>
+      <div class="lo-hint"><b>Demo access:</b> admin@afcco.com &nbsp;/&nbsp; admin123</div>
     </div>
   </div>
 </div>
 
-<!-- APP -->
 <div id="app">
 <aside class="side" id="side">
   <div class="si-top">
@@ -341,16 +341,14 @@ tbody tr:hover{background:var(--b2)}
 
 <main class="mn">
 
-<!-- ████ DASHBOARD ████ -->
 <div class="pg on" id="pg-dash">
   <div class="ph">
     <div><h2>Executive Dashboard</h2><p id="dashGreet">Good morning, Ahmed — <span id="today"></span></p></div>
     <div class="ph-acts">
-      <button class="bt bt-out bt-sm" onclick="genR('fin')"><i class="fas fa-download"></i> Export</button>
+      <button class="bt bt-out bt-sm" onclick="openReportParams('fin')"><i class="fas fa-download"></i> Export</button>
       <button class="bt bt-pri bt-sm" onclick="refreshDash()"><i class="fas fa-sync-alt"></i> Refresh</button>
     </div>
   </div>
-  <!-- Live KPIs from data -->
   <div class="kpis" id="dashKPIs"></div>
   <div class="g21">
     <div class="cd">
@@ -392,7 +390,6 @@ tbody tr:hover{background:var(--b2)}
   </div>
 </div>
 
-<!-- ████ PROJECTS ████ -->
 <div class="pg" id="pg-proj">
   <div class="ph"><div><h2>Project Management</h2><p>Monitor all active construction and O&G field service projects</p></div><div class="ph-acts"><button class="bt bt-out bt-sm" onclick="exportTable('tP','Projects')"><i class="fas fa-download"></i> Export CSV</button><button class="bt bt-pri bt-sm" onclick="openAddModal('proj')"><i class="fas fa-plus"></i> New Project</button></div></div>
   <div class="kpis" id="projKPIs"></div>
@@ -411,7 +408,6 @@ tbody tr:hover{background:var(--b2)}
   <div class="cd"><div class="cd-h"><div class="cd-hl"><i class="fas fa-stream"></i><div><div class="cd-t">Project Timeline — Gantt View</div></div></div></div><div class="cd-b p0" id="gantt"></div></div>
 </div>
 
-<!-- ████ FINANCE ████ -->
 <div class="pg" id="pg-fin">
   <div class="ph"><div><h2>Financial Management</h2><p>Budget tracking, invoicing, expenses, and financial analysis</p></div><div class="ph-acts"><button class="bt bt-out bt-sm" onclick="openAddModal('expense')"><i class="fas fa-minus-circle"></i> Add Expense</button><button class="bt bt-pri bt-sm" onclick="openAddModal('invoice')"><i class="fas fa-plus"></i> New Invoice</button></div></div>
   <div class="kpis" id="finKPIs"></div>
@@ -429,7 +425,6 @@ tbody tr:hover{background:var(--b2)}
   </div>
 </div>
 
-<!-- ████ PROCUREMENT ████ -->
 <div class="pg" id="pg-proc">
   <div class="ph"><div><h2>Procurement & Materials</h2><p>Purchase orders, inventory control, and vendor management</p></div><div class="ph-acts"><button class="bt bt-pri bt-sm" onclick="openAddModal('po')"><i class="fas fa-plus"></i> New Purchase Order</button></div></div>
   <div class="kpis" id="procKPIs"></div>
@@ -454,7 +449,6 @@ tbody tr:hover{background:var(--b2)}
   </div>
 </div>
 
-<!-- ████ EQUIPMENT ████ -->
 <div class="pg" id="pg-equip">
   <div class="ph"><div><h2>Equipment & Plant</h2><p>Asset register, utilization tracking, and maintenance scheduling</p></div><div class="ph-acts"><button class="bt bt-pri bt-sm" onclick="openAddModal('equip')"><i class="fas fa-plus"></i> Add Equipment</button></div></div>
   <div class="kpis" id="equipKPIs"></div>
@@ -471,7 +465,6 @@ tbody tr:hover{background:var(--b2)}
   </div>
 </div>
 
-<!-- ████ HR ████ -->
 <div class="pg" id="pg-hr">
   <div class="ph"><div><h2>HR & Payroll Management</h2><p>Employee directory, attendance, payroll processing, and training records</p></div><div class="ph-acts"><button class="bt bt-pri bt-sm" onclick="openAddModal('emp')"><i class="fas fa-user-plus"></i> Add Employee</button></div></div>
   <div class="kpis" id="hrKPIs"></div>
@@ -490,7 +483,15 @@ tbody tr:hover{background:var(--b2)}
   </div>
   <div class="tp-pane" id="hAtt">
     <div class="cd">
-      <div class="cd-h"><div class="cd-hl"><i class="fas fa-clock"></i><div><div class="cd-t">Attendance — Today</div></div></div><button class="bt bt-pri bt-sm" onclick="openAddModal('att')"><i class="fas fa-plus"></i> Mark Attendance</button></div>
+      <div class="cd-h">
+        <div class="cd-hl"><i class="fas fa-clock"></i><div><div class="cd-t">Attendance Record</div></div></div>
+        <div class="cd-acts">
+          <input type="date" class="fi-ctrl" style="padding:5px 8px; font-size:12px; width:120px;" id="attFrom">
+          <span style="font-size:12px;color:var(--t4)">to</span>
+          <input type="date" class="fi-ctrl" style="padding:5px 8px; font-size:12px; width:120px;" id="attTo">
+          <button class="bt bt-pri bt-sm" onclick="openAddModal('att')"><i class="fas fa-plus"></i> Mark Attendance</button>
+        </div>
+      </div>
       <div class="cd-b">
         <canvas id="c8" height="90"></canvas>
         <div style="border-top:1px solid var(--b3);margin-top:16px;padding-top:16px">
@@ -507,7 +508,6 @@ tbody tr:hover{background:var(--b2)}
   </div>
 </div>
 
-<!-- ████ HSE ████ -->
 <div class="pg" id="pg-hse">
   <div class="ph"><div><h2>Health, Safety & Environment</h2><p>Incident tracking, risk management, inspections, and permit control</p></div><div class="ph-acts"><button class="bt bt-err bt-sm" onclick="openAddModal('incident')"><i class="fas fa-plus"></i> Report Incident</button></div></div>
   <div class="kpis" id="hseKPIs"></div>
@@ -526,7 +526,6 @@ tbody tr:hover{background:var(--b2)}
   </div>
 </div>
 
-<!-- ████ DOCUMENTS ████ -->
 <div class="pg" id="pg-docs">
   <div class="ph"><div><h2>Document Management</h2><p>Centralized repository for all project drawings, contracts, and records</p></div><div class="ph-acts"><button class="bt bt-pri bt-sm" onclick="openAddModal('doc')"><i class="fas fa-upload"></i> Upload Document</button></div></div>
   <div class="kpis" id="docsKPIs"></div>
@@ -542,7 +541,6 @@ tbody tr:hover{background:var(--b2)}
   </div>
 </div>
 
-<!-- ████ CRM ████ -->
 <div class="pg" id="pg-crm">
   <div class="ph"><div><h2>CRM & Client Management</h2><p>Client directory, tender tracking, and business development pipeline</p></div><div class="ph-acts"><button class="bt bt-out bt-sm" onclick="openAddModal('tender')"><i class="fas fa-plus"></i> Add Tender</button><button class="bt bt-pri bt-sm" onclick="openAddModal('client')"><i class="fas fa-plus"></i> Add Client</button></div></div>
   <div class="kpis" id="crmKPIs"></div>
@@ -559,36 +557,34 @@ tbody tr:hover{background:var(--b2)}
   </div>
 </div>
 
-<!-- ████ REPORTS ████ -->
 <div class="pg" id="pg-rpt">
   <div class="ph"><div><h2>Reports & Business Intelligence</h2><p>Generate, view, and export management reports</p></div></div>
   <div class="g3" style="margin-bottom:20px">
-    <div class="rc" onclick="genR('proj')"><div class="rc-icon" style="background:var(--pri-l);color:var(--pri)"><i class="fas fa-hard-hat"></i></div><div class="rc-t">Project Progress</div><div class="rc-d">Active project status, milestones and completion rates</div><button class="bt bt-pri bt-sm"><i class="fas fa-download"></i> Generate</button></div>
-    <div class="rc" onclick="genR('fin')"><div class="rc-icon" style="background:var(--acc-l);color:var(--acc)"><i class="fas fa-wallet"></i></div><div class="rc-t">Financial Report</div><div class="rc-d">Revenue, cost analysis, P&L, and cash flow summary</div><button class="bt bt-acc bt-sm"><i class="fas fa-download"></i> Generate</button></div>
-    <div class="rc" onclick="genR('hr')"><div class="rc-icon" style="background:var(--ok-l);color:var(--ok)"><i class="fas fa-users"></i></div><div class="rc-t">HR & Workforce</div><div class="rc-d">Headcount, payroll summary, attendance and training</div><button class="bt bt-out bt-sm"><i class="fas fa-download"></i> Generate</button></div>
-    <div class="rc" onclick="genR('hse')"><div class="rc-icon" style="background:var(--err-l);color:var(--err)"><i class="fas fa-shield-alt"></i></div><div class="rc-t">HSE Performance</div><div class="rc-d">Incident stats, compliance rates, and risk summary</div><button class="bt bt-out bt-sm"><i class="fas fa-download"></i> Generate</button></div>
-    <div class="rc" onclick="genR('equip')"><div class="rc-icon" style="background:var(--warn-l);color:var(--warn)"><i class="fas fa-truck"></i></div><div class="rc-t">Equipment Report</div><div class="rc-d">Asset utilization, maintenance costs, and fuel data</div><button class="bt bt-out bt-sm"><i class="fas fa-download"></i> Generate</button></div>
-    <div class="rc" onclick="genR('proc')"><div class="rc-icon" style="background:var(--b3);color:var(--t3)"><i class="fas fa-shopping-cart"></i></div><div class="rc-t">Procurement Report</div><div class="rc-d">PO summary, vendor performance, and inventory levels</div><button class="bt bt-out bt-sm"><i class="fas fa-download"></i> Generate</button></div>
+    <div class="rc" onclick="openReportParams('proj')"><div class="rc-icon" style="background:var(--pri-l);color:var(--pri)"><i class="fas fa-hard-hat"></i></div><div class="rc-t">Project Progress</div><div class="rc-d">Active project status, milestones and completion rates</div><button class="bt bt-pri bt-sm"><i class="fas fa-download"></i> Generate</button></div>
+    <div class="rc" onclick="openReportParams('fin')"><div class="rc-icon" style="background:var(--acc-l);color:var(--acc)"><i class="fas fa-wallet"></i></div><div class="rc-t">Financial Report</div><div class="rc-d">Revenue, cost analysis, P&L, and cash flow summary</div><button class="bt bt-acc bt-sm"><i class="fas fa-download"></i> Generate</button></div>
+    <div class="rc" onclick="openReportParams('hr')"><div class="rc-icon" style="background:var(--ok-l);color:var(--ok)"><i class="fas fa-users"></i></div><div class="rc-t">HR & Workforce</div><div class="rc-d">Headcount, payroll summary, attendance and training</div><button class="bt bt-out bt-sm"><i class="fas fa-download"></i> Generate</button></div>
+    <div class="rc" onclick="openReportParams('hse')"><div class="rc-icon" style="background:var(--err-l);color:var(--err)"><i class="fas fa-shield-alt"></i></div><div class="rc-t">HSE Performance</div><div class="rc-d">Incident stats, compliance rates, and risk summary</div><button class="bt bt-out bt-sm"><i class="fas fa-download"></i> Generate</button></div>
+    <div class="rc" onclick="openReportParams('equip')"><div class="rc-icon" style="background:var(--warn-l);color:var(--warn)"><i class="fas fa-truck"></i></div><div class="rc-t">Equipment Report</div><div class="rc-d">Asset utilization, maintenance costs, and fuel data</div><button class="bt bt-out bt-sm"><i class="fas fa-download"></i> Generate</button></div>
+    <div class="rc" onclick="openReportParams('proc')"><div class="rc-icon" style="background:var(--b3);color:var(--t3)"><i class="fas fa-shopping-cart"></i></div><div class="rc-t">Procurement Report</div><div class="rc-d">PO summary, vendor performance, and inventory levels</div><button class="bt bt-out bt-sm"><i class="fas fa-download"></i> Generate</button></div>
   </div>
   <div class="cd"><div class="cd-h"><div class="cd-hl"><i class="fas fa-chart-area"></i><div><div class="cd-t">Executive KPI Trend — 2022 to 2024</div></div></div></div><div class="cd-b"><canvas id="c10" height="80"></canvas></div></div>
 </div>
 
-<!-- ████ SETTINGS ████ -->
 <div class="pg" id="pg-set">
   <div class="ph"><div><h2>System Settings</h2><p>Company details, user management, and notification preferences</p></div></div>
   <div class="g2">
     <div class="cd"><div class="cd-h"><div class="cd-hl"><i class="fas fa-building"></i><div><div class="cd-t">Company Information</div></div></div></div><div class="cd-b">
       <div class="fg2">
-        <div class="fi fw"><label>Company Name</label><input id="set_cn" value="AFCCO Oil & Gas Field Services (Pvt.) Ltd."/></div>
-        <div class="fi"><label>Founded</label><input id="set_fy" value="1994"/></div>
-        <div class="fi"><label>Headquarters</label><input id="set_hq" value="Karachi, Pakistan"/></div>
-        <div class="fi"><label>Primary Business</label><input id="set_pb" value="Pre-Drilling Construction & Civil Works"/></div>
-        <div class="fi"><label>Email</label><input id="set_em" value="info@afcco.com.pk"/></div>
-        <div class="fi"><label>Phone</label><input id="set_ph" value="+92-21-3450000"/></div>
+        <div class="fi fw"><label>Company Name</label><input class="fi-ctrl" id="set_cn" value="AFCCO Oil & Gas Field Services (Pvt.) Ltd."/></div>
+        <div class="fi"><label>Founded</label><input class="fi-ctrl" id="set_fy" value="1994"/></div>
+        <div class="fi"><label>Headquarters</label><input class="fi-ctrl" id="set_hq" value="Karachi, Pakistan"/></div>
+        <div class="fi"><label>Primary Business</label><input class="fi-ctrl" id="set_pb" value="Pre-Drilling Construction & Civil Works"/></div>
+        <div class="fi"><label>Email</label><input class="fi-ctrl" id="set_em" value="info@afcco.com.pk"/></div>
+        <div class="fi"><label>Phone</label><input class="fi-ctrl" id="set_ph" value="+92-21-3450000"/></div>
       </div>
       <div style="margin-top:16px"><button class="bt bt-pri" onclick="saveSettings()"><i class="fas fa-save"></i> Save Changes</button></div>
     </div></div>
-    <div class="cd"><div class="cd-h"><div class="cd-hl"><i class="fas fa-users-cog"></i><div><div class="cd-t">User Management</div></div></div><button class="bt bt-pri bt-sm" onclick="openAddModal('user')"><i class="fas fa-plus"></i> Add User</button></div>
+    <div class="cd"><div class="cd-h"><div class="cd-hl"><i class="fas fa-users-cog"></i><div><div class="cd-t">User Management</div></div></div><button class="bt bt-pri bt-sm" id="btn-add-user" onclick="openAddModal('user')"><i class="fas fa-plus"></i> Add User</button></div>
     <div class="cd-b p0"><div class="tw"><table><thead><tr><th>Name</th><th>Role</th><th>Email</th><th>Status</th><th>Actions</th></tr></thead><tbody id="bUsers"></tbody></table></div></div></div>
     <div class="cd"><div class="cd-h"><div class="cd-hl"><i class="fas fa-bell"></i><div><div class="cd-t">Notification Preferences</div></div></div></div><div class="cd-b">
       <div class="tg-row"><div class="tg-lb">HSE Incidents<span>Notify immediately on incident reports</span></div><input type="checkbox" class="tg" checked/></div>
@@ -611,7 +607,6 @@ tbody tr:hover{background:var(--b2)}
 </main>
 </div>
 
-<!-- ====== UNIVERSAL MODAL ====== -->
 <div class="ov" id="uModal">
   <div class="md" id="uMd">
     <div class="md-h">
@@ -623,7 +618,6 @@ tbody tr:hover{background:var(--b2)}
   </div>
 </div>
 
-<!-- VIEW MODAL -->
 <div class="ov" id="vModal">
   <div class="md" style="width:500px">
     <div class="md-h"><h3 id="vMdTitle">Details</h3><button class="md-x" onclick="cm('vModal')"><i class="fas fa-times"></i></button></div>
@@ -632,7 +626,6 @@ tbody tr:hover{background:var(--b2)}
   </div>
 </div>
 
-<!-- REPORT MODAL -->
 <div class="ov" id="mRPT">
   <div class="md" style="width:700px">
     <div class="md-h"><h3 id="rptT">Report</h3><button class="md-x" onclick="cm('mRPT')"><i class="fas fa-times"></i></button></div>
@@ -641,8 +634,43 @@ tbody tr:hover{background:var(--b2)}
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ===================== DATA STORE =====================
+const USERS = {
+  'admin@afcco.com': {
+    password: 'admin123',
+    name: 'Suhaib Sheth',
+    initials: 'SS',
+    role: 'Administrator',
+    canAccessFinance: true,
+    canAccessSettings: true,
+    canDeleteProjects: true,
+    status: 'Active'
+  },
+  'om@afcco.com': {
+    password: 'ops2024',
+    name: 'Ahmad Malik',
+    initials: 'AM',
+    role: 'Operations Manager',
+    canAccessFinance: false,
+    canAccessSettings: false,
+    canDeleteProjects: false,
+    status: 'Active'
+  },
+  'finance@afcco.com': {
+    password: 'fin#2026',
+    name: 'Finance Manager',
+    initials: 'FM',
+    role: 'Finance Manager',
+    canAccessFinance: true,
+    canAccessSettings: false,
+    canDeleteProjects: false,
+    status: 'Active'
+  }
+};
+
+let currentUser = null;
+
 const D = {
   projects:[
     {id:'PRJ-001',n:'KPD-2 Drilling Pad',cl:'OGDCL',tp:'O&G',loc:'Sindh',bgt:120000000,pr:68,st:'Active',pm:'Ahmed Malik',s:'2024-01-15',e:'2024-09-30',desc:'Drilling pad construction including earthworks, civil, piping'},
@@ -772,12 +800,6 @@ const D = {
     {n:'Raza Iqbal',r:'Finance Mgr.',b:250000,a:37500,o:0,d:27000,ne:260500,s:'Processed'},
     {n:'Fatima Ali',r:'HSE Officer',b:180000,a:36000,o:24000,d:19000,ne:221000,s:'Pending'}
   ],
-  users:[
-    {n:'Ahmed Malik',r:'Administrator',em:'ahmed@afcco.com',s:'Active',av:'AM',col:'var(--pri)'},
-    {n:'Sara Khan',r:'Project Manager',em:'sara@afcco.com',s:'Active',av:'SK',col:'var(--acc)'},
-    {n:'Raza Iqbal',r:'Finance Manager',em:'raza@afcco.com',s:'Active',av:'RI',col:'var(--ok)'},
-    {n:'Fatima Ali',r:'HSE Officer',em:'fatima@afcco.com',s:'Inactive',av:'FA',col:'var(--warn)'}
-  ],
   notifs:[
     {ic:'fas fa-tasks',icBg:'var(--pri-l)',icC:'var(--pri)',tx:'KPD-2 Pipeline milestone due tomorrow',tm:'2 hours ago',read:false},
     {ic:'fas fa-exclamation-triangle',icBg:'var(--err-l)',icC:'var(--err)',tx:'HSE incident reported on Lahore Site B',tm:'4 hours ago',read:false},
@@ -795,7 +817,7 @@ const D = {
 };
 
 // Counters
-let cnt={p:9,e:9,i:6,x:6,po:5,eq:7,inc:4,dc:6,cl:7,vnd:5,inv:6,ins:4,ptw:90,rsk:4,mnt:5,trn:5,att:6,usr:5};
+let cnt={p:9,e:9,i:6,x:6,po:5,eq:7,inc:4,dc:6,cl:7,vnd:5,inv:6,ins:4,ptw:90,rsk:4,mnt:5,trn:5,att:6};
 
 // ===================== UTILS =====================
 const avc=['var(--pri)','var(--acc)','var(--ok)','var(--warn)','#6b7280','#8b5cf6','#ec4899'];
@@ -915,7 +937,7 @@ function initCharts(){
   updateRevChart(document.getElementById('revChartMode')?.value||'monthly');
   buildProjectTypeMix();
 
-  // Expenses bar — from real data
+  // Expenses bar
   const expByMonth=[120,145,138,165,152,185];
   mk('c3',()=>new Chart(document.getElementById('c3'),{
     type:'bar',data:{labels:['Jan','Feb','Mar','Apr','May','Jun'],datasets:[{data:expByMonth,backgroundColor:'#0284c7',borderRadius:5,borderSkipped:false}]},
@@ -923,9 +945,6 @@ function initCharts(){
   }));
 
   // Workforce from employees
-  const depts={};
-  D.emps.forEach(e=>{depts[e.dp]=(depts[e.dp]||0)+1;});
-  // augment with field workers
   const wfLabels=['Engineers','Technicians','Laborers','Admin','HSE'];
   const wfData=[85,95,120,28,14];
   mk('c4',()=>new Chart(document.getElementById('c4'),{
@@ -948,7 +967,7 @@ function initCharts(){
     options:{responsive:true,cutout:'60%',plugins:{legend:{position:'right',labels:{boxWidth:12,font:{size:12,family:'Plus Jakarta Sans'}}}}}
   }));
 
-  // Equipment utilization from real data
+  // Equipment utilization
   const eqLabels=D.eqs.map(e=>e.n.split(' ').slice(0,2).join(' '));
   const eqUtil=D.eqs.map(e=>e.util);
   mk('c7',()=>new Chart(document.getElementById('c7'),{
@@ -1137,7 +1156,7 @@ function rFin(){
         <div style="display:flex;gap:2px">
           <button class="bt bt-gh bt-ic" onclick="viewRecord('invoice',${i})" title="View"><i class="fas fa-eye"></i></button>
           <button class="bt bt-gh bt-ic" onclick="editRecord('invoice',${i})" title="Edit"><i class="fas fa-edit"></i></button>
-          <button class="bt bt-gh bt-ic" onclick="delRecord('inv',${i},'rFin')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
+          <button class="bt bt-gh bt-ic admin-only" onclick="delRecord('inv',${i},'rFin')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
         </div>
       </td>
     </tr>`).join('');
@@ -1155,7 +1174,7 @@ function rFin(){
       <td>
         <div style="display:flex;gap:2px">
           <button class="bt bt-gh bt-ic" onclick="editRecord('expense',${i})" title="Edit"><i class="fas fa-edit"></i></button>
-          <button class="bt bt-gh bt-ic" onclick="delRecord('exp',${i},'rFin')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
+          <button class="bt bt-gh bt-ic admin-only" onclick="delRecord('exp',${i},'rFin')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
         </div>
       </td>
     </tr>`).join('');
@@ -1184,7 +1203,7 @@ function rProc(){
       <td><div style="display:flex;gap:2px">
         <button class="bt bt-gh bt-ic" onclick="editRecord('po',${i})" title="Edit"><i class="fas fa-edit"></i></button>
         <button class="bt bt-gh bt-ic" onclick="changePOStatus(${i})" title="Change Status"><i class="fas fa-exchange-alt"></i></button>
-        <button class="bt bt-gh bt-ic" onclick="delRecord('pos',${i},'rProc')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
+        <button class="bt bt-gh bt-ic admin-only" onclick="delRecord('pos',${i},'rProc')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
       </div></td>
     </tr>`).join('');
 
@@ -1196,7 +1215,7 @@ function rProc(){
       <td>${it.mn}</td><td>₨${fmtNP(it.vl)}</td><td>${it.wh}</td><td>${bd(it.s)}</td>
       <td><div style="display:flex;gap:2px">
         <button class="bt bt-gh bt-ic" onclick="editRecord('invt',${i})" title="Edit"><i class="fas fa-edit"></i></button>
-        <button class="bt bt-gh bt-ic" onclick="delRecord('invt',${i},'rProc')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
+        <button class="bt bt-gh bt-ic admin-only" onclick="delRecord('invt',${i},'rProc')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
       </div></td>
     </tr>`).join('');
 
@@ -1208,7 +1227,7 @@ function rProc(){
       <td><div style="display:flex;gap:2px">
         <button class="bt bt-gh bt-ic" onclick="viewRecord('vendor',${i})" title="View"><i class="fas fa-eye"></i></button>
         <button class="bt bt-gh bt-ic" onclick="editRecord('vendor',${i})" title="Edit"><i class="fas fa-edit"></i></button>
-        <button class="bt bt-gh bt-ic" onclick="delRecord('vnds',${i},'rProc')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
+        <button class="bt bt-gh bt-ic admin-only" onclick="delRecord('vnds',${i},'rProc')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
       </div></td>
     </tr>`).join('');
 
@@ -1245,7 +1264,7 @@ function rEq(){
       <td><div style="display:flex;gap:2px">
         <button class="bt bt-gh bt-ic" onclick="viewRecord('equip',${i})" title="View"><i class="fas fa-eye"></i></button>
         <button class="bt bt-gh bt-ic" onclick="editRecord('equip',${i})" title="Edit"><i class="fas fa-edit"></i></button>
-        <button class="bt bt-gh bt-ic" onclick="delRecord('eqs',${i},'rEq')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
+        <button class="bt bt-gh bt-ic admin-only" onclick="delRecord('eqs',${i},'rEq')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
       </div></td>
     </tr>`).join('');
 
@@ -1255,7 +1274,7 @@ function rEq(){
       <td class="tp">${m.eq}</td><td>${m.tp}</td><td>${m.du}</td><td>${bd(m.pr)}</td>
       <td><div style="display:flex;gap:2px">
         <button class="bt bt-gh bt-ic" onclick="editRecord('mnt',${i})" title="Edit"><i class="fas fa-edit"></i></button>
-        <button class="bt bt-gh bt-ic" onclick="delRecord('mnt',${i},'rEq')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
+        <button class="bt bt-gh bt-ic admin-only" onclick="delRecord('mnt',${i},'rEq')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
       </div></td>
     </tr>`).join('');
 
@@ -1284,7 +1303,7 @@ function rHR(){
       <td><div style="display:flex;gap:2px">
         <button class="bt bt-gh bt-ic" onclick="viewRecord('emp',${i})" title="View"><i class="fas fa-eye"></i></button>
         <button class="bt bt-gh bt-ic" onclick="editRecord('emp',${i})" title="Edit"><i class="fas fa-edit"></i></button>
-        <button class="bt bt-gh bt-ic" onclick="delRecord('emps',${i},'rHR')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
+        <button class="bt bt-gh bt-ic admin-only" onclick="delRecord('emps',${i},'rHR')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
       </div></td>
     </tr>`).join('');
 
@@ -1317,7 +1336,7 @@ function rHR(){
       <td>${bd(t.s)}</td>
       <td><div style="display:flex;gap:2px">
         <button class="bt bt-gh bt-ic" onclick="editRecord('trn',${i})" title="Edit"><i class="fas fa-edit"></i></button>
-        <button class="bt bt-gh bt-ic" onclick="delRecord('trn',${i},'rHR')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
+        <button class="bt bt-gh bt-ic admin-only" onclick="delRecord('trn',${i},'rHR')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
       </div></td>
     </tr>`).join('');
 
@@ -1368,7 +1387,7 @@ function rHSE(){
       <td style="max-width:180px;font-size:12px">${r.cm}</td><td>${r.ow}</td>
       <td><div style="display:flex;gap:2px">
         <button class="bt bt-gh bt-ic" onclick="editRecord('risk',${i})" title="Edit"><i class="fas fa-edit"></i></button>
-        <button class="bt bt-gh bt-ic" onclick="delRecord('rsks',${i},'rHSE')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
+        <button class="bt bt-gh bt-ic admin-only" onclick="delRecord('rsks',${i},'rHSE')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
       </div></td>
     </tr>`).join('');
 
@@ -1380,7 +1399,7 @@ function rHSE(){
       <td>${ins.ob} obs.</td><td>${bd(ins.s)}</td>
       <td><div style="display:flex;gap:2px">
         <button class="bt bt-gh bt-ic" onclick="editRecord('insp',${i})" title="Edit"><i class="fas fa-edit"></i></button>
-        <button class="bt bt-gh bt-ic" onclick="delRecord('insps',${i},'rHSE')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
+        <button class="bt bt-gh bt-ic admin-only" onclick="delRecord('insps',${i},'rHSE')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
       </div></td>
     </tr>`).join('');
 
@@ -1435,7 +1454,7 @@ function rDocs(){
         <button class="bt bt-gh bt-ic" onclick="viewRecord('doc',${i})" title="View"><i class="fas fa-eye"></i></button>
         <button class="bt bt-gh bt-ic" onclick="editRecord('doc',${i})" title="Edit"><i class="fas fa-edit"></i></button>
         <button class="bt bt-gh bt-ic" onclick="toast('Downloading '+D.docs[${i}].t,'ok')" title="Download"><i class="fas fa-download"></i></button>
-        <button class="bt bt-gh bt-ic" onclick="delRecord('docs',${i},'rDocs')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
+        <button class="bt bt-gh bt-ic admin-only" onclick="delRecord('docs',${i},'rDocs')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
       </div></td>
     </tr>`).join('');
 
@@ -1457,7 +1476,7 @@ function rCRM(){
       <td><div style="display:flex;gap:2px">
         <button class="bt bt-gh bt-ic" onclick="viewRecord('client',${i})" title="View"><i class="fas fa-eye"></i></button>
         <button class="bt bt-gh bt-ic" onclick="editRecord('client',${i})" title="Edit"><i class="fas fa-edit"></i></button>
-        <button class="bt bt-gh bt-ic" onclick="delRecord('cls',${i},'rCRM')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
+        <button class="bt bt-gh bt-ic admin-only" onclick="delRecord('cls',${i},'rCRM')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
       </div></td>
     </tr>`).join('');
 
@@ -1468,7 +1487,7 @@ function rCRM(){
       <td>${t.sb}</td><td>${t.dc}</td><td>${bd(t.s)}</td><td>${t.pm}</td>
       <td><div style="display:flex;gap:2px">
         <button class="bt bt-gh bt-ic" onclick="editRecord('tender',${i})" title="Edit"><i class="fas fa-edit"></i></button>
-        <button class="bt bt-gh bt-ic" onclick="delRecord('tnds',${i},'rCRM')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
+        <button class="bt bt-gh bt-ic admin-only" onclick="delRecord('tnds',${i},'rCRM')" style="color:var(--err)" title="Delete"><i class="fas fa-trash"></i></button>
       </div></td>
     </tr>`).join('');
 
@@ -1489,13 +1508,9 @@ function rUsers(){
   const b = document.getElementById('bUsers');
   if(!b) return;
 
-  // 1. Get the current user session
-  const session = JSON.parse(sessionStorage.getItem('afcco_user') || '{}');
-  const currentEmail = session.email;
-  const currentUserObj = USERS[currentEmail];
-  const isAdmin = currentUserObj.role === "Administrator";
+  const currentEmail = currentUser ? currentUser.email : '';
+  const isAdmin = currentUser && currentUser.role === "Administrator";
 
-  // 2. Loop through the actual USERS authentication object to build the table
   b.innerHTML = Object.keys(USERS).map(email => {
     const user = USERS[email];
     const isMe = (email === currentEmail);
@@ -1512,14 +1527,14 @@ function rUsers(){
         </div>
       </td>
       <td>${escapeHTML(user.role)}</td>
-      <td><span class="bg bg-g">Active</span></td>
+      <td>${bd(user.status)}</td>
       <td>
         <div style="display:flex;gap:2px">
           ${isAdmin ? `
             <button class="bt bt-gh bt-ic" onclick="editRecord('user', '${email}')" title="Edit Permissions">
               <i class="fas fa-edit"></i>
             </button>
-            <button class="bt bt-gh bt-ic" onclick="toggleUserStatus('${email}')" title="Deactivate">
+            <button class="bt bt-gh bt-ic" onclick="toggleUserStatus('${email}')" title="${user.status==='Active'?'Deactivate':'Activate'}">
               <i class="fas fa-power-off"></i>
             </button>
           ` : ''}
@@ -1534,7 +1549,13 @@ function rUsers(){
     </tr>`;
   }).join('');
 }
-// Function to reset password from the UI
+
+function toggleUserStatus(email) {
+  USERS[email].status = USERS[email].status === 'Active' ? 'Inactive' : 'Active';
+  rUsers();
+  toast('User status updated');
+}
+
 function promptResetPassword(email) {
     const newPass = prompt(`Enter new password for ${email}:`);
     if (newPass && newPass.length >= 4) {
@@ -1575,7 +1596,6 @@ function rKPIs(){rProjKPIs();rDash();}
 
 // Add activity log
 function addActivity(desc,title){
-  // sanitize inputs before storing
   desc = escapeHTML(desc); title = escapeHTML(title);
   const now=new Date();
   const time='Today, '+now.toLocaleTimeString('en-PK',{hour:'2-digit',minute:'2-digit'});
@@ -1872,12 +1892,16 @@ const FORMS={
     title:'System User',
     fields:[
       {id:'fus_n',label:'Full Name *',type:'text',key:'n'},
-      {id:'fus_r',label:'Role',type:'select',opts:['Administrator','Project Manager','Finance Manager','HSE Officer','Procurement Officer','Viewer'],key:'r'},
       {id:'fus_em',label:'Email *',type:'text',key:'em'},
+      {id:'fus_pw',label:'Password *',type:'text',key:'pw'},
+      {id:'fus_r',label:'Role',type:'select',opts:['Administrator','Project Manager','Finance Manager','Operations Manager','HSE Officer','Procurement Officer','Viewer'],key:'r'},
+      {id:'fus_af',label:'Access Finance?',type:'select',opts:['Yes','No'],key:'af'},
+      {id:'fus_as',label:'Access Settings?',type:'select',opts:['Yes','No'],key:'as'},
+      {id:'fus_cd',label:'Can Delete Projects?',type:'select',opts:['Yes','No'],key:'cd'},
       {id:'fus_s',label:'Status',type:'select',opts:['Active','Inactive'],key:'s'}
     ],
     arr:'users',rerender:'rUsers',
-    newFn:(d)=>({...d,av:d.n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2),col:'var(--acc)'}),
+    newFn:(d)=>({}),
     actTitle:'User'
   }
 };
@@ -1896,10 +1920,16 @@ function openAddModal(type){
 function editRecord(type,idx){
   const cfg=FORMS[type];if(!cfg)return;
   editingIdx=idx;editingArr=cfg.arr;editingRerender=cfg.rerender;
-  const rec=D[cfg.arr][idx];
+  let rec;
+  if (type === 'user') {
+      const u = USERS[idx];
+      rec = { n: u.name, em: idx, pw: u.password, r: u.role, af: u.canAccessFinance?'Yes':'No', as: u.canAccessSettings?'Yes':'No', cd: u.canDeleteProjects?'Yes':'No', s: u.status || 'Active' };
+  } else {
+      rec = D[cfg.arr][idx];
+  }
   document.getElementById('uMdTitle').textContent='Edit '+cfg.title;
   document.getElementById('uMdBody').innerHTML=buildFormHTML(cfg.fields,rec);
-  document.getElementById('uMdFoot').innerHTML=`<button class="bt bt-out" onclick="cm('uModal')">Cancel</button><button class="bt bt-err bt-sm" onclick="delRecord('${cfg.arr}',${idx},'${cfg.rerender}',true)"><i class="fas fa-trash"></i> Delete</button><button class="bt bt-pri" onclick="saveRecord('${type}')"><i class="fas fa-save"></i> Save Changes</button>`;
+  document.getElementById('uMdFoot').innerHTML=`<button class="bt bt-out" onclick="cm('uModal')">Cancel</button><button class="bt bt-err bt-sm admin-only" onclick="delRecord('${cfg.arr}', '${idx}', '${cfg.rerender}', true)"><i class="fas fa-trash"></i> Delete</button><button class="bt bt-pri" onclick="saveRecord('${type}')"><i class="fas fa-save"></i> Save Changes</button>`;
   om('uModal');
 }
 
@@ -1933,41 +1963,47 @@ function saveRecord(type){
   });
   if(!valid){toast('Please fill in all required fields (*)','w');return;}
 
+  if (type === 'user') {
+      const email = data.em.toLowerCase();
+      const isEditing = editingIdx !== null;
+      const targetEmail = isEditing ? editingIdx : email;
+
+      USERS[targetEmail] = {
+          password: data.pw,
+          name: data.n,
+          initials: data.n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2),
+          role: data.r || 'Viewer',
+          canAccessFinance: data.af === 'Yes',
+          canAccessSettings: data.as === 'Yes',
+          canDeleteProjects: data.cd === 'Yes',
+          status: data.s || 'Active'
+      };
+      
+      if(isEditing && targetEmail !== email) {
+          USERS[email] = USERS[targetEmail];
+          delete USERS[targetEmail];
+      }
+      
+      toast(isEditing ? 'User updated successfully' : 'User added successfully');
+      addActivity(`${isEditing?'Updated':'Added'} User: ${email}`, 'User Management');
+      cm('uModal');
+      if(currentUser && currentUser.email === (isEditing ? targetEmail : email)){
+         applyPermissions(USERS[email]); 
+      }
+      rUsers();
+      return;
+  }
+
   if(editingIdx!==null){
-    // Edit existing
     const old=D[cfg.arr][editingIdx];
     cfg.fields.forEach(f=>old[f.key]=data[f.key]);
-    // recalc computed
     if(type==='invt'){old.s=parseInt(old.sk)<=parseInt(old.mn)?'Low':'OK';}
     if(type==='pay'){old.ne=(parseFloat(old.b)||0)+(parseFloat(old.a)||0)+(parseFloat(old.o)||0)-(parseFloat(old.d)||0);}
-    // If editing a user, sync name/role in sidebar if it's the current user
-    if(type==='user'&&currentUser){
-      const authKey=Object.keys(USERS).find(k=>USERS[k].name===old.n||USERS[k].name===data.n);
-      if(authKey){USERS[authKey].name=data.n;USERS[authKey].initials=(data.n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2));applyPermissions(USERS[authKey]);}
-    }
     toast(cfg.title+' updated successfully');
   }else{
-    // Add new
     const rec=cfg.newFn(data);
     D[cfg.arr].unshift(rec);
-    // If adding a user, also create a USERS auth entry
-    if(type==='user'&&data.em){
-      const initials=(data.n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2));
-      const defaultPw='afcco'+new Date().getFullYear();
-      const roleMap={'Administrator':true,'Finance Manager':true};
-      USERS[data.em]={
-        password:defaultPw,
-        name:data.n,
-        initials:initials,
-        role:data.r||'Viewer',
-        canAccessFinance:!!(roleMap[data.r]),
-        canAccessSettings:data.r==='Administrator',
-        canDeleteProjects:data.r==='Administrator'
-      };
-      toast(cfg.title+' added — login: '+data.em+' / '+defaultPw);
-    }else{
-      toast(cfg.title+' added successfully');
-    }
+    toast(cfg.title+' added successfully');
   }
 
   addActivity((editingIdx!==null?'Updated ':'Added ')+cfg.actTitle+': '+(data[cfg.fields[0].key]||''),cfg.title+' '+(editingIdx!==null?'Updated':'Added'));
@@ -1978,7 +2014,11 @@ function saveRecord(type){
 
 function delRecord(arr,idx,rerenderFn,fromModal=false){
   if(!confirm('Delete this record? This cannot be undone.'))return;
-  D[arr].splice(idx,1);
+  if(arr === 'users') {
+      delete USERS[idx];
+  } else {
+      D[arr].splice(idx,1);
+  }
   if(fromModal)cm('uModal');
   window[rerenderFn]&&window[rerenderFn]();
   rDash();initCharts();
@@ -2008,9 +2048,29 @@ function viewRecord(type,idx){
 }
 
 // ===================== REPORTS =====================
-function genR(tp){
+function openReportParams(tp) {
+    const titles = {proj:'Project', fin:'Financial', hr:'HR', hse:'HSE', equip:'Equipment', proc:'Procurement'};
+    document.getElementById('uMdTitle').textContent = titles[tp] + ' Report Parameters';
+    document.getElementById('uMdBody').innerHTML = `
+      <div class="fg2">
+        <div class="fi"><label>Month / Year</label><input type="month" id="rptMonth" class="fi-ctrl" value="${new Date().toISOString().slice(0,7)}"></div>
+        <div class="fi"><label>Project (Optional)</label><select id="rptProj" class="fi-ctrl"><option value="">All Projects</option>${D.projects.map(p=>`<option value="${p.id}">${p.n}</option>`).join('')}</select></div>
+      </div>
+    `;
+    document.getElementById('uMdFoot').innerHTML = `
+      <button class="bt bt-out" onclick="cm('uModal')">Cancel</button>
+      <button class="bt bt-pri" onclick="cm('uModal'); genR('${tp}', document.getElementById('rptMonth').value, document.getElementById('rptProj').value)"><i class="fas fa-magic"></i> Generate Report</button>
+    `;
+    om('uModal');
+}
+
+function genR(tp, monthParam, projParam){
   const ts={proj:'Project Progress Report',fin:'Financial Summary Report',hr:'HR & Workforce Report',hse:'HSE Performance Report',equip:'Equipment Status Report',proc:'Procurement Report'};
   const genDate=new Date().toLocaleString('en-PK');
+  const monthStr = monthParam ? new Date(monthParam).toLocaleDateString('en-PK', {month:'long', year:'numeric'}) : 'All Time';
+  const projName = projParam ? D.projects.find(p=>p.id===projParam)?.n : 'All Projects';
+  const userName = currentUser ? USERS[currentUser.email]?.name : 'System';
+
   let content='';
   if(tp==='proj'){
     const avgPr=Math.round(D.projects.reduce((s,p)=>s+p.pr,0)/D.projects.length);
@@ -2064,7 +2124,7 @@ function genR(tp){
   }
 
   document.getElementById('rptT').innerHTML=`<i class="fas fa-file-alt" style="color:var(--pri);margin-right:8px"></i>${ts[tp]}`;
-  document.getElementById('rptB').innerHTML=`<div style="margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--b3)"><div style="font-weight:700;font-size:14px;color:var(--t1)">AFCCO Oil & Gas Field Services (Pvt.) Ltd.</div><div style="font-size:12px;color:var(--t4);margin-top:2px">Generated: ${genDate} &nbsp;|&nbsp; By: Ahmed Malik &nbsp;|&nbsp; System: AFCCO MIS v2.0</div></div>${content}`;
+  document.getElementById('rptB').innerHTML=`<div style="margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--b3)"><div style="font-weight:700;font-size:14px;color:var(--t1)">AFCCO Oil & Gas Field Services (Pvt.) Ltd.</div><div style="font-size:12px;color:var(--t4);margin-top:2px">Generated: ${genDate} &nbsp;|&nbsp; By: ${userName} &nbsp;|&nbsp; Period: ${monthStr} &nbsp;|&nbsp; Context: ${projName}</div></div>${content}`;
   om('mRPT');
 }
 
@@ -2111,58 +2171,6 @@ function saveSettings(){
 
 // ===================== RBAC & AUTH =====================
 
-// User lookup table — extend this to add more users
-const USERS = {
-  'admin@afcco.com': {
-    password: 'admin123',
-    name: 'Suhaib Sheth',
-    initials: 'SS',
-    role: 'Administrator',
-    // Admin can see and edit EVERYTHING
-    permissions: {
-      finance: 'edit',
-      projects: 'edit',
-      procurement: 'edit',
-      people: 'edit',
-      admin: 'edit',
-      settings: 'access'
-    }
-  },
-  'om@afcco.com': {
-    password: 'ops2024',
-    name: 'Ahmad Malik',
-    initials: 'AM',
-    role: 'Operations Manager',
-    // Operations can edit Projects/Equip but only view others
-    permissions: {
-      finance: 'view',
-      projects: 'edit',
-      procurement: 'edit',
-      people: 'view',
-      admin: 'view',
-      settings: 'none'
-    }
-  },
-  'finance@afcco.com': {
-    password: 'fin#2026',
-    name: 'Finance Manager',
-    initials: 'FM',
-    role: 'Finance Manager',
-    // Finance can edit Finance/Invoices but only view others
-    permissions: {
-      finance: 'edit',
-      projects: 'view',
-      procurement: 'view',
-      people: 'view',
-      admin: 'view',
-      settings: 'none'
-    }
-  }
-};
-// Currently logged-in user (in-memory + sessionStorage)
-let currentUser = null;
-
-// XSS protection helper
 function escapeHTML(str) {
   if (str == null) return '';
   return String(str)
@@ -2173,22 +2181,20 @@ function escapeHTML(str) {
     .replace(/'/g,'&#x27;');
 }
 
-// Apply UI permissions based on role
 function applyPermissions(user) {
-  // Finance sidebar item
   const navFin = document.getElementById('nav-fin');
   if (navFin) navFin.style.display = user.canAccessFinance ? '' : 'none';
 
-  // Settings sidebar item
   const navSet = document.getElementById('nav-set');
   if (navSet) navSet.style.display = user.canAccessSettings ? '' : 'none';
 
-  // Admin-only elements (projects delete button etc.)
   document.querySelectorAll('.admin-only').forEach(el => {
     el.style.display = user.canDeleteProjects ? '' : 'none';
   });
 
-  // Update sidebar user info
+  const addUserBtn = document.getElementById('btn-add-user');
+  if (addUserBtn) addUserBtn.style.display = user.canAccessSettings ? '' : 'none';
+
   const sideAv = document.getElementById('sideAv');
   const sideUn = document.getElementById('sideUn');
   const sideUr = document.getElementById('sideUr');
@@ -2198,7 +2204,6 @@ function applyPermissions(user) {
   if (sideUr) sideUr.textContent = user.role;
   if (hdAv)   { hdAv.textContent = user.initials; hdAv.title = user.name + ' — ' + user.role; }
 
-  // Update dashboard greeting
   const greet = document.getElementById('dashGreet');
   if (greet) {
     const firstName = user.name.split(' ')[0];
@@ -2206,20 +2211,23 @@ function applyPermissions(user) {
   }
 }
 
-// Restore session on page load
 function initializeSession() {
   const saved = sessionStorage.getItem('afcco_user');
   if (saved) {
     try {
-      const user = JSON.parse(saved);
-      if (USERS[user.email]) {
-        currentUser = user;
+      const parsed = JSON.parse(saved);
+      const email = parsed.email.toLowerCase();
+      const user = USERS[email];
+      if (user && user.status === 'Active') {
+        currentUser = { email };
         document.getElementById('loginPage').style.display = 'none';
         document.getElementById('app').style.display = 'block';
         document.getElementById('today').textContent = new Date().toLocaleDateString('en-PK',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-        applyPermissions(USERS[user.email]);
+        applyPermissions(user);
         rAll();
         setTimeout(initCharts, 200);
+      } else {
+        sessionStorage.removeItem('afcco_user');
       }
     } catch(e) {
       sessionStorage.removeItem('afcco_user');
@@ -2233,8 +2241,12 @@ function login() {
   const user  = USERS[email];
 
   if (user && user.password === pass) {
+    if(user.status !== 'Active') {
+       toast("Account deactivated. Contact Administrator.", "e");
+       return;
+    }
     currentUser = { email };
-    sessionStorage.setItem('afcco_user', JSON.stringify(currentUser));
+    sessionStorage.setItem('afcco_user', JSON.stringify({email}));
 
     document.getElementById('loginPage').style.display = 'none';
     document.getElementById('app').style.display = 'block';
@@ -2256,17 +2268,14 @@ function logout() {
     currentUser = null;
     document.getElementById('app').style.display = 'none';
     document.getElementById('loginPage').style.display = 'flex';
-    // Reset login form
     document.getElementById('lu').value = '';
     document.getElementById('lp').value = '';
     toast('Signed out successfully');
   }
 }
 
-// Run session check on load
-initializeSession();
+window.onload = initializeSession;
 
-// Click outside modals to close
 document.addEventListener('click',e=>{
   if(e.target.classList.contains('ov'))e.target.classList.remove('op');
   if(!e.target.closest('#notP')&&!e.target.closest('.hd-btn')){
@@ -2284,10 +2293,6 @@ document.addEventListener('keydown',e=>{
   }
 });
 
-// Make fi-ctrl styled properly
-const s=document.createElement('style');
-s.textContent='.fi-ctrl{padding:9px 13px;border:1.5px solid var(--b4);border-radius:var(--rs);font-size:13.5px;color:var(--t1);outline:none;background:var(--b1);transition:.2s;font-family:inherit;width:100%}.fi-ctrl:focus{border-color:var(--pri);box-shadow:0 0 0 3px rgba(13,148,136,.08)}';
-document.head.appendChild(s);
 </script>
 </body>
 </html>
