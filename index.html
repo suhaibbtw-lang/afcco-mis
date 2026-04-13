@@ -2174,28 +2174,11 @@ function escapeHTML(str) {
 }
 
 // Apply UI permissions based on role
-// Apply Permissions to User Management Actions
-  const addUserBtn = document.getElementById('addUserBtn'); // We must add this ID to the HTML first!
-  const userTable = document.getElementById('tUsers');
-  
-  // Strict check: Is the user an Admin?
-  if (user.role === 'Administrator') {
-    // Admins see everything
-    if(addUserBtn) addUserBtn.style.display = 'inline-flex';
-    if(userTable) userTable.style.display = 'table';
-    document.getElementById('set-user-msg').style.display = 'none'; // Hide "Admins Only" message
-  } else {
-    // Non-Admins: Hide the button and the table content
-    if(addUserBtn) addUserBtn.style.display = 'none';
-    if(userTable) userTable.style.display = 'none';
-    
-    // Optional: Show a message explaining why they can't see the list
-    const msgEl = document.getElementById('set-user-msg');
-    if(msgEl) {
-        msgEl.style.display = 'block';
-        msgEl.textContent = 'Only an Administrator can manage user accounts and permissions.';
-    }
-  }
+function applyPermissions(user) {
+  // Finance sidebar item
+  const navFin = document.getElementById('nav-fin');
+  if (navFin) navFin.style.display = user.canAccessFinance ? '' : 'none';
+
   // Settings sidebar item
   const navSet = document.getElementById('nav-set');
   if (navSet) navSet.style.display = user.canAccessSettings ? '' : 'none';
